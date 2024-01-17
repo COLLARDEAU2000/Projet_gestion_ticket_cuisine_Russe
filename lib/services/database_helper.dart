@@ -341,6 +341,55 @@ class DatabaseHelper {
       );
     });
   }
+  
+  static Future<List<SubCategory>> getSubCategoriesByIds(List<int> subCategoryIds) async {
+    try {
+      Database db = await _instance.database;
+
+      // Requête pour récupérer les sous-catégories en fonction des IDs fournis
+      List<Map<String, dynamic>> maps = await db.query(
+        'SubCategories',
+        where: 'id IN (${subCategoryIds.join(",")})',
+      );
+
+      // Convertir les résultats en objets SubCategorie
+      List<SubCategory> subCategories = List.generate(maps.length, (i) {
+        return SubCategory.fromJson(maps[i]);
+      });
+
+      return subCategories;
+    } catch (e) {
+      if (kDebugMode) {
+        print('Erreur lors de la récupération des sous-catégories par IDs : $e');
+      }
+      rethrow;
+    }
+  }
+
+  static Future<List<Temperature>> getTemperaturesByCategoryId(int categoryId) async {
+    try {
+      Database db = await _instance.database;
+
+      // Requête pour récupérer les températures en fonction de la catégorie
+      List<Map<String, dynamic>> maps = await db.query(
+        'Temperatures',
+        where: 'categoryId = ?',
+        whereArgs: [categoryId],
+      );
+
+      // Convertir les résultats en objets Temperature
+      List<Temperature> temperatures = List.generate(maps.length, (i) {
+        return Temperature.fromJson(maps[i]);
+      });
+
+      return temperatures;
+    } catch (e) {
+      if (kDebugMode) {
+        print('Erreur lors de la récupération des températures par catégorie : $e');
+      }
+      rethrow;
+    }
+  }
 
   Future<void> initializeSubCategories() async {
     try {
@@ -2901,93 +2950,90 @@ class DatabaseHelper {
     }
   }
 
-static Future<List<Temperature>> getTemperaturesByOpen(int open) async {
-  try {
-    if (kDebugMode) {
-      print('getTemperaturesByOpen - Ouvert: $open');
-    }
-
-    Database db = await _instance.database;
-
-    if (open != null) {
-      List<Map<String, dynamic>> maps = await db.query(
-        'Temperatures',
-        where: 'ouvert = ?',
-        whereArgs: [open],
-      );
-
-      // Ajout d'une impression pour examiner les données brutes de la base de données
+  static Future<List<Temperature>> getTemperaturesByOpen(int open) async {
+    try {
       if (kDebugMode) {
-        print('Raw data from the database: $maps');
+        print('getTemperaturesByOpen - Ouvert: $open');
       }
 
-      List<Temperature> temperatures = List.generate(maps.length, (i) {
-        try {
-          // Ajout d'une impression pour examiner la valeur de "ouvert"
-          if (kDebugMode) {
-            print('Value of "ouvert" from the database: ${maps[i]['ouvert']}');
-          }
-
-          return Temperature.fromJson(maps[i]);
-        } catch (e) {
-          // Ajout d'une impression pour afficher les erreurs pendant la conversion
-          if (kDebugMode) {
-            print('Error converting database record to Temperature: $e');
-          }
-          // Vous pouvez choisir de renvoyer un objet Temperature par défaut en cas d'erreur
-          return Temperature(
-            id: 0,
-            ouvert: 0,
-            categoryId: 0,
-            temperature: '',
-            subCategoryId: 0,
-            dureeDeConservation: '',
-            indicateur: 0,
-          );
-        }
-      });
-
-      return temperatures;
-    } else {
-      return [];
-    }
-  } catch (e) {
-    if (kDebugMode) {
-      print('Error retrieving temperatures: $e');
-    }
-    return [];
-  }
-}
- 
-static Future<List<SubCategory>> getSubCategoriesByFilteredCategories(List<Categorie> filteredCategories) async {
-    try {
       Database db = await _instance.database;
 
-      // Récupérer les IDs des catégories filtrées
-      List<int> categoryIds = filteredCategories.map((categorie) => categorie.id).toList();
+      if (open != null) {
+        List<Map<String, dynamic>> maps = await db.query(
+          'Temperatures',
+          where: 'ouvert = ?',
+          whereArgs: [open],
+        );
 
-      // Requête pour récupérer les sous-catégories en fonction des IDs des catégories filtrées
-      List<Map<String, dynamic>> maps = await db.query(
-        'SubCategories',
-        where: 'categoryId IN (${categoryIds.join(",")})',
-      );
+        // Ajout d'une impression pour examiner les données brutes de la base de données
+        if (kDebugMode) {
+          print('Raw data from the database: $maps');
+        }
 
-      // Convertir les résultats en objets SubCategorie
-      List<SubCategory> subCategories = List.generate(maps.length, (i) {
-        return SubCategory.fromJson(maps[i]);
-      });
+        List<Temperature> temperatures = List.generate(maps.length, (i) {
+          try {
+            // Ajout d'une impression pour examiner la valeur de "ouvert"
+            if (kDebugMode) {
+              print('Value of "ouvert" from the database: ${maps[i]['ouvert']}');
+            }
 
-      return subCategories;
+            return Temperature.fromJson(maps[i]);
+          } catch (e) {
+            // Ajout d'une impression pour afficher les erreurs pendant la conversion
+            if (kDebugMode) {
+              print('Error converting database record to Temperature: $e');
+            }
+            // Vous pouvez choisir de renvoyer un objet Temperature par défaut en cas d'erreur
+            return Temperature(
+              id: 0,
+              ouvert: 0,
+              categoryId: 0,
+              temperature: '',
+              subCategoryId: 0,
+              dureeDeConservation: '',
+              indicateur: 0,
+            );
+          }
+        });
+
+        return temperatures;
+      } else {
+        return [];
+      }
     } catch (e) {
       if (kDebugMode) {
-        print('Erreur lors de la récupération des sous-catégories : $e');
+        print('Error retrieving temperatures: $e');
       }
-      rethrow;
+      return [];
     }
   }
+  
+  static Future<List<SubCategory>> getSubCategoriesByFilteredCategories(List<Categorie> filteredCategories) async {
+      try {
+        Database db = await _instance.database;
 
+        // Récupérer les IDs des catégories filtrées
+        List<int> categoryIds = filteredCategories.map((categorie) => categorie.id).toList();
 
+        // Requête pour récupérer les sous-catégories en fonction des IDs des catégories filtrées
+        List<Map<String, dynamic>> maps = await db.query(
+          'SubCategories',
+          where: 'categoryId IN (${categoryIds.join(",")})',
+        );
 
+        // Convertir les résultats en objets SubCategorie
+        List<SubCategory> subCategories = List.generate(maps.length, (i) {
+          return SubCategory.fromJson(maps[i]);
+        });
+
+        return subCategories;
+      } catch (e) {
+        if (kDebugMode) {
+          print('Erreur lors de la récupération des sous-catégories : $e');
+        }
+        rethrow;
+      }
+    }
 
   static Future<List<Categorie>> getCategorieByIdCuisine(Cuisine cuisine) async {
     try {
@@ -3016,37 +3062,44 @@ static Future<List<SubCategory>> getSubCategoriesByFilteredCategories(List<Categ
     }
   } 
 
-
-static Future<List<Categorie>> getCategoryFilter(
-  List<Temperature> temperatureList, List<Categorie> allCategories) async {
-  try {
-    // Ajout de l'impression de débogage
-    if (kDebugMode) {
-      print('getCategoryFilter - TemperatureList: $temperatureList, AllCategories: $allCategories');
-    }
-
-    // Filtrer les catégories en fonction des categoryIds des objets Temperature fournis
-    List<Categorie> filteredCategories = allCategories.where((category) {
-      for (var temperature in temperatureList) {
-        if (category.id == temperature.categoryId) {
-          return true;
-        }
+  static Future<List<Categorie>> getCategoryFilter(
+    List<Temperature> temperatureList, List<Categorie> allCategories) async {
+    try {
+      // Ajout de l'impression de débogage
+      if (kDebugMode) {
+        print('getCategoryFilter - TemperatureList: $temperatureList, AllCategories: $allCategories');
       }
-      return false;
-    }).toList();
 
-    // Ajout d'une impression pour vérifier les résultats
-    if (kDebugMode) {
-      print('getCategoryFilter - Résultats: $filteredCategories');
-    }
+      // Filtrer les catégories en fonction des categoryIds des objets Temperature fournis
+      List<Categorie> filteredCategories = allCategories.where((category) {
+        for (var temperature in temperatureList) {
+          if (category.id == temperature.categoryId) {
+            return true;
+          }
+        }
+        return false;
+      }).toList();
 
-    return filteredCategories;
-  } catch (e) {
-    if (kDebugMode) {
-      print('Erreur lors de la récupération des catégories filtrées : $e');
+      // Ajout d'une impression pour vérifier les résultats
+      if (kDebugMode) {
+        print('getCategoryFilter - Résultats: $filteredCategories');
+      }
+
+      return filteredCategories;
+    } catch (e) {
+      if (kDebugMode) {
+        print('Erreur lors de la récupération des catégories filtrées : $e');
+      }
+      rethrow;
     }
-    rethrow;
   }
-}
+
+
+
+
+
+
+
+
 
 }

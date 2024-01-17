@@ -50,20 +50,28 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
         print('Filtered Categories: $filteredCategories');
       }
 
-      // Utiliser la nouvelle fonction pour obtenir les sous-catégories des catégories filtrées
-      List<SubCategory> filteredSubCategories =
-          await DatabaseHelper.getSubCategoriesByFilteredCategories(filteredCategories);
-      if (kDebugMode) {
-        print('Filtered SubCategories: $filteredSubCategories');
-      }
-
       setState(() {
         categories = filteredCategories;
-        subCategories = filteredSubCategories;
       });
     } catch (e) {
       if (kDebugMode) {
         print('Erreur lors de la mise à jour des catégories : $e');
+      }
+    }
+  }
+
+  Future<void> _updateSubCategories(int categoryId) async {
+    try {
+      List<Temperature> temperatures = await DatabaseHelper.getTemperaturesByCategoryId(categoryId);
+      List<int> subCategoryIds = temperatures.map((temp) => temp.subCategoryId).toList();
+      List<SubCategory> filteredSubCategories = await DatabaseHelper.getSubCategoriesByIds(subCategoryIds);
+
+      setState(() {
+        subCategories = filteredSubCategories;
+      });
+    } catch (e) {
+      if (kDebugMode) {
+        print('Erreur lors de la mise à jour des sous-catégories : $e');
       }
     }
   }
@@ -107,7 +115,7 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
                         child: ListTile(
                           title: Text(categories[index].name),
                           onTap: () {
-                            // Ajoutez ici l'action que vous souhaitez effectuer lorsqu'une catégorie est sélectionnée.
+                            _updateSubCategories(categories[index].id);
                           },
                         ),
                       );

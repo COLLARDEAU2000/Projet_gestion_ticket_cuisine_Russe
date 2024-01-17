@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: unnecessary_null_comparison, duplicate_ignore, file_names
 
 import 'dart:io';
 import 'package:flutter/foundation.dart';
@@ -6,15 +6,18 @@ import 'package:grinlintsa/models/cook.dart';
 import 'package:grinlintsa/models/cuisine.dart';
 import 'package:grinlintsa/models/category_cuisine.dart';
 import 'package:grinlintsa/models/sub_category.dart';
+import 'package:grinlintsa/models/temperature.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 
 class DatabaseHelper {
   static final DatabaseHelper _instance = DatabaseHelper._internal();
+
   factory DatabaseHelper() => _instance;
 
   DatabaseHelper._internal();
+
   static Database? _database;
 
   Future<Database> get database async {
@@ -27,7 +30,7 @@ class DatabaseHelper {
   Future<Database> initDatabase() async {
     try {
       Directory documentsDirectory = await getApplicationDocumentsDirectory();
-      String path = join(documentsDirectory.path, 'x_database.db');
+      String path = join(documentsDirectory.path, 'opex_database.db');
 
       Database database = await openDatabase(
         path,
@@ -71,12 +74,12 @@ class DatabaseHelper {
           await db.execute('''
           CREATE TABLE Temperatures (
             id INTEGER PRIMARY KEY,
-            ouvert INTEGER NOT NULL,
-            categoryId INTEGER NOT NULL,
+            ouvert INTEGER ,            
+            categoryId INTEGER ,
             temperature TEXT NOT NULL,
-            subCategoryId INTEGER NOT NULL,
+            subCategoryId INTEGER ,
             dureeDeConservation TEXT NOT NULL,
-            indicateur INTEGER NOT NULL,
+            indicateur INTEGER,
             FOREIGN KEY(categoryId) REFERENCES Categories(id)
             FOREIGN KEY(subCategoryId) REFERENCES SubCategories(id)
           )
@@ -307,49 +310,14 @@ class DatabaseHelper {
       List<Map<String, dynamic>> initialTemperatureData = [
         {
           "id": 1,
-          "ouvert": false,
+          "ouvert": 0,
           "categoryId": 10,
           "temperature": "-18°С",
           "subCategoryId": 41,
-          "Duree de concervation": "180 jours",
-          "indicateur": true
+          "dureeDeConservation": "180 jours",
+          "indicateur": 1
         },
-        {
-          "id": 2,
-          "ouvert": true,
-          "categoryId": 10,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 38,
-          "Duree de concervation": "48 jours",
-          "indicateur": false
-        },
-        {
-          "id": 3,
-          "ouvert": true,
-          "categoryId": 10,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 39,
-          "Duree de concervation": "48 jours",
-          "indicateur": false
-        },
-        {
-          "id": 4,
-          "ouvert": true,
-          "categoryId": 10,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 40,
-          "Duree de concervation": "48 jours",
-          "indicateur": false
-        },
-        {
-          "id": 5,
-          "ouvert": true,
-          "categoryId": 10,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 41,
-          "Duree de concervation": "48 jours",
-          "indicateur": false
-        },
+        
       ];
       await db.transaction((txn) async {
         Batch batch = txn.batch();
@@ -376,5 +344,157 @@ class DatabaseHelper {
       rethrow;
     }
   }
+
+  static Future<List<Temperature>> getTemperaturesByOpen(int open) async {
+    try {
+      if (kDebugMode) {
+        print('getTemperaturesByOpen - Ouvert: $open');
+      }
+
+      Database db = await _instance.database;
+
+      if (open != null) {
+        List<Map<String, dynamic>> maps = await db.query(
+          'Temperatures',
+          where: 'ouvert = ?',
+          whereArgs: [open],
+        );
+
+        // Ajout d'une impression pour examiner les données brutes de la base de données
+        if (kDebugMode) {
+          print('Raw data from the database: $maps');
+        }
+
+        List<Temperature> temperatures = List.generate(maps.length, (i) {
+          try {
+            // Ajout d'une impression pour examiner la valeur de "ouvert"
+            if (kDebugMode) {
+              print('Value of "ouvert" from the database: ${maps[i]['ouvert']}');
+            }
+
+            return Temperature.fromJson(maps[i]);
+          } catch (e) {
+            // Ajout d'une impression pour afficher les erreurs pendant la conversion
+            if (kDebugMode) {
+              print('Error converting database record to Temperature: $e');
+            }
+            // Vous pouvez choisir de renvoyer un objet Temperature par défaut en cas d'erreur
+            return Temperature(
+              id: 0,
+              ouvert: 0,
+              categoryId: 0,
+              temperature: '',
+              subCategoryId: 0,
+              dureeDeConservation: '',
+              indicateur: 0,
+            );
+          }
+        });
+
+        return temperatures;
+      } else {
+        return [];
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error retrieving temperatures: $e');
+      }
+      return [];
+    }
+  }
   
+  static Future<List<SubCategory>> getSubCategoriesByFilteredCategories(List<Categorie> filteredCategories) async {
+      try {
+        Database db = await _instance.database;
+
+        // Récupérer les IDs des catégories filtrées
+        List<int> categoryIds = filteredCategories.map((categorie) => categorie.id).toList();
+
+        // Requête pour récupérer les sous-catégories en fonction des IDs des catégories filtrées
+        List<Map<String, dynamic>> maps = await db.query(
+          'SubCategories',
+          where: 'categoryId IN (${categoryIds.join(",")})',
+        );
+
+        // Convertir les résultats en objets SubCategorie
+        List<SubCategory> subCategories = List.generate(maps.length, (i) {
+          return SubCategory.fromJson(maps[i]);
+        });
+
+        return subCategories;
+      } catch (e) {
+        if (kDebugMode) {
+          print('Erreur lors de la récupération des sous-catégories : $e');
+        }
+        rethrow;
+      }
+    }
+
+  static Future<List<Categorie>> getCategorieByIdCuisine(Cuisine cuisine) async {
+    try {
+      Database db = await _instance.database;
+
+      // Ajout de l'impression de débogage
+      if (kDebugMode) {
+        print('getCategorieByIdCuisine - Cuisine ID: ${cuisine.id}');
+      }
+
+      // Récupérer les catégories pour une cuisine spécifique
+      List<Map<String, dynamic>> maps = await db.query('Categories',
+          where: 'cuisineId = ?', whereArgs: [cuisine.id]);
+
+      // Convertir les résultats en objets Categorie
+      List<Categorie> categories = List.generate(maps.length, (i) {
+        return Categorie.fromMap(maps[i]);
+      });
+
+      return categories;
+    } catch (e) {
+      if (kDebugMode) {
+        print('Erreur lors de la récupération des catégories : $e');
+      }
+      rethrow;
+    }
+  } 
+
+  static Future<List<Categorie>> getCategoryFilter(
+    List<Temperature> temperatureList, List<Categorie> allCategories) async {
+    try {
+      // Ajout de l'impression de débogage
+      if (kDebugMode) {
+        print('getCategoryFilter - TemperatureList: $temperatureList, AllCategories: $allCategories');
+      }
+
+      // Filtrer les catégories en fonction des categoryIds des objets Temperature fournis
+      List<Categorie> filteredCategories = allCategories.where((category) {
+        for (var temperature in temperatureList) {
+          if (category.id == temperature.categoryId) {
+            return true;
+          }
+        }
+        return false;
+      }).toList();
+
+      // Ajout d'une impression pour vérifier les résultats
+      if (kDebugMode) {
+        print('getCategoryFilter - Résultats: $filteredCategories');
+      }
+
+      return filteredCategories;
+    } catch (e) {
+      if (kDebugMode) {
+        print('Erreur lors de la récupération des catégories filtrées : $e');
+      }
+      rethrow;
+    }
+  }
+
+  
+
+
+
+
+
+
+
 }
