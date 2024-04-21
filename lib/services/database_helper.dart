@@ -1,5 +1,4 @@
 // ignore_for_file: unnecessary_null_comparison, duplicate_ignore
-
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:grinlintsa/models/cook.dart';
@@ -372,7 +371,7 @@ class DatabaseHelper {
 
       // Requête pour récupérer les températures en fonction de la catégorie
       List<Map<String, dynamic>> maps = await db.query(
-        'Temperatures',
+        '>',
         where: 'categoryId = ?',
         whereArgs: [categoryId],
       );
