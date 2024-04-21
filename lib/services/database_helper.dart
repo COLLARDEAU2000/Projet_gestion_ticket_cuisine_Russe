@@ -124,7 +124,7 @@ class DatabaseHelper {
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
-  Future<void> initializeData() async {
+  Future<void> initializeCuisines() async {
     try {
       Database db = await database;
 
@@ -323,73 +323,6 @@ class DatabaseHelper {
   }
 
   //PARTIE SUBCATEGORIE
-
-  Future<List<SubCategory>> getSubCategories(int categoryId) async {
-    final Database db = await database;
-    final List<Map<String, dynamic>> maps = await db.query(
-      'SubCategories',
-      where: 'categoryId = ?',
-      whereArgs: [categoryId],
-    );
-
-    return List.generate(maps.length, (i) {
-      return SubCategory(
-        id: maps[i]['id'],
-        name: maps[i]['name'],
-        categoryId: maps[i]['categoryId'],
-      );
-    });
-  }
-  
-  static Future<List<SubCategory>> getSubCategoriesByIds(List<int> subCategoryIds) async {
-    try {
-      Database db = await _instance.database;
-
-      // Requête pour récupérer les sous-catégories en fonction des IDs fournis
-      List<Map<String, dynamic>> maps = await db.query(
-        'SubCategories',
-        where: 'id IN (${subCategoryIds.join(",")})',
-      );
-
-      // Convertir les résultats en objets SubCategorie
-      List<SubCategory> subCategories = List.generate(maps.length, (i) {
-        return SubCategory.fromJson(maps[i]);
-      });
-
-      return subCategories;
-    } catch (e) {
-      if (kDebugMode) {
-        print('Erreur lors de la récupération des sous-catégories par IDs : $e');
-      }
-      rethrow;
-    }
-  }
-
-  static Future<List<Temperature>> getTemperaturesByCategoryId(int categoryId) async {
-    try {
-      Database db = await _instance.database;
-
-      // Requête pour récupérer les températures en fonction de la catégorie
-      List<Map<String, dynamic>> maps = await db.query(
-        '>',
-        where: 'categoryId = ?',
-        whereArgs: [categoryId],
-      );
-
-      // Convertir les résultats en objets Temperature
-      List<Temperature> temperatures = List.generate(maps.length, (i) {
-        return Temperature.fromJson(maps[i]);
-      });
-
-      return temperatures;
-    } catch (e) {
-      if (kDebugMode) {
-        print('Erreur lors de la récupération des températures par catégorie : $e');
-      }
-      rethrow;
-    }
-  }
-
   Future<void> initializeSubCategories() async {
     try {
       Database db = await database;
@@ -708,6 +641,51 @@ class DatabaseHelper {
       rethrow;
     }
   }
+
+  Future<List<SubCategory>> getSubCategories(int categoryId) async {
+    final Database db = await database;
+    final List<Map<String, dynamic>> maps = await db.query(
+      'SubCategories',
+      where: 'categoryId = ?',
+      whereArgs: [categoryId],
+    );
+
+    return List.generate(maps.length, (i) {
+      return SubCategory(
+        id: maps[i]['id'],
+        name: maps[i]['name'],
+        categoryId: maps[i]['categoryId'],
+      );
+    });
+  }
+  
+  static Future<List<SubCategory>> getSubCategoriesByIds(List<int> subCategoryIds) async {
+    try {
+      Database db = await _instance.database;
+
+      // Requête pour récupérer les sous-catégories en fonction des IDs fournis
+      List<Map<String, dynamic>> maps = await db.query(
+        'SubCategories',
+        where: 'id IN (${subCategoryIds.join(",")})',
+      );
+
+      // Convertir les résultats en objets SubCategorie
+      List<SubCategory> subCategories = List.generate(maps.length, (i) {
+        return SubCategory.fromJson(maps[i]);
+      });
+
+      return subCategories;
+    } catch (e) {
+      if (kDebugMode) {
+        print('Erreur lors de la récupération des sous-catégories par IDs : $e');
+      }
+      rethrow;
+    }
+  }
+
+  
+
+  
 
   //PARTIE TEMPERATURE
   //Charger les données initiales dans la table Temperature
@@ -3004,6 +2982,31 @@ class DatabaseHelper {
         print('Error retrieving temperatures: $e');
       }
       return [];
+    }
+  }
+
+  static Future<List<Temperature>> getTemperaturesByCategoryId(int categoryId) async {
+    try {
+      Database db = await _instance.database;
+
+      // Requête pour récupérer les températures en fonction de la catégorie
+      List<Map<String, dynamic>> maps = await db.query(
+        'Temperatures',
+        where: 'categoryId = ?',
+        whereArgs: [categoryId],
+      );
+
+      // Convertir les résultats en objets Temperature
+      List<Temperature> temperatures = List.generate(maps.length, (i) {
+        return Temperature.fromJson(maps[i]);
+      });
+
+      return temperatures;
+    } catch (e) {
+      if (kDebugMode) {
+        print('Erreur lors de la récupération des températures par catégorie : $e');
+      }
+      rethrow;
     }
   }
   

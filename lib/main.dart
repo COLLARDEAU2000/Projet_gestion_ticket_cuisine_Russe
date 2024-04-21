@@ -8,7 +8,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DatabaseHelper dbHelper = DatabaseHelper();
   await dbHelper.initDatabase(); // Assurez-vous que la base de données est initialisée d'abord
-  await dbHelper.initializeData();
+  await dbHelper.initializeCuisines();
   await dbHelper.initializeCategories();
   await dbHelper.initializeSubCategories();
   await dbHelper.initializeTemperatures();
