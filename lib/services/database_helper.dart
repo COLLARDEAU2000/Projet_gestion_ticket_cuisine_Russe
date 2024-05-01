@@ -29,7 +29,7 @@ class DatabaseHelper {
   Future<Database> initDatabase() async {
     try {
       Directory documentsDirectory = await getApplicationDocumentsDirectory();
-      String path = join(documentsDirectory.path, 'opex_database.db');
+      String path = join(documentsDirectory.path, 'poex.db');
 
       Database database = await openDatabase(
         path,
@@ -235,74 +235,69 @@ class DatabaseHelper {
       Database db = await database;
 
       List<Map<String, dynamic>> initialCategoryData = [
-        {"id": 1, "name": "СОУСЫ", "cuisineId": 1},
-        {"id": 10, "name": "МЯСО", "cuisineId": 1},
-        {"id": 11, "name": "ГАСТРОНОМИЯ", "cuisineId": 1},
-        {"id": 12, "name": "КОНСЕРВАЦИЯ", "cuisineId": 1},
-        {"id": 13, "name": "ЗАМОРОЗКА", "cuisineId": 1},
-        {"id": 14, "name": "СОУСЫ И ЗАМЕСЫ", "cuisineId": 1},
-        {"id": 16, "name": "МЯСНАЯ ГАСТРОНОМИЯ", "cuisineId": 1},
-        {"id": 17, "name": "ЯИЧНЫЕ ПРОДУКТЫ", "cuisineId": 1},
+        {"id": 1, "name": "ОВОЩИ", "cuisineId": 1},
+        {"id": 2, "name": "МЯСО", "cuisineId": 1},
+        {"id": 3, "name": "ГАСТРОНОМИЯ", "cuisineId": 1},
+        {"id": 4, "name": "БАКАЛЕЯ", "cuisineId": 1},
+    
+        {"id": 5, "name": "ЗАМОРОЗКА", "cuisineId": 1},
+        {"id": 6, "name": "СОУСЫ И ЗАМЕСЫ", "cuisineId": 1},
+        {"id": 7, "name": "МЯСНАЯ ГАСТРОНОМИЯ", "cuisineId": 1},
+        {"id": 8, "name": "ЯИЧНЫЕ ПРОДУКТЫ", "cuisineId": 1},
+        {"id": 9, "name": "ПОЛУФАБРИКАТЫ ОВОЩНЫЕ МАРИНОВАННЫЕ", "cuisineId": 1},
         {
-          "id": 19,
-          "name": "ПОЛУФАБРИКАТЫ ОВОЩНЫЕ МАРИНОВАННЫЕ",
-          "cuisineId": 1
-        },
-        {
-          "id": 20,
+          "id": 10,
           "name": "ПОЛУФАБРИКАТЫ ПОСЛЕ ТЕРМИЧЕСКОЙ ОБРАБОТКИ",
           "cuisineId": 1
         },
-        {"id": 21, "name": "ОВОЩИ", "cuisineId": 1},
-        {"id": 22, "name": "БАКАЛЕЯ", "cuisineId": 1},
-        {"id": 23, "name": "МЯСНАЯ ГАСТРОНОМИЯ", "cuisineId": 2},
-        {"id": 24, "name": "СЫРНАЯ ГАСТРОНОМИЯ", "cuisineId": 2},
-        {"id": 25, "name": "КОНСЕРВАЦИ", "cuisineId": 2},
-        {"id": 30, "name": "КОНСЕРВАЦИ", "cuisineId": 2},
-        {"id": 26, "name": "МЯСО", "cuisineId": 2},
-        {"id": 27, "name": "Соусы", "cuisineId": 2},
-        {"id": 28, "name": "БАКАЛЕЯ", "cuisineId": 2},
-        {"id": 29, "name": "МОРЕПРОДУКТЫ", "cuisineId": 2},
-        {"id": 31, "name": "МЯСНАЯ ГАСТРОНОМИЯ", "cuisineId": 2},
-        {"id": 32, "name": "СЫРНАЯ ГАСТРОНОМИЯ", "cuisineId": 2},
-        {"id": 35, "name": "СОУСЫ ПОЛУФАБРИКАТ", "cuisineId": 2},
-        {"id": 36, "name": "ОВОЩИ", "cuisineId": 2},
+        {"id": 11, "name": "СОУСЫ", "cuisineId": 1},
+        {"id": 13, "name": "МЯСНАЯ ГАСТРОНОМИЯ", "cuisineId": 2},
+        {"id": 14, "name": "СЫРНАЯ ГАСТРОНОМИЯ", "cuisineId": 2},
+        {"id": 15, "name": "КОНСЕРВАЦИ", "cuisineId": 2},
+        {"id": 16, "name": "Соусы", "cuisineId": 2},
+        {"id": 17, "name": "МЯСО", "cuisineId": 2},
+        {"id": 18, "name": "БАКАЛЕЯ", "cuisineId": 2},
+        {"id": 19, "name": "МОРЕПРОДУКТЫ", "cuisineId": 2},
+        {"id": 20, "name": "МЯСНАЯ ГАСТРОНОМИЯ", "cuisineId": 2},
+        {"id": 21, "name": "СЫРНАЯ ГАСТРОНОМИЯ", "cuisineId": 2},
+        {"id": 22, "name": "СОУСЫ ПОЛУФАБРИКАТ", "cuisineId": 2},
+        {"id": 23, "name": "ОВОЩИ", "cuisineId": 2},
         {
-          "id": 37,
+          "id": 24,
           "name": "ПОЛУФАБРИКАТЫ ОВОЩНЫЕ МАРИНОВАННЫЕ",
           "cuisineId": 2
         },
-        {"id": 38, "name": "ТЕСТО ПОЛУФАБРИКАТ", "cuisineId": 2},
+        {"id": 25, "name": "ТЕСТО ПОЛУФАБРИКАТ", "cuisineId": 2},
+        {"id": 26, "name": "Яичные продукты", "cuisineId": 2},
         {
-          "id": 39,
+          "id": 27,
           "name": "ПОЛУФАБРИКАТЫ ПОСЛЕ ТЕРМИЧЕСКОЙ ОБРАБОТКИ",
           "cuisineId": 2
         },
-        {"id": 60, "name": "Яичные продукты", "cuisineId": 2},
-        {"id": 41, "name": "МЯСНАЯ ГАСТРОНОМИЯ", "cuisineId": 3},
-        {"id": 42, "name": "СЫР", "cuisineId": 3},
-        {"id": 43, "name": "МОРЕПРОДУКТЫ", "cuisineId": 3},
-        {"id": 44, "name": "СОУСЫ", "cuisineId": 3},
-        {"id": 45, "name": "БАКАЛЕЯ", "cuisineId": 3},
-        {"id": 46, "name": "КОНСЕРВАЦИЯ", "cuisineId": 3},
-        {"id": 47, "name": "ЛАПША", "cuisineId": 3},
-        {"id": 48, "name": "МЯСО", "cuisineId": 3},
-        {"id": 49, "name": "ЗАМАРОЖЕННЫЕ ПОЛУФАБРИКАТ", "cuisineId": 3},
-        {"id": 50, "name": "ЗАМОРОЗКА", "cuisineId": 3},
-        {"id": 51, "name": "ДЕСЕРТЫ", "cuisineId": 3},
-        {"id": 52, "name": "СОУСЫ ПОЛУФАБРИКАТЫ", "cuisineId": 3},
-        {"id": 53, "name": "ТЕСТО", "cuisineId": 3},
-        {"id": 54, "name": "ОВОЩИ и ФРУКТЫ", "cuisineId": 3},
-        {"id": 55, "name": "ЯЙЦО", "cuisineId": 3},
-        {"id": 56, "name": "ЗАМЕСЫ на РОЛЛЫ", "cuisineId": 3},
-        {"id": 57, "name": "ЗАМЕСЫ на СЫРНЫЕ ШАРИКИ", "cuisineId": 3},
+        {"id": 28, "name": "МЯСНАЯ ГАСТРОНОМИЯ", "cuisineId": 3},
+        {"id": 29, "name": "СЫР", "cuisineId": 3},
+        {"id": 30, "name": "МОРЕПРОДУКТЫ", "cuisineId": 3},
+        {"id": 31, "name": "СОУСЫ", "cuisineId": 3},
+        {"id": 32, "name": "БАКАЛЕЯ", "cuisineId": 3},
+        {"id": 33, "name": "КОНСЕРВАЦИЯ", "cuisineId": 3},
+        {"id": 34, "name": "ЛАПША", "cuisineId": 3},
+        {"id": 35, "name": "МЯСО", "cuisineId": 3},
+        {"id": 36, "name": "ЗАМАРОЖЕННЫЕ ПОЛУФАБРИКАТ", "cuisineId": 3},
+        {"id": 37, "name": "ЗАМОРОЗКА", "cuisineId": 3},
+        {"id": 38, "name": "ДЕСЕРТЫ", "cuisineId": 3},
+        {"id": 39, "name": "СОУСЫ ПОЛУФАБРИКАТЫ", "cuisineId": 3},
+        {"id": 40, "name": "ТЕСТО", "cuisineId": 3},
+        {"id": 41, "name": "ОВОЩИ и ФРУКТЫ", "cuisineId": 3},
+        {"id": 42, "name": "ЯЙЦО", "cuisineId": 3},
+        {"id": 43, "name": "ЗАМЕСЫ HA РОЛЛЫ", "cuisineId": 3},
+        {"id": 44, "name": "ЗАМЕСЫ HA СЫРНЫЕ ШАРИКИ", "cuisineId": 3},
         {
-          "id": 58,
+          "id": 45,
           "name": "ПОЛУФАБРИКАТЫ ПОСЛЕ ТЕРМИЧЕСКОЙ ОБРАБОТКИ",
           "cuisineId": 3
         },
-        {"id": 59, "name": "HEOБРАБОТАННЫЕ ОВОЩИ И ФРУКТЫ.", "cuisineId": 4},
-        {"id": 60, "name": "OБРАБОТАННЫЕ ОВОЩИ И ФРУКТЫ.", "cuisineId": 4}
+        {"id": 46, "name": "Овощи и Фрукты", "cuisineId": 4},
+        {"id": 47, "name": "Продукты", "cuisineId": 4}
       ];
 
       await db.transaction((txn) async {
@@ -329,300 +324,288 @@ class DatabaseHelper {
 
       // Données initiales des sous-catégories
       List<Map<String, dynamic>> initialSubCategoryData = [
-        {"id": 1, "name": "Томаты", "categoryId": 21},
-        {"id": 2, "name": "Огурцы", "categoryId": 21},
-        {"id": 3, "name": "Лук белый", "categoryId": 21},
-        {"id": 4, "name": "Лук красный", "categoryId": 21},
-        {"id": 5, "name": " Шампиньоны", "categoryId": 21},
-        {"id": 6, "name": "Чеснок очищенный", "categoryId": 21},
-        {"id": 7, "name": "Чеснок измельченный", "categoryId": 21},
-        {"id": 8, "name": "Капуста", "categoryId": 21},
-        {"id": 9, "name": "Перец болгарский", "categoryId": 21},
-        {"id": 10, "name": "Морковь", "categoryId": 21},
-        {"id": 11, "name": "Лук белый маринованный", "categoryId": 19},
-        {"id": 12, "name": "Морковь по-корейски", "categoryId": 19},
-        {"id": 13, "name": "Чесночный", "categoryId": 14},
-        {"id": 14, "name": "Сладкий черри", "categoryId": 14},
-        {"id": 15, "name": "Горчица", "categoryId": 14},
-        {"id": 16, "name": "Чили - вода с перцем", "categoryId": 14},
-        {"id": 17, "name": "Замес с омлетом и майонезом", "categoryId": 14},
-        {"id": 18, "name": "Маринованные огурцы", "categoryId": 12},
-        {"id": 19, "name": "Ананасы", "categoryId": 12},
+        {"id": 1, "name": "Томаты", "categoryId": 1},
+        {"id": 2, "name": "Огурцы", "categoryId": 1},
+        {"id": 3, "name": "Лук белый", "categoryId": 1},
+        {"id": 4, "name": "Лук красный", "categoryId": 1},
+        {"id": 5, "name": " Шампиньоны", "categoryId": 1},
+        {"id": 6, "name": "Чеснок очищенный", "categoryId": 1},
+        {"id": 7, "name": "Капуста", "categoryId": 1},
+        {"id": 8, "name": "Mорковь", "categoryId": 1},
+        {"id": 9, "name": "Перец болгарский", "categoryId": 1},
+        {"id": 10, "name": " Филе цыпленка", "categoryId": 2},
+        {"id": 11, "name": "Крылья цыпленка", "categoryId": 2},
+        {"id": 12, "name": "Говядина", "categoryId": 2},
+        {"id": 13, "name": "Фарш из мяса птицы", "categoryId": 2},
+        {"id": 14, "name": "Сардельки без оболочки", "categoryId": 3},
+        {"id": 15, "name": "Сыр Голландский слайс", "categoryId": 3},
+        {"id": 16, "name": "Соль экстра", "categoryId": 4},
+        {"id": 17, "name": "Растительное масло", "categoryId": 4},
+        {"id": 18, "name": "Фритюрное масло", "categoryId": 4},
+        {"id": 19, "name": "Булочки для хот дога", "categoryId": 4},
+        {"id": 20, "name": "Лаваш", "categoryId": 4},
+        {"id": 21, "name": "Лепешка для грильяса", "categoryId": 4},
+        {"id": 22, "name": "Яичный порошок", "categoryId": 4},
+        {"id": 23, "name": "Маринованные огурцы", "categoryId": 4.1},
+        {"id": 24, "name": "Ананасы", "categoryId": 4.1},
         {
-          "id": 20,
+          "id": 25,
           "name": "Халапеньо, в неметаллическом контейнере",
-          "categoryId": 12
+          "categoryId": 4.1
         },
-        {"id": 0, "name": "Картофель фри", "categoryId": 13},
-        {"id": 21, "name": "Картофель фри для шаурмы", "categoryId": 20},
-        {"id": 22, "name": "Омлет яичный", "categoryId": 20},
-        {"id": 23, "name": "Шампиньоны фри", "categoryId": 20},
-        {"id": 24, "name": "Филе цыпленка", "categoryId": 20},
-        {"id": 25, "name": "Лук фри", "categoryId": 20},
-        {"id": 26, "name": "Говядина фри", "categoryId": 20},
-        {"id": 27, "name": "Фарш с соусом", "categoryId": 20},
-        {"id": 28, "name": "Фарш куриный жареный", "categoryId": 20},
-        {"id": 29, "name": "Чипсы пшеничные/острые", "categoryId": 20},
-        {"id": 290, "name": "Чипсы острые", "categoryId": 20},
-        {"id": 30, "name": "Бекон", "categoryId": 16},
-        {"id": 31, "name": "Меланж яичный", "categoryId": 17},
-        {"id": 32, "name": "Обычный", "categoryId": 1},
-        {"id": 33, "name": "Сырный", "categoryId": 1},
-        {"id": 34, "name": "Грибной", "categoryId": 1},
-        {"id": 35, "name": "Кетчуп томатный EFKO FOOD", "categoryId": 1},
-        {"id": 36, "name": "BBQ", "categoryId": 1},
-        {"id": 37, "name": "Сладкий соус для курицы Агoy-D", "categoryId": 1},
-        {"id": 248, "name": "Соус устричный", "categoryId": 27},
-        {"id": 241, "name": "Соевый соус концентрат", "categoryId": 27},
-        {"id": 242, "name": "Сырный", "categoryId": 27},
-        {"id": 243, "name": "Сладкий соус для курицы Aroy-D", "categoryId": 27},
-        {"id": 244, "name": "Соус для пиццы СООКМЕ", "categoryId": 27},
-        {"id": 245, "name": "Сливки", "categoryId": 27},
-        {"id": 246, "name": "Растительное масло", "categoryId": 28},
-        {"id": 247, "name": "Соль", "categoryId": 28},
-        {"id": 298, "name": "Caxap", "categoryId": 28},
-        {"id": 249, "name": "Орегано", "categoryId": 28},
+        {"id": 26, "name": "Картофель фри", "categoryId": 5},
+        {"id": 27, "name": "Чесночный", "categoryId": 6},
+        {"id": 28, "name": "Горчица", "categoryId": 6},
+        {"id": 29, "name": "Сладкий черри", "categoryId": 6},
+        {"id": 30, "name": "Чили - вода с перцем", "categoryId": 6},
+        {"id": 31, "name": "Замес с омлетом и майонезом", "categoryId": 6},
+        {"id": 32, "name": "Бекон", "categoryId": 7},
+        {"id": 33, "name": "яичный Mеланж ", "categoryId": 8},
+        {"id": 34, "name": "Лук белый маринованный", "categoryId": 9},
+        {"id": 35, "name": "Морковь по-корейски", "categoryId": 9},
+        {"id": 36, "name": "Картофель фри для шаурмы", "categoryId": 10},
+        {"id": 37, "name": "Филе цыпленка", "categoryId": 10},
+        {"id": 38, "name": "Шампиньоны фри", "categoryId": 10},
+        {"id": 39, "name": "Омлет яичный", "categoryId": 10},
+        {"id": 40, "name": "Лук фри", "categoryId": 10},
+        {"id": 41, "name": "Говядина фри", "categoryId": 10},
+        {"id": 42, "name": "Фарш с соусом", "categoryId": 10},
+        {"id": 43, "name": "Фарш куриный жареный", "categoryId": 10},
+        {"id": 44, "name": "Чипсы пшеничные/острые", "categoryId": 10},
+        {"id": 45, "name": "Обычный", "categoryId": 11},
+        {"id": 46, "name": "Сырный", "categoryId": 11},
+        {"id": 47, "name": "Грибной", "categoryId": 11},
+        {"id": 48, "name": "Кетчуп томатный EFKO FOOD", "categoryId": 11},
+        {"id": 49, "name": "BBQ", "categoryId": 11},
+        {"id": 50, "name": "Сладкий соус для курицы Агoy-D", "categoryId": 11},
+        {"id": 51, "name": "Сервелат", "categoryId": 13},
+        {"id": 52, "name": "Карбонад", "categoryId": 13},
+        {"id": 53, "name": "Пепперони", "categoryId": 13},
+        {"id": 54, "name": "Ветчина из мяса птицы", "categoryId": 13},
+        {"id": 55, "name": "Бекон", "categoryId": 13},
+        {"id": 56, "name": "Моцарелла тертая", "categoryId": 14},
+        {"id": 57, "name": "Сыр Голландский слайс", "categoryId": 14},
+        {"id": 58, "name": "Пармезан", "categoryId": 14},
+        {"id": 59, "name": " Дор-блю", "categoryId": 14},
+        {"id": 60, "name": "Очаковский", "categoryId": 14},
+        {"id": 61, "name": "Пицца сырный борт", "categoryId": 14},
+        {"id": 62, "name": "Сиртаки", "categoryId": 14},
+        {"id": 63, "name": "Ананасы", "categoryId": 15},
         {
-          "id": 250,
-          "name": "Приправа «Knorr» куриный бульон",
-          "categoryId": 28
-        },
-        {"id": 251, "name": "Перец черный молотый", "categoryId": 28},
-        {"id": 252, "name": "Лук жареный криспи", "categoryId": 28},
-        {"id": 253, "name": "Лимонный концентрат", "categoryId": 28},
-        {"id": 254, "name": "Яичный порошок", "categoryId": 28},
-        {"id": 255, "name": "Дрожжи", "categoryId": 28},
-        {"id": 256, "name": "Мука", "categoryId": 28},
-        {"id": 38, "name": " Филе цыпленка", "categoryId": 10},
-        {"id": 39, "name": "Крылья цыпленка", "categoryId": 10},
-        {"id": 40, "name": "Говядина", "categoryId": 10},
-        {"id": 41, "name": "Фарш из мяса птицы", "categoryId": 10},
-        {"id": 42, "name": "Сардельки без оболочки", "categoryId": 11},
-        {"id": 43, "name": "Растительное масло", "categoryId": 11},
-        {"id": 44, "name": "Соль экстра", "categoryId": 22},
-        {"id": 45, "name": "Фритюрное масло", "categoryId": 22},
-        {"id": 46, "name": "Булочки для хот дога", "categoryId": 22},
-        {"id": 47, "name": "Лаваш", "categoryId": 22},
-        {"id": 48, "name": "Лепешка для грильяса", "categoryId": 22},
-        {"id": 49, "name": "Яичный порошок", "categoryId": 22},
-        {"id": 50, "name": "Картофель фри", "categoryId": 22},
-        {"id": 51, "name": "Сервелат", "categoryId": 23},
-        {"id": 510, "name": "Карбонад", "categoryId": 23},
-        {"id": 52, "name": "Пепперони", "categoryId": 23},
-        {"id": 53, "name": "Ветчина из мяса птицы", "categoryId": 23},
-        {"id": 54, "name": "Фарш куриный жареный", "categoryId": 23},
-        {"id": 55, "name": "Бекон", "categoryId": 23},
-        {"id": 288, "name": "Филе цыпленка полуфабрикат", "categoryId": 26},
-        {"id": 56, "name": "Пармезан", "categoryId": 24},
-        {"id": 57, "name": " Дор-блю", "categoryId": 24},
-        {"id": 58, "name": "Пицца сырный борт", "categoryId": 24},
-        {"id": 578, "name": "Пармезан", "categoryId": 32},
-        {"id": 579, "name": " Дор-блю", "categoryId": 32},
-        {"id": 589, "name": "Пицца сырный борт", "categoryId": 32},
-        {"id": 590, "name": "Моцарелла тертая", "categoryId": 32},
-        {"id": 591, "name": "Сыр Голландский слайс", "categoryId": 32},
-        {"id": 592, "name": "Очаковский", "categoryId": 32},
-        {"id": 593, "name": "Сиртаки", "categoryId": 32},
-        {"id": 59, "name": "Ананасы", "categoryId": 25},
-        {"id": 60, "name": "Маринованные огурцы", "categoryId": 25},
-        {
-          "id": 61,
+          "id": 64,
           "name": "Халапеньо, в неметаллическом контейнере",
-          "categoryId": 25
+          "categoryId": 15
         },
-        {"id": 62, "name": "Белый", "categoryId": 35},
-        {"id": 63, "name": "Красный для пиццы", "categoryId": 35},
-        {"id": 64, "name": "Соевый соус полуфабрикат", "categoryId": 35},
-        {"id": 65, "name": "Сливочный", "categoryId": 35},
-        {"id": 66, "name": "Цезарь", "categoryId": 35},
-        {"id": 67, "name": "BBQ", "categoryId": 35},
-        {"id": 68, "name": "Шампиньоны", "categoryId": 36},
-        {"id": 69, "name": "Томаты", "categoryId": 36},
-        {"id": 70, "name": "Лук зеленый", "categoryId": 36},
-        {"id": 71, "name": "Укроп", "categoryId": 36},
-        {"id": 72, "name": "Лук красный", "categoryId": 36},
-        {"id": 73, "name": "Айсберг", "categoryId": 36},
-        {"id": 74, "name": "Лук белый маринованный", "categoryId": 37},
-        {"id": 75, "name": "Тесто дрожжевое", "categoryId": 38},
-        {"id": 76, "name": "Филе цыпленка", "categoryId": 39},
-        {"id": 77, "name": "Масло чесночное", "categoryId": 39},
-        {"id": 78, "name": "Фарш с соусом", "categoryId": 39},
-        {"id": 79, "name": "Картофель фри для шаурмы", "categoryId": 39},
-        {"id": 80, "name": "Яичный меланж", "categoryId": 60},
-        {"id": 83, "name": "Сардельки без оболочки", "categoryId": 41},
-        {"id": 84, "name": "Карбонад", "categoryId": 41},
-        {"id": 85, "name": "Сервелат", "categoryId": 41},
-        {"id": 86, "name": "Бекон", "categoryId": 41},
-        {"id": 87, "name": "Моцарелла тертая", "categoryId": 42},
-        {"id": 88, "name": "Сиртаки", "categoryId": 42},
-        {"id": 89, "name": "Креметте", "categoryId": 42},
-        {"id": 90, "name": "Пармезан", "categoryId": 42},
-        {"id": 91, "name": " Форель", "categoryId": 43},
-        {"id": 92, "name": "Креветки сырые", "categoryId": 43},
-        {"id": 93, "name": "Снежный краб", "categoryId": 43},
-        {"id": 94, "name": "Угорь", "categoryId": 43},
-        {"id": 95, "name": "Икра Масаго оранжевая", "categoryId": 43},
-        {"id": 96, "name": "Икра Масаго красная", "categoryId": 43},
-        {"id": 97, "name": "Паста том ям", "categoryId": 44},
-        {"id": 98, "name": "Паста чили тайская", "categoryId": 44},
-        {"id": 99, "name": "Молоко кокосовое", "categoryId": 44},
-        {"id": 100, "name": "Чили Mivimex", "categoryId": 44},
-        {"id": 101, "name": " Соус рыбный", "categoryId": 44},
-        {"id": 102, "name": "Соус сладкий для курицы Агoy-D", "categoryId": 44},
-        {"id": 103, "name": "Майонез Печагин", "categoryId": 44},
-        {"id": 104, "name": " Соус устричный", "categoryId": 44},
-        {"id": 105, "name": "Унаги", "categoryId": 44},
-        {"id": 106, "name": "Кетчуп томатный EFKO FOOD", "categoryId": 44},
-        {"id": 107, "name": "Ким Чи", "categoryId": 44},
-        {"id": 108, "name": "Соевый соус концентрат", "categoryId": 44},
-        {"id": 109, "name": "Сливки", "categoryId": 44},
-        {"id": 110, "name": "BBQ", "categoryId": 44},
-        {"id": 111, "name": "Рис", "categoryId": 45},
-        {"id": 112, "name": "Рисовое вино Мирин", "categoryId": 45},
-        {"id": 113, "name": "Крахмал", "categoryId": 45},
-        {"id": 114, "name": "Фритюрное масло", "categoryId": 45},
-        {"id": 115, "name": "Оливковое масло", "categoryId": 45},
-        {"id": 116, "name": "Растительное масло", "categoryId": 45},
-        {"id": 117, "name": "Соль", "categoryId": 45},
-        {"id": 118, "name": "Caxap", "categoryId": 45},
-        {"id": 119, "name": "Имбирь маринованный", "categoryId": 45},
-        {"id": 120, "name": "Сахарная пудра", "categoryId": 45},
-        {"id": 121, "name": "Приправа Knorr куриный бульон", "categoryId": 45},
-        {"id": 122, "name": "Кунжутное масло", "categoryId": 45},
-        {"id": 123, "name": "BBQ", "categoryId": 45},
-        {"id": 124, "name": "Стружка тунца", "categoryId": 45},
-        {"id": 125, "name": "Водоросли нори", "categoryId": 45},
-        {"id": 126, "name": "Панировочные сухари", "categoryId": 45},
-        {"id": 127, "name": "Уксус рисовый Мицукан", "categoryId": 45},
-        {"id": 128, "name": "Кунжут белый", "categoryId": 45},
-        {"id": 129, "name": "Кунжут черный", "categoryId": 45},
-        {"id": 130, "name": "Какао", "categoryId": 45},
-        {"id": 131, "name": "Яичный порошок", "categoryId": 45},
-        {"id": 132, "name": "Орегано", "categoryId": 45},
-        {"id": 133, "name": "Лимонный концентрат", "categoryId": 45},
-        {"id": 134, "name": "Лук жареный криспи", "categoryId": 45},
-        {"id": 135, "name": "Ананасы", "categoryId": 46},
-        {"id": 136, "name": "Маслины", "categoryId": 46},
-        {"id": 137, "name": "Оливки", "categoryId": 46},
-        {"id": 138, "name": "Маринованные огурцы", "categoryId": 46},
-        {"id": 139, "name": "Яичная", "categoryId": 47},
-        {"id": 140, "name": "Удон", "categoryId": 47},
-        {"id": 141, "name": "Говядина", "categoryId": 48},
-        {"id": 142, "name": "Филе цыпленка", "categoryId": 48},
-        {"id": 143, "name": "Куриная грудка", "categoryId": 48},
-        {"id": 144, "name": "Фасоль стручковая", "categoryId": 49},
-        {"id": 145, "name": "Картофель фри", "categoryId": 50},
-        {"id": 1450, "name": "Топпинг в ассортименте", "categoryId": 51},
-        {"id": 146, "name": "Чизкейк в ассортименте", "categoryId": 51},
-        {"id": 1445, "name": "Сырники", "categoryId": 51},
-        {"id": 147, "name": "Лава", "categoryId": 52},
-        {"id": 594, "name": "Терияки", "categoryId": 52},
-        {"id": 148, "name": "Цезарь", "categoryId": 52},
-        {"id": 149, "name": "Соевый соус полуфабрикат", "categoryId": 52},
-        {"id": 150, "name": "Греческая заправка", "categoryId": 52},
-        {"id": 151, "name": "Спайс", "categoryId": 52},
-        {"id": 152, "name": "Мицукан заправка для риса", "categoryId": 52},
-        {"id": 153, "name": "Васаби", "categoryId": 52},
-        {"id": 154, "name": "Красный для пиццы", "categoryId": 52},
-        {"id": 155, "name": "Соус базовый вок ", "categoryId": 52},
-        {"id": 156, "name": "Соус сливочный вок", "categoryId": 52},
-        {"id": 157, "name": "Соус устричный вок", "categoryId": 52},
-        {"id": 158, "name": "BBQ", "categoryId": 52},
-        {"id": 159, "name": "Кляр", "categoryId": 53},
-        {"id": 160, "name": "Шампиньоны", "categoryId": 54},
-        {"id": 161, "name": "Томаты", "categoryId": 54},
-        {"id": 162, "name": "Лук белый", "categoryId": 54},
-        {"id": 163, "name": "Лук красный", "categoryId": 54},
-        {"id": 164, "name": "Лук белый маринованный", "categoryId": 54},
-        {"id": 165, "name": "Айсберг", "categoryId": 54},
-        {"id": 166, "name": "Апельсин", "categoryId": 54},
-        {"id": 167, "name": "Банан", "categoryId": 54},
-        {"id": 168, "name": "Груша", "categoryId": 54},
-        {"id": 1680, "name": "Киби", "categoryId": 54},
-        {"id": 169, "name": "Лимон", "categoryId": 54},
-        {"id": 170, "name": "Лук зеленый", "categoryId": 54},
-        {"id": 171, "name": "Морковь", "categoryId": 54},
-        {"id": 172, "name": "Огурцы ", "categoryId": 54},
-        {"id": 173, "name": "Перец чили", "categoryId": 54},
-        {"id": 174, "name": "Болгарский перец", "categoryId": 54},
-        {"id": 175, "name": "Укроп", "categoryId": 54},
-        {"id": 176, "name": "Чеснок", "categoryId": 54},
-        {"id": 177, "name": "Корень имбиря", "categoryId": 54},
-        {"id": 178, "name": "Яйцо куриное(вареное)", "categoryId": 55},
-        {"id": 1708, "name": "Яйцо куриное(вар очищенное)", "categoryId": 55},
-        {"id": 1780, "name": "Яйцо куриное(мытое) ", "categoryId": 55},
-        {"id": 179, "name": "Яичный меланж", "categoryId": 55},
-        {"id": 180, "name": "С форелью", "categoryId": 56},
-        {"id": 181, "name": "Цезарь", "categoryId": 56},
-        {"id": 182, "name": "Сладкий сыр", "categoryId": 56},
-        {"id": 183, "name": "Роскошь Бермудов", "categoryId": 56},
-        {"id": 184, "name": "Краб+Спайс", "categoryId": 56},
+        {"id": 65, "name": "Маринованные огурцы", "categoryId": 15},
+        {"id": 66, "name": "Сливки", "categoryId": 16},
+        {"id": 67, "name": " Соус устричный", "categoryId": 16},
+        {"id": 68, "name": "Соус сладкий для курицы Агoy-D", "categoryId": 16},
+        {"id": 69, "name": "Соевый соус концентрат", "categoryId": 16},
+        {"id": 70, "name": "Сырный", "categoryId": 16},
+        {"id": 71, "name": "Соус для пиццы СООКМЕ", "categoryId": 16},
+        {"id": 72, "name": "Филе цыпленка полуфабрикат", "categoryId": 17},
+        {"id": 73, "name": "Мука", "categoryId": 18},
+        {"id": 74, "name": "Дрожжи", "categoryId": 18},
+        {"id": 75, "name": "Растительное масло", "categoryId": 18},
+        {"id": 76, "name": "Соль", "categoryId": 18},
+        {"id": 77, "name": "Caxap", "categoryId": 18},
+        {"id": 78, "name": "Орегано", "categoryId": 18},
+        {"id": 79, "name": "Приправа «Knorr» куриный бульон", "categoryId": 18},
+        {"id": 80, "name": "Перец черный молотый", "categoryId": 18},
+        {"id": 81, "name": "Лук жареный криспи", "categoryId": 18},
+        {"id": 82, "name": "Лимонный концентрат", "categoryId": 18},
+        {"id": 83, "name": "Яичный порошок", "categoryId": 18},
+        {"id": 84, "name": "Снежный краб", "categoryId": 19},
+        {"id": 85, "name": "Креветка сырая", "categoryId": 19},
+        {"id": 86, "name": "Сервелат", "categoryId": 20},
+        {"id": 87, "name": "Карбонад", "categoryId": 20},
+        {"id": 88, "name": "Пеперони", "categoryId": 20},
+        {"id": 89, "name": "Ветчина из мяса птицы", "categoryId": 20},
+        {"id": 90, "name": "Фарш куриный жареный", "categoryId": 20},
+        {"id": 91, "name": "Бекон", "categoryId": 20},
+        {"id": 92, "name": "Пармезан", "categoryId": 21},
+        {"id": 93, "name": " Дор-блю", "categoryId": 21},
+        {"id": 94, "name": "Пицца сырный борт", "categoryId": 21},
+        {"id": 95, "name": "Белый", "categoryId": 22},
+        {"id": 96, "name": "Красный для пиццы", "categoryId": 22},
+        {"id": 97, "name": "Соевый соус полуфабрикат", "categoryId": 22},
+        {"id": 98, "name": "Сливочный", "categoryId": 22},
+        {"id": 99, "name": "Цезарь", "categoryId": 22},
+        {"id": 100, "name": "BBQ", "categoryId": 22},
+        {"id": 101, "name": "Шампиньоны", "categoryId": 23},
+        {"id": 102, "name": "Томаты", "categoryId": 23},
+        {"id": 103, "name": "Лук белый", "categoryId": 23},
+        {"id": 104, "name": "Лук красный", "categoryId": 23},
+        {"id": 105, "name": "Лук белый маринованный", "categoryId": 23},
+        {"id": 106, "name": "Айсберг", "categoryId": 23},
+        {"id": 107, "name": "Лук белый маринованный", "categoryId": 24},
+        {"id": 108, "name": "Тесто дрожжевое", "categoryId": 25},
+        {"id": 109, "name": "Яичный меланж", "categoryId": 26},
+        {"id": 109, "name": "Филе цыпленка", "categoryId": 27},
+        {"id": 110, "name": "Масло чесночное", "categoryId": 27},
+        {"id": 111, "name": "Фарш с соусом", "categoryId": 27},
+        {"id": 112, "name": "Картофель фри для шаурмы", "categoryId": 27},
+        {"id": 113, "name": "Сардельки без оболочки", "categoryId": 28},
+        {"id": 114, "name": "Карбонад", "categoryId": 28},
+        {"id": 115, "name": "Сервелат", "categoryId": 28},
+        {"id": 116, "name": "Бекон", "categoryId": 28},
+        {"id": 117, "name": "Моцарелла тертая", "categoryId": 29},
+        {"id": 118, "name": "Креметте", "categoryId": 29},
+        {"id": 119, "name": "Пармезан", "categoryId": 29},
+        {"id": 120, "name": "Сиртаки", "categoryId": 29},
+        {"id": 121, "name": " Форель", "categoryId": 30},
+        {"id": 122, "name": "Креветки сырые", "categoryId": 30},
+        {"id": 123, "name": "Снежный краб", "categoryId": 30},
+        {"id": 124, "name": "Угорь", "categoryId": 30},
+        {"id": 125, "name": "Икра Масаго оранжевая", "categoryId": 30},
+        {"id": 126, "name": "Икра Масаго красная", "categoryId": 30},
+        {"id": 127, "name": "Чили Mivimex", "categoryId": 31},
+        {"id": 128, "name": "Паста том ям", "categoryId": 31},
+        {"id": 129, "name": "Паста чили тайская", "categoryId": 31},
+        {"id": 130, "name": "Молоко кокосовое", "categoryId": 31},
+        {"id": 131, "name": " Соус рыбный", "categoryId": 31},
         {
-          "id": 185,
+          "id": 132,
+          "name": " Соус сладкий для курицы Aroy-D",
+          "categoryId": 31
+        },
+        {"id": 133, "name": "Майонез Печагин", "categoryId": 31},
+        {"id": 135, "name": "Унаги", "categoryId": 31},
+        {"id": 136, "name": "Кетчуп томатный EFKO FOOD", "categoryId": 31},
+        {"id": 137, "name": "Ким Чи", "categoryId": 31},
+        {"id": 138, "name": "Соевый соус концентрат", "categoryId": 31},
+        {"id": 139, "name": "Сливки", "categoryId": 31},
+        {"id": 140, "name": "BBQ", "categoryId": 31},
+        {"id": 141, "name": "Рис", "categoryId": 32},
+        {"id": 142, "name": "Рисовое вино Мирин", "categoryId": 32},
+        {"id": 143, "name": "Крахмал", "categoryId": 32},
+        {"id": 144, "name": "Фритюрное масло", "categoryId": 32},
+        {"id": 145, "name": "Оливковое масло", "categoryId": 32},
+        {"id": 146, "name": "Растительное масло", "categoryId": 32},
+        {"id": 147, "name": "Соль", "categoryId": 32},
+        {"id": 148, "name": "Caxap", "categoryId": 32},
+        {"id": 149, "name": "Имбирь маринованный", "categoryId": 32},
+        {"id": 150, "name": "Сахарная пудра", "categoryId": 32},
+        {"id": 151, "name": "Приправа Knorr куриный бульон", "categoryId": 32},
+        {"id": 152, "name": "Кунжутное масло", "categoryId": 32},
+        {"id": 153, "name": "BBQ", "categoryId": 32},
+        {"id": 154, "name": "Водоросли нори", "categoryId": 32},
+        {"id": 155, "name": "Ананасы", "categoryId": 33},
+        {"id": 156, "name": "Маслины", "categoryId": 33},
+        {"id": 157, "name": "Оливки", "categoryId": 33},
+        {"id": 158, "name": "Маринованные огурцы", "categoryId": 33},
+        {"id": 159, "name": "Яичная", "categoryId": 34},
+        {"id": 160, "name": "Удон", "categoryId": 34},
+        {"id": 161, "name": "Говядина", "categoryId": 35},
+        {"id": 162, "name": "Филе цыпленка", "categoryId": 35},
+        {"id": 163, "name": "Куриная грудка", "categoryId": 35},
+        {"id": 164, "name": "Фасоль стручковая", "categoryId": 36},
+        {"id": 165, "name": "Картофель фри", "categoryId": 37},
+        {"id": 166, "name": "Топпинг в ассортименте", "categoryId": 38},
+        {"id": 167, "name": "Чизкейк в ассортименте", "categoryId": 38},
+        {"id": 168, "name": "Сырники", "categoryId": 38},
+        {"id": 169, "name": "Лава", "categoryId": 39},
+        {"id": 170, "name": "Цезарь", "categoryId": 39},
+        {"id": 171, "name": "Соевый соус полуфабрикат", "categoryId": 39},
+        {"id": 172, "name": "Греческая заправка", "categoryId": 39},
+        {"id": 173, "name": "Спайс", "categoryId": 39},
+        {"id": 174, "name": "Терияки", "categoryId": 39},
+        {"id": 175, "name": "Мицукан заправка для риса", "categoryId": 39},
+        {"id": 176, "name": "Васаби", "categoryId": 39},
+        {"id": 177, "name": "Красный для пиццы", "categoryId": 39},
+        {"id": 178, "name": "Соус базовый вок ", "categoryId": 39},
+        {"id": 179, "name": "соус сливочный вок", "categoryId": 39},
+        {"id": 180, "name": "Соус устричный вок", "categoryId": 39},
+        {"id": 181, "name": "BBQ", "categoryId": 39},
+        {"id": 201, "name": "Кляр", "categoryId": 40},
+        {"id": 183, "name": "Шампиньоны", "categoryId": 41},
+        {"id": 188, "name": "Апельсин", "categoryId": 41},
+        {"id": 189, "name": "Банан", "categoryId": 41},
+        {"id": 190, "name": "Груша", "categoryId": 41},
+        {"id": 191, "name": "Киби", "categoryId": 41},
+        {"id": 192, "name": "Лимон", "categoryId": 41},
+        {"id": 193, "name": "Лук зеленый", "categoryId": 41},
+        {"id": 194, "name": "Морковь", "categoryId": 41},
+        {"id": 195, "name": "Огурцы ", "categoryId": 41},
+        {"id": 196, "name": "Перец чили", "categoryId": 41},
+        {"id": 197, "name": "Болгарский перец", "categoryId": 41},
+        {"id": 198, "name": "Укроп", "categoryId": 41},
+        {"id": 199, "name": "Чеснок", "categoryId": 41},
+        {"id": 200, "name": "Корень имбиря", "categoryId": 41},
+        {"id": 186, "name": "Лук белый маринованный", "categoryId": 41},
+        {"id": 187, "name": "Айсберг", "categoryId": 41},
+        {"id": 202, "name": "Яйцо куриное(вареное)", "categoryId": 42},
+        {"id": 203, "name": "Яйцо куриное(вар очищенное)", "categoryId": 42},
+        {"id": 204, "name": "Яйцо куриное(мытое) ", "categoryId": 42},
+        {"id": 205, "name": "Яичный меланж", "categoryId": 42},
+        {"id": 206, "name": "С форелью", "categoryId": 43},
+        {"id": 207, "name": "Цезарь", "categoryId": 43},
+        {"id": 208, "name": "Сладкий сыр", "categoryId": 43},
+        {"id": 209, "name": "Роскошь Бермудов", "categoryId": 43},
+        {"id": 210, "name": "Краб+Спайс", "categoryId": 43},
+        {
+          "id": 211,
           "name": "Сырные шарики полуфабрикаты всех видов",
-          "categoryId": 57
+          "categoryId": 44
         },
-        {"id": 186, "name": "Бульон рыбный", "categoryId": 58},
-        {"id": 187, "name": "Бульон куриный", "categoryId": 58},
-        {"id": 188, "name": "Булочки", "categoryId": 58},
-        {"id": 189, "name": "Яичная лапша", "categoryId": 58},
-        {"id": 190, "name": "Удон лапша", "categoryId": 58},
-        {"id": 191, "name": "Блин сладкий", "categoryId": 58},
-        {"id": 192, "name": "Блин яичный", "categoryId": 58},
-        {"id": 193, "name": "Блин шоколадный", "categoryId": 58},
-        {"id": 194, "name": "Рис для суши", "categoryId": 58},
-        {"id": 1940, "name": "Рис для суши(из термоса)", "categoryId": 58},
-        {"id": 195, "name": "Креветки вареные", "categoryId": 58},
-        {"id": 196, "name": "Грибы Шиитаке", "categoryId": 58},
-        {"id": 197, "name": "Куриная грудка жареная", "categoryId": 58},
-        {"id": 198, "name": "Лосось терияки жареный", "categoryId": 58},
-        {"id": 199, "name": "Сухари", "categoryId": 58},
-        {"id": 200, "name": "Картофель фри для шаурмы", "categoryId": 58},
-        {"id": 201, "name": "Томат Черри", "categoryId": 59},
-        {"id": 202, "name": "Лук зеленый свежий", "categoryId": 59},
-        {"id": 203, "name": "Лимон", "categoryId": 59},
-        {"id": 204, "name": "Капуста белокочанная", "categoryId": 59},
-        {"id": 205, "name": "Томат", "categoryId": 59},
-        {"id": 206, "name": "Огурцы", "categoryId": 59},
-        {"id": 207, "name": "Лук белый", "categoryId": 59},
-        {"id": 208, "name": "Лук крымский", "categoryId": 59},
-        {"id": 209, "name": "Перец сладкий", "categoryId": 59},
-        {"id": 210, "name": "Шампиньоны", "categoryId": 59},
-        {"id": 211, "name": "Айсберг", "categoryId": 59},
-        {"id": 212, "name": "Банан", "categoryId": 59},
-        {"id": 213, "name": "Укроп", "categoryId": 59},
-        {"id": 214, "name": "Киви", "categoryId": 59},
-        {"id": 215, "name": "Чеснок", "categoryId": 59},
-        {"id": 216, "name": "Перец чили", "categoryId": 59},
-        {"id": 217, "name": "Корень имбиря", "categoryId": 59},
-        {"id": 218, "name": "Томаты", "categoryId": 60},
-        {"id": 219, "name": "Томаты (хот-дог)", "categoryId": 60},
-        {"id": 220, "name": "Огурцы", "categoryId": 60},
-        {"id": 221, "name": "Томаты черри", "categoryId": 60},
-        {"id": 222, "name": "Болгарский перец", "categoryId": 60},
-        {"id": 223, "name": "Лук(белый)", "categoryId": 60},
-        {"id": 224, "name": "Лук(репка)", "categoryId": 60},
-        {"id": 225, "name": "Лук (красный)", "categoryId": 60},
-        {"id": 226, "name": "Шампиньоны", "categoryId": 60},
-        {"id": 227, "name": "Капуста", "categoryId": 60},
-        {"id": 228, "name": "Лук зеленый", "categoryId": 60},
-        {"id": 229, "name": "Огурец (марин.)", "categoryId": 60},
-        {"id": 230, "name": "Морковь (кор.)", "categoryId": 60},
-        {"id": 231, "name": "Лук репка марин.", "categoryId": 60},
-        {"id": 232, "name": "Салат", "categoryId": 60},
-        {"id": 233, "name": "Укроп", "categoryId": 60},
-        {"id": 234, "name": "Горчица", "categoryId": 60},
-        {"id": 235, "name": "Чили соус", "categoryId": 60},
-        {"id": 236, "name": "Аройд", "categoryId": 60},
-        {"id": 237, "name": "Красный соус", "categoryId": 60},
-        {"id": 238, "name": "Соус обычный", "categoryId": 60},
-        {"id": 239, "name": "Соус чесночный", "categoryId": 60},
-        {"id": 240, "name": "Снежный краб", "categoryId": 29},
-        {
-          "id": 2410,
-          "name": "Креветка сырая",
-          "categoryId": 29
-        } // ... Ajoutez d'autres données initiales ici
+        {"id": 212, "name": "Бульон куриный", "categoryId": 45},
+        {"id": 213, "name": "Бульон рыбный", "categoryId": 45},
+        {"id": 214, "name": "Булочки", "categoryId": 45},
+        {"id": 215, "name": "Яичная лапша", "categoryId": 45},
+        {"id": 216, "name": "Удон лапша", "categoryId": 45},
+        {"id": 217, "name": "Блин сладкий", "categoryId": 45},
+        {"id": 218, "name": "Блин яичный", "categoryId": 45},
+        {"id": 219, "name": "Блин шоколадный", "categoryId": 45},
+        {"id": 220, "name": "Рис для суши", "categoryId": 45},
+        {"id": 221, "name": "Рис для суши(из термоса)", "categoryId": 45},
+        {"id": 222, "name": "Креветки вареные", "categoryId": 45},
+        {"id": 223, "name": "Грибы Шиитаке", "categoryId": 45},
+        {"id": 224, "name": "Куриная грудка жареная", "categoryId": 45},
+        {"id": 225, "name": "Лосось терияки жареный", "categoryId": 45},
+        {"id": 226, "name": "Сухари", "categoryId": 45},
+        {"id": 227, "name": "Картофель фри для шаурмы", "categoryId": 45},
+        {"id": 228, "name": "Томат Черри", "categoryId": 46},
+        {"id": 229, "name": "Лук зеленый свежий", "categoryId": 46},
+        {"id": 230, "name": "Лимон", "categoryId": 46},
+        {"id": 231, "name": "Капуста белокочанная", "categoryId": 46},
+        {"id": 232, "name": "Томат", "categoryId": 46},
+        {"id": 233, "name": "Огурцы", "categoryId": 46},
+        {"id": 234, "name": "Лук белый", "categoryId": 46},
+        {"id": 235, "name": "Лук крымский", "categoryId": 46},
+        {"id": 236, "name": "Морковь", "categoryId": 46},
+        {"id": 237, "name": "Апельсин", "categoryId": 46},
+        {"id": 238, "name": "Перец сладкий", "categoryId": 46},
+        {"id": 239, "name": "Шампиньоны", "categoryId": 46},
+        {"id": 240, "name": "Айсберг", "categoryId": 46},
+        {"id": 241, "name": "Банан", "categoryId": 46},
+        {"id": 242, "name": "Груша", "categoryId": 46},
+        {"id": 243, "name": "Укроп", "categoryId": 46},
+        {"id": 244, "name": "Киви", "categoryId": 46},
+        {"id": 245, "name": "Чеснок", "categoryId": 46},
+        {"id": 246, "name": "Перец чили", "categoryId": 46},
+        {"id": 247, "name": "Корень имбиря", "categoryId": 46},
+        {"id": 248, "name": "Томаты", "categoryId": 47},
+        {"id": 249, "name": "Томаты (хот-дог)", "categoryId": 47},
+        {"id": 250, "name": "Огурцы", "categoryId": 47},
+        {"id": 251, "name": "Томаты черри", "categoryId": 47},
+        {"id": 252, "name": "Болгарский перец", "categoryId": 47},
+        {"id": 253, "name": "Лук(белый)", "categoryId": 47},
+        {"id": 254, "name": "Лук(репка)", "categoryId": 47},
+        {"id": 255, "name": "Лук (красный)", "categoryId": 47},
+        {"id": 256, "name": "Шампиньоны", "categoryId": 47},
+        {"id": 257, "name": "Капуста", "categoryId": 47},
+        {"id": 258, "name": "Лук зеленый", "categoryId": 47},
+        {"id": 259, "name": "Огурец (марин.)", "categoryId": 47},
+        {"id": 260, "name": "Морковь (кор.)", "categoryId": 47},
+        {"id": 261, "name": "Лук репка марин.", "categoryId": 47},
+        {"id": 262, "name": "Салат", "categoryId": 47},
+        {"id": 263, "name": "Укроп", "categoryId": 47},
+        {"id": 264, "name": "Горчица", "categoryId": 47},
+        {"id": 265, "name": "Чили соус", "categoryId": 47},
+        {"id": 266, "name": "Аройд", "categoryId": 47},
+        {"id": 267, "name": "Красный соус", "categoryId": 47},
+        {"id": 268, "name": "Соус обычный", "categoryId": 47},
+        {"id": 269, "name": "Соус чесночный", "categoryId": 47}
       ];
 
       await db.transaction((txn) async {
@@ -658,8 +641,9 @@ class DatabaseHelper {
       );
     });
   }
-  
-  static Future<List<SubCategory>> getSubCategoriesByIds(List<int> subCategoryIds) async {
+
+  static Future<List<SubCategory>> getSubCategoriesByIds(
+      List<int> subCategoryIds) async {
     try {
       Database db = await _instance.database;
 
@@ -677,15 +661,12 @@ class DatabaseHelper {
       return subCategories;
     } catch (e) {
       if (kDebugMode) {
-        print('Erreur lors de la récupération des sous-catégories par IDs : $e');
+        print(
+            'Erreur lors de la récupération des sous-catégories par IDs : $e');
       }
       rethrow;
     }
   }
-
-  
-
-  
 
   //PARTIE TEMPERATURE
   //Charger les données initiales dans la table Temperature
@@ -696,47 +677,47 @@ class DatabaseHelper {
       List<Map<String, dynamic>> initialTemperatureData = [
         {
           "id": 1,
-          "ouvert": 0,
-          "categoryId": 10,
-          "temperature": "-18°С",
-          "subCategoryId": 41,
-          "dureeDeConservation": "180 jours",
-          "indicateur": 1
+          "ouvert": 1,
+          "categoryId": 1,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 1,
+          "dureeDeConservation": "18 heures",
+          "indicateur": 0
         },
         {
           "id": 2,
           "ouvert": 1,
-          "categoryId": 10,
+          "categoryId": 1,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 38,
-          "dureeDeConservation": "48 jours",
+          "subCategoryId": 2,
+          "dureeDeConservation": "18 heures",
           "indicateur": 0
         },
         {
           "id": 3,
           "ouvert": 1,
-          "categoryId": 10,
+          "categoryId": 1,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 39,
-          "dureeDeConservation": "48 jours",
+          "subCategoryId": 3,
+          "dureeDeConservation": "24 heures",
           "indicateur": 0
         },
         {
           "id": 4,
           "ouvert": 1,
-          "categoryId": 10,
+          "categoryId": 1,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 40,
-          "dureeDeConservation": "48 jours",
+          "subCategoryId": 4,
+          "dureeDeConservation": "24 heures",
           "indicateur": 0
         },
         {
           "id": 5,
           "ouvert": 1,
-          "categoryId": 10,
+          "categoryId": 1,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 41,
-          "dureeDeConservation": "48 jours",
+          "subCategoryId": 5,
+          "dureeDeConservation": "18 heures",
           "indicateur": 0
         },
         {
@@ -744,7 +725,7 @@ class DatabaseHelper {
           "ouvert": 1,
           "categoryId": 1,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 32,
+          "subCategoryId": 6,
           "dureeDeConservation": "120 heures",
           "indicateur": 0
         },
@@ -753,8 +734,8 @@ class DatabaseHelper {
           "ouvert": 1,
           "categoryId": 1,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 33,
-          "dureeDeConservation": "120 heures",
+          "subCategoryId": 7,
+          "dureeDeConservation": "12 heures",
           "indicateur": 0
         },
         {
@@ -762,8 +743,8 @@ class DatabaseHelper {
           "ouvert": 1,
           "categoryId": 1,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 34,
-          "dureeDeConservation": "120 heures",
+          "subCategoryId": 8,
+          "dureeDeConservation": "24 heures",
           "indicateur": 0
         },
         {
@@ -771,2133 +752,2510 @@ class DatabaseHelper {
           "ouvert": 1,
           "categoryId": 1,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 35,
-          "dureeDeConservation": "15 jours",
+          "subCategoryId": 9,
+          "dureeDeConservation": "18 heures",
           "indicateur": 0
         },
         {
           "id": 10,
           "ouvert": 1,
-          "categoryId": 1,
+          "categoryId": 2,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 36,
-          "dureeDeConservation": "180 jours",
+          "subCategoryId": 10,
+          "dureeDeConservation": "48 heures",
           "indicateur": 0
         },
         {
           "id": 11,
           "ouvert": 1,
-          "categoryId": 1,
+          "categoryId": 2,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 37,
-          "dureeDeConservation": "30 jours",
+          "subCategoryId": 11,
+          "dureeDeConservation": "48 heures",
           "indicateur": 0
         },
         {
           "id": 12,
           "ouvert": 1,
-          "categoryId": 1,
-          "temperature": "до +20°С",
-          "subCategoryId": 35,
+          "categoryId": 2,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 12,
           "dureeDeConservation": "48 heures",
           "indicateur": 0
         },
         {
           "id": 13,
           "ouvert": 1,
-          "categoryId": 1,
-          "temperature": "до +20°С",
-          "subCategoryId": 36,
-          "dureeDeConservation": "72 heures",
+          "categoryId": 2,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 13,
+          "dureeDeConservation": "48 heures",
           "indicateur": 0
         },
         {
           "id": 14,
-          "ouvert": 1,
-          "categoryId": 11,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 42,
-          "dureeDeConservation": "72 heures",
-          "indicateur": 0
+          "ouvert": 0,
+          "categoryId": 2,
+          "temperature": "-18°С",
+          "subCategoryId": 13,
+          "dureeDeConservation": "180 jours",
+          "indicateur": 1
         },
         {
           "id": 15,
           "ouvert": 1,
-          "categoryId": 11,
+          "categoryId": 3,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 43,
-          "dureeDeConservation": "12 heures",
+          "subCategoryId": 14,
+          "dureeDeConservation": "72 heures",
           "indicateur": 0
         },
         {
           "id": 16,
           "ouvert": 1,
-          "categoryId": 12,
-          "temperature": "до +20°С",
-          "subCategoryId": 18,
-          "dureeDeConservation": "72 heures",
+          "categoryId": 3,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 15,
+          "dureeDeConservation": "12 heures",
           "indicateur": 0
         },
         {
           "id": 17,
           "ouvert": 1,
-          "categoryId": 12,
+          "categoryId": 4,
           "temperature": "до +20°С",
-          "subCategoryId": 19,
-          "dureeDeConservation": "48 heures",
+          "subCategoryId": 16,
+          "dureeDeConservation": "2 annees",
           "indicateur": 0
         },
         {
           "id": 18,
           "ouvert": 1,
-          "categoryId": 12,
+          "categoryId": 4,
           "temperature": "до +20°С",
-          "subCategoryId": 20,
-          "dureeDeConservation": "21 jours",
+          "subCategoryId": 17,
+          "dureeDeConservation": "12 mois",
           "indicateur": 0
         },
         {
           "id": 19,
-          "ouvert": 0,
-          "categoryId": 13,
-          "temperature": "-18°С",
-          "subCategoryId": 0,
-          "dureeDeConservation": "7 jours",
-          "indicateur": 1
+          "ouvert": 1,
+          "categoryId": 4,
+          "temperature": "до +20°С",
+          "subCategoryId": 18,
+          "dureeDeConservation": "12 mois",
+          "indicateur": 0
         },
         {
           "id": 20,
           "ouvert": 1,
-          "categoryId": 13,
-          "temperature": "до +20°С",
-          "subCategoryId": 0,
-          "dureeDeConservation": "30 minutes",
+          "categoryId": 4,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 19,
+          "dureeDeConservation": "120 heures",
           "indicateur": 0
         },
         {
           "id": 21,
           "ouvert": 1,
-          "categoryId": 21,
+          "categoryId": 4,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 1,
-          "dureeDeConservation": "18 heures",
+          "subCategoryId": 20,
+          "dureeDeConservation": "72 heures",
           "indicateur": 0
         },
         {
           "id": 22,
           "ouvert": 1,
-          "categoryId": 21,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 2,
-          "dureeDeConservation": "18 heures",
+          "categoryId": 4,
+          "temperature": "до +20°С",
+          "subCategoryId": 20,
+          "dureeDeConservation": "24 heures",
           "indicateur": 0
         },
         {
           "id": 23,
           "ouvert": 1,
-          "categoryId": 21,
+          "categoryId": 4,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 5,
-          "dureeDeConservation": "18 heures",
+          "subCategoryId": 21,
+          "dureeDeConservation": "48 heures",
           "indicateur": 0
         },
         {
           "id": 24,
           "ouvert": 1,
-          "categoryId": 21,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 9,
-          "dureeDeConservation": "18 heures",
+          "categoryId": 4,
+          "temperature": "до +20°С",
+          "subCategoryId": 21,
+          "dureeDeConservation": "24 heures",
           "indicateur": 0
         },
         {
           "id": 25,
           "ouvert": 1,
-          "categoryId": 21,
+          "categoryId": 4,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 3,
-          "dureeDeConservation": "24 heures",
+          "subCategoryId": 22,
+          "dureeDeConservation": "24 mois",
           "indicateur": 0
         },
         {
           "id": 26,
           "ouvert": 1,
-          "categoryId": 21,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 4,
-          "dureeDeConservation": "24 heures",
+          "categoryId": 4,
+          "temperature": "до +20°С",
+          "subCategoryId": 22,
+          "dureeDeConservation": "6 mois",
           "indicateur": 0
         },
         {
           "id": 27,
           "ouvert": 1,
-          "categoryId": 21,
+          "categoryId": 4,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 10,
-          "dureeDeConservation": "24 heures",
+          "subCategoryId": 22,
+          "dureeDeConservation": "15 heures",
           "indicateur": 0
         },
         {
           "id": 28,
           "ouvert": 1,
-          "categoryId": 21,
+          "categoryId": 4.1,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 6,
-          "dureeDeConservation": "120 heures",
+          "subCategoryId": 23,
+          "dureeDeConservation": "72 heures",
           "indicateur": 0
         },
         {
           "id": 29,
           "ouvert": 1,
-          "categoryId": 21,
+          "categoryId": 4.1,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 8,
-          "dureeDeConservation": "12 heures",
+          "subCategoryId": 24,
+          "dureeDeConservation": "48 heures",
           "indicateur": 0
         },
         {
           "id": 30,
           "ouvert": 1,
-          "categoryId": 19,
+          "categoryId": 4.1,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 11,
-          "dureeDeConservation": "12 heures",
+          "subCategoryId": 25,
+          "dureeDeConservation": "21 jours",
           "indicateur": 0
         },
         {
           "id": 31,
-          "ouvert": 1,
-          "categoryId": 19,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 12,
-          "dureeDeConservation": "12 heures",
-          "indicateur": 0
+          "ouvert": 0,
+          "categoryId": 5,
+          "temperature": "-18°С",
+          "subCategoryId": 26,
+          "dureeDeConservation": "7 jours",
+          "indicateur": 1
         },
         {
           "id": 32,
           "ouvert": 1,
-          "categoryId": 14,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 15,
-          "dureeDeConservation": "72 heures",
+          "categoryId": 5,
+          "temperature": "до +20°С",
+          "subCategoryId": 26,
+          "dureeDeConservation": "30 минут",
           "indicateur": 0
         },
         {
           "id": 33,
           "ouvert": 1,
-          "categoryId": 14,
+          "categoryId": 6,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 16,
-          "dureeDeConservation": "72 heures",
+          "subCategoryId": 27,
+          "dureeDeConservation": "120 heures",
           "indicateur": 0
         },
         {
           "id": 34,
           "ouvert": 1,
-          "categoryId": 14,
+          "categoryId": 6,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 13,
-          "dureeDeConservation": "120 heures",
+          "subCategoryId": 28,
+          "dureeDeConservation": "72 heures",
           "indicateur": 0
         },
         {
           "id": 35,
           "ouvert": 1,
-          "categoryId": 14,
+          "categoryId": 6,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 14,
+          "subCategoryId": 29,
           "dureeDeConservation": "15 jours",
           "indicateur": 0
         },
         {
           "id": 36,
           "ouvert": 1,
-          "categoryId": 14,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 20,
-          "dureeDeConservation": "6 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 37,
-          "ouvert": 1,
-          "categoryId": 12,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 18,
-          "dureeDeConservation": "72 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 38,
-          "ouvert": 1,
-          "categoryId": 12,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 19,
-          "dureeDeConservation": "48 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 39,
-          "ouvert": 1,
-          "categoryId": 12,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 20,
-          "dureeDeConservation": "21 jours",
-          "indicateur": 0
-        },
-        {
-          "id": 40,
-          "ouvert": 1,
-          "categoryId": 20,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 24,
-          "dureeDeConservation": "24 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 41,
-          "ouvert": 1,
-          "categoryId": 20,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 22,
-          "dureeDeConservation": "36 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 42,
-          "ouvert": 1,
-          "categoryId": 20,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 27,
-          "dureeDeConservation": "12 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 43,
-          "ouvert": 1,
-          "categoryId": 20,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 28,
-          "dureeDeConservation": "48 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 44,
-          "ouvert": 1,
-          "categoryId": 20,
-          "temperature": "до +20°С",
-          "subCategoryId": 21,
-          "dureeDeConservation": "4 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 44,
-          "ouvert": 1,
-          "categoryId": 20,
-          "temperature": "до +20°С",
-          "subCategoryId": 23,
-          "dureeDeConservation": "4 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 44,
-          "ouvert": 1,
-          "categoryId": 20,
-          "temperature": "до +20°С",
-          "subCategoryId": 24,
-          "dureeDeConservation": "4 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 44,
-          "ouvert": 1,
-          "categoryId": 20,
-          "temperature": "до +20°С",
-          "subCategoryId": 25,
-          "dureeDeConservation": "4 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 45,
-          "ouvert": 1,
-          "categoryId": 20,
-          "temperature": "до +20°С",
-          "subCategoryId": 27,
-          "dureeDeConservation": "3 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 46,
-          "ouvert": 1,
-          "categoryId": 20,
-          "temperature": "до +20°С",
-          "subCategoryId": [29, 290],
-          "dureeDeConservation": "24 heures",
-          "indicateur": 0
-        },
-        
-        {
-          "id": 46,
-          "ouvert": 1,
-          "categoryId": 20,
-          "temperature": "до +20°С",
-          "subCategoryId": 29,
-          "dureeDeConservation": "24 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 240,
-          "ouvert": 1,
-          "categoryId": 20,
-          "temperature": "до +20°С",
-          "subCategoryId": 290,
-          "dureeDeConservation": "24 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 48,
-          "ouvert": 1,
-          "categoryId": 16,
+          "categoryId": 6,
           "temperature": "от +2 до +6°С",
           "subCategoryId": 30,
           "dureeDeConservation": "72 heures",
           "indicateur": 0
         },
         {
-          "id": 49,
+          "id": 37,
           "ouvert": 1,
-          "categoryId": 17,
+          "categoryId": 6,
           "temperature": "от +2 до +6°С",
           "subCategoryId": 31,
+          "dureeDeConservation": "6 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 38,
+          "ouvert": 1,
+          "categoryId": 7,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 32,
+          "dureeDeConservation": "72 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 39,
+          "ouvert": 1,
+          "categoryId": 8,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 33,
           "dureeDeConservation": "24 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 40,
+          "ouvert": 1,
+          "categoryId": 9,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 34,
+          "dureeDeConservation": " 36 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 41,
+          "ouvert": 1,
+          "categoryId": 10,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 35,
+          "dureeDeConservation": "36 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 42,
+          "ouvert": 1,
+          "categoryId": 10,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 36,
+          "dureeDeConservation": "12 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 43,
+          "ouvert": 1,
+          "categoryId": 10,
+          "temperature": "до +20°С",
+          "subCategoryId": 36,
+          "dureeDeConservation": "4 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 44,
+          "ouvert": 1,
+          "categoryId": 10,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 37,
+          "dureeDeConservation": "24 heures ",
+          "indicateur": 0
+        },
+        {
+          "id": 45,
+          "ouvert": 1,
+          "categoryId": 10,
+          "temperature": "до +20°С",
+          "subCategoryId": 37,
+          "dureeDeConservation": "4 heures ",
+          "indicateur": 0
+        },
+        {
+          "id": 46,
+          "ouvert": 1,
+          "categoryId": 10,
+          "temperature": "до +20°С",
+          "subCategoryId": 38,
+          "dureeDeConservation": "4 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 47,
+          "ouvert": 1,
+          "categoryId": 10,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 39,
+          "dureeDeConservation": "18 heures ",
+          "indicateur": 0
+        },
+        {
+          "id": 48,
+          "ouvert": 1,
+          "categoryId": 10,
+          "temperature": "до +20°С",
+          "subCategoryId": 40,
+          "dureeDeConservation": "4 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 49,
+          "ouvert": 1,
+          "categoryId": 10,
+          "temperature": "до +20°С",
+          "subCategoryId": 41,
+          "dureeDeConservation": "4 heures",
           "indicateur": 0
         },
         {
           "id": 50,
           "ouvert": 1,
-          "categoryId": 23,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 51,
-          "dureeDeConservation": "120 heures",
+          "categoryId": 10,
+          "temperature": "до +20°С",
+          "subCategoryId": 42,
+          "dureeDeConservation": "3 heures",
           "indicateur": 0
         },
         {
           "id": 51,
           "ouvert": 1,
-          "categoryId": 23,
+          "categoryId": 10,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 510,
-          "dureeDeConservation": "120 heures",
+          "subCategoryId": 42,
+          "dureeDeConservation": "12 heures",
           "indicateur": 0
         },
         {
           "id": 52,
           "ouvert": 1,
-          "categoryId": 23,
+          "categoryId": 10,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 52,
+          "subCategoryId": 43,
           "dureeDeConservation": "120 heures",
           "indicateur": 0
         },
         {
           "id": 53,
           "ouvert": 1,
-          "categoryId": 23,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 53,
-          "dureeDeConservation": "72 heures",
+          "categoryId": 10,
+          "temperature": "до +20°С",
+          "subCategoryId": 44,
+          "dureeDeConservation": "24 heures",
           "indicateur": 0
         },
         {
           "id": 54,
           "ouvert": 1,
-          "categoryId": 23,
+          "categoryId": 11,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 55,
-          "dureeDeConservation": "72 heures",
+          "subCategoryId": 45,
+          "dureeDeConservation": "120 heures",
           "indicateur": 0
         },
         {
           "id": 55,
           "ouvert": 1,
-          "categoryId": 32,
+          "categoryId": 11,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 56,
-          "dureeDeConservation": "168 heures",
+          "subCategoryId": 46,
+          "dureeDeConservation": "120 heures",
           "indicateur": 0
         },
         {
           "id": 56,
           "ouvert": 1,
-          "categoryId": 24,
+          "categoryId": 11,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 57,
+          "subCategoryId": 47,
           "dureeDeConservation": "120 heures",
           "indicateur": 0
         },
         {
           "id": 57,
           "ouvert": 1,
-          "categoryId": 24,
+          "categoryId": 11,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 58,
-          "dureeDeConservation": "72 heures",
+          "subCategoryId": 48,
+          "dureeDeConservation": "15 jours",
           "indicateur": 0
         },
         {
           "id": 58,
           "ouvert": 1,
-          "categoryId": 32,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 592,
-          "dureeDeConservation": "72 heures",
+          "categoryId": 11,
+          "temperature": "до +20°С",
+          "subCategoryId": 48,
+          "dureeDeConservation": "48 heures",
           "indicateur": 0
         },
         {
           "id": 59,
           "ouvert": 1,
-          "categoryId": 32,
+          "categoryId": 11,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 593,
-          "dureeDeConservation": "72 heures",
+          "subCategoryId": 49,
+          "dureeDeConservation": "180 jours",
           "indicateur": 0
         },
         {
           "id": 60,
           "ouvert": 1,
-          "categoryId": 32,
+          "categoryId": 11,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 589,
+          "subCategoryId": 49,
           "dureeDeConservation": "72 heures",
           "indicateur": 0
         },
         {
           "id": 61,
           "ouvert": 1,
-          "categoryId": 32,
+          "categoryId": 11,
+          "temperature": "до +20°С",
+          "subCategoryId": 50,
+          "dureeDeConservation": "30 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 56,
+          "ouvert": 1,
+          "categoryId": 13,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 590,
+          "subCategoryId": 51,
+          "dureeDeConservation": "120 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 57,
+          "ouvert": 1,
+          "categoryId": 13,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 52,
+          "dureeDeConservation": "120 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 58,
+          "ouvert": 1,
+          "categoryId": 13,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 53,
+          "dureeDeConservation": "120 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 59,
+          "ouvert": 1,
+          "categoryId": 13,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 54,
+          "dureeDeConservation": "72 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 60,
+          "ouvert": 1,
+          "categoryId": 13,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 55,
+          "dureeDeConservation": "72 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 61,
+          "ouvert": 1,
+          "categoryId": 14,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 56,
           "dureeDeConservation": "72 heures",
           "indicateur": 0
         },
         {
           "id": 62,
           "ouvert": 1,
-          "categoryId": 32,
+          "categoryId": 14,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 591,
+          "subCategoryId": 57,
           "dureeDeConservation": "12 heures",
           "indicateur": 0
         },
         {
           "id": 63,
           "ouvert": 1,
-          "categoryId": 32,
+          "categoryId": 14,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 579,
-          "dureeDeConservation": "120 heures",
+          "subCategoryId": 58,
+          "dureeDeConservation": "168 heures",
           "indicateur": 0
         },
         {
           "id": 64,
           "ouvert": 1,
-          "categoryId": 32,
+          "categoryId": 14,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 578,
-          "dureeDeConservation": "168 heures",
+          "subCategoryId": 59,
+          "dureeDeConservation": "120 heures",
           "indicateur": 0
         },
         {
           "id": 65,
           "ouvert": 1,
-          "categoryId": 25,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 59,
-          "dureeDeConservation": "48 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 66,
-          "ouvert": 1,
-          "categoryId": 25,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 61,
-          "dureeDeConservation": "21 jours",
-          "indicateur": 0
-        },
-        {
-          "id": 67,
-          "ouvert": 1,
-          "categoryId": 25,
+          "categoryId": 13,
           "temperature": "от +2 до +6°С",
           "subCategoryId": 60,
           "dureeDeConservation": "72 heures",
           "indicateur": 0
         },
         {
-          "id": 68,
+          "id": 66,
           "ouvert": 1,
-          "categoryId": 27,
+          "categoryId": 14,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 244,
+          "subCategoryId": 61,
           "dureeDeConservation": "72 heures",
           "indicateur": 0
         },
         {
-          "id": 69,
+          "id": 67,
           "ouvert": 1,
-          "categoryId": 27,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 245,
-          "dureeDeConservation": "72 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 70,
-          "ouvert": 1,
-          "categoryId": 27,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 243,
-          "dureeDeConservation": "30 jours",
-          "indicateur": 0
-        },
-        {
-          "id": 71,
-          "ouvert": 1,
-          "categoryId": 27,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 242,
-          "dureeDeConservation": "120 jours",
-          "indicateur": 0
-        },
-        {
-          "id": 72,
-          "ouvert": 1,
-          "categoryId": 27,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 241,
-          "dureeDeConservation": "12 mois",
-          "indicateur": 0
-        },
-        {
-          "id": 73,
-          "ouvert": 1,
-          "categoryId": 27,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 240,
-          "dureeDeConservation": "30 jours",
-          "indicateur": 0
-        },
-        {
-          "id": 74,
-          "ouvert": 1,
-          "categoryId": 28,
-          "temperature": "до +20°С",
-          "subCategoryId": 256,
-          "dureeDeConservation": "18 mois",
-          "indicateur": 0
-        },
-        {
-          "id": 75,
-          "ouvert": 1,
-          "categoryId": 28,
-          "temperature": "до +20°С",
-          "subCategoryId": 246,
-          "dureeDeConservation": "12 mois",
-          "indicateur": 0
-        },
-        {
-          "id": 75,
-          "ouvert": 1,
-          "categoryId": 28,
-          "temperature": "до +20°С",
-          "subCategoryId": 250,
-          "dureeDeConservation": "12 mois",
-          "indicateur": 0
-        },
-        {
-          "id": 76,
-          "ouvert": 1,
-          "categoryId": 28,
-          "temperature": "до +20°С",
-          "subCategoryId": 247,
-          "dureeDeConservation": "2 ans",
-          "indicateur": 0
-        },
-        {
-          "id": 77,
-          "ouvert": 1,
-          "categoryId": 28,
-          "temperature": "до +20°С",
-          "subCategoryId": 248,
-          "dureeDeConservation": "4 ans",
-          "indicateur": 0
-        },
-        {
-          "id": 78,
-          "ouvert": 1,
-          "categoryId": 28,
-          "temperature": "до +20°С",
-          "subCategoryId": 249,
-          "dureeDeConservation": "36 mois",
-          "indicateur": 0
-        },
-        {
-          "id": 79,
-          "ouvert": 1,
-          "categoryId": 28,
-          "temperature": "до +20°С",
-          "subCategoryId": 251,
-          "dureeDeConservation": "24 mois",
-          "indicateur": 0
-        },
-        {
-          "id": 80,
-          "ouvert": 1,
-          "categoryId": 28,
-          "temperature": "до +20°С",
-          "subCategoryId": 252,
-          "dureeDeConservation": "14 mois",
-          "indicateur": 0
-        },
-        {
-          "id": 81,
-          "ouvert": 1,
-          "categoryId": 28,
-          "temperature": "до +20°С",
-          "subCategoryId": 253,
-          "dureeDeConservation": "8 mois",
-          "indicateur": 0
-        },
-        {
-          "id": 82,
-          "ouvert": 1,
-          "categoryId": 28,
-          "temperature": "до +20°С",
-          "subCategoryId": 254,
-          "dureeDeConservation": "6 mois",
-          "indicateur": 0
-        },
-        {
-          "id": 83,
-          "ouvert": 1,
-          "categoryId": 23,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 54,
-          "dureeDeConservation": "48 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 84,
-          "ouvert": 1,
-          "categoryId": 23,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 56,
-          "dureeDeConservation": "168 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 85,
-          "ouvert": 1,
-          "categoryId": 23,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 57,
-          "dureeDeConservation": "120 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 86,
-          "ouvert": 1,
-          "categoryId": 23,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 58,
-          "dureeDeConservation": "72 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 87,
-          "ouvert": 1,
-          "categoryId": 35,
+          "categoryId": 14,
           "temperature": "от +2 до +6°С",
           "subCategoryId": 62,
           "dureeDeConservation": "72 heures",
           "indicateur": 0
         },
         {
-          "id": 88,
+          "id": 68,
           "ouvert": 1,
-          "categoryId": 35,
+          "categoryId": 14,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 63,
+          "subCategoryId": 61,
           "dureeDeConservation": "72 heures",
           "indicateur": 0
         },
         {
-          "id": 89,
+          "id": 69,
           "ouvert": 1,
-          "categoryId": 35,
+          "categoryId": 14,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 62,
+          "dureeDeConservation": "168 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 70,
+          "ouvert": 1,
+          "categoryId": 15,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 63,
+          "dureeDeConservation": "48 heures ",
+          "indicateur": 0
+        },
+        {
+          "id": 71,
+          "ouvert": 1,
+          "categoryId": 15,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 64,
+          "dureeDeConservation": "21 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 72,
+          "ouvert": 1,
+          "categoryId": 15,
           "temperature": "от +2 до +6°С",
           "subCategoryId": 65,
           "dureeDeConservation": "72 heures",
           "indicateur": 0
         },
         {
-          "id": 90,
+          "id": 73,
           "ouvert": 1,
-          "categoryId": 35,
+          "categoryId": 16,
           "temperature": "от +2 до +6°С",
           "subCategoryId": 66,
           "dureeDeConservation": "72 heures",
           "indicateur": 0
         },
         {
+          "id": 74,
+          "ouvert": 1,
+          "categoryId": 16,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 67,
+          "dureeDeConservation": "72 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 75,
+          "ouvert": 1,
+          "categoryId": 16,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 68,
+          "dureeDeConservation": "30 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 76,
+          "ouvert": 1,
+          "categoryId": 16,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 69,
+          "dureeDeConservation": "12 mois",
+          "indicateur": 0
+        },
+        {
+          "id": 77,
+          "ouvert": 1,
+          "categoryId": 16,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 70,
+          "dureeDeConservation": "120 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 78,
+          "ouvert": 1,
+          "categoryId": 16,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 71,
+          "dureeDeConservation": "30 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 79,
+          "ouvert": 1,
+          "categoryId": 17,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 72,
+          "dureeDeConservation": "48 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 80,
+          "ouvert": 1,
+          "categoryId": 18,
+          "temperature": "до +20°С",
+          "subCategoryId": 73,
+          "dureeDeConservation": "18 mois",
+          "indicateur": 0
+        },
+        {
+          "id": 81,
+          "ouvert": 1,
+          "categoryId": 18,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 74,
+          "dureeDeConservation": "168 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 82,
+          "ouvert": 1,
+          "categoryId": 18,
+          "temperature": "до +20°С",
+          "subCategoryId": 75,
+          "dureeDeConservation": "12 mois",
+          "indicateur": 0
+        },
+        {
+          "id": 83,
+          "ouvert": 1,
+          "categoryId": 18,
+          "temperature": "до +20°С",
+          "subCategoryId": 76,
+          "dureeDeConservation": "2 annees",
+          "indicateur": 0
+        },
+        {
+          "id": 84,
+          "ouvert": 1,
+          "categoryId": 18,
+          "temperature": "до +20°С",
+          "subCategoryId": 77,
+          "dureeDeConservation": "4 annees",
+          "indicateur": 0
+        },
+        {
+          "id": 85,
+          "ouvert": 1,
+          "categoryId": 18,
+          "temperature": "до +20°С",
+          "subCategoryId": 78,
+          "dureeDeConservation": "36 mois",
+          "indicateur": 0
+        },
+        {
+          "id": 86,
+          "ouvert": 1,
+          "categoryId": 18,
+          "temperature": "до +20°С",
+          "subCategoryId": 79,
+          "dureeDeConservation": "2 ans",
+          "indicateur": 0
+        },
+        {
+          "id": 87,
+          "ouvert": 1,
+          "categoryId": 18,
+          "temperature": "до +20°С",
+          "subCategoryId": 80,
+          "dureeDeConservation": "24 mois",
+          "indicateur": 0
+        },
+        {
+          "id": 88,
+          "ouvert": 1,
+          "categoryId": 18,
+          "temperature": "до +20°С",
+          "subCategoryId": 81,
+          "dureeDeConservation": "14 mois",
+          "indicateur": 0
+        },
+        {
+          "id": 89,
+          "ouvert": 1,
+          "categoryId": 18,
+          "temperature": "до +20°С",
+          "subCategoryId": 82,
+          "dureeDeConservation": "8 mois",
+          "indicateur": 0
+        },
+        {
+          "id": 90,
+          "ouvert": 1,
+          "categoryId": 18,
+          "temperature": "до +20°С",
+          "subCategoryId": 83,
+          "dureeDeConservation": "6 mois",
+          "indicateur": 0
+        },
+        {
           "id": 91,
           "ouvert": 1,
-          "categoryId": 35,
+          "categoryId": 19,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 64,
-          "dureeDeConservation": "48 heures",
+          "subCategoryId": 84,
+          "dureeDeConservation": "32 heures",
           "indicateur": 0
         },
         {
           "id": 92,
           "ouvert": 1,
-          "categoryId": 35,
+          "categoryId": 19,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 67,
-          "dureeDeConservation": "180 jours",
+          "subCategoryId": 85,
+          "dureeDeConservation": "12 heures",
           "indicateur": 0
         },
         {
           "id": 93,
           "ouvert": 1,
-          "categoryId": 35,
-          "temperature": "до +20°С",
-          "subCategoryId": 67,
-          "dureeDeConservation": "72 heures",
+          "categoryId": 20,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 86,
+          "dureeDeConservation": "120 heures",
           "indicateur": 0
         },
         {
           "id": 94,
           "ouvert": 1,
-          "categoryId": 36,
+          "categoryId": 20,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 68,
-          "dureeDeConservation": "180 jours",
+          "subCategoryId": 87,
+          "dureeDeConservation": "120 heures",
           "indicateur": 0
         },
         {
           "id": 95,
           "ouvert": 1,
-          "categoryId": 36,
+          "categoryId": 20,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 69,
-          "dureeDeConservation": "180 jours",
+          "subCategoryId": 88,
+          "dureeDeConservation": "120 heures",
           "indicateur": 0
         },
         {
           "id": 96,
           "ouvert": 1,
-          "categoryId": 36,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 70,
-          "dureeDeConservation": "180 jours",
-          "indicateur": 0
-        },
-        {
-          "id": 97,
-          "ouvert": 1,
-          "categoryId": 36,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 71,
-          "dureeDeConservation": "180 jours",
-          "indicateur": 0
-        },
-        {
-          "id": 98,
-          "ouvert": 1,
-          "categoryId": 36,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 73,
-          "dureeDeConservation": "180 jours",
-          "indicateur": 0
-        },
-        {
-          "id": 99,
-          "ouvert": 1,
-          "categoryId": 36,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 72,
-          "dureeDeConservation": "24 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 100,
-          "ouvert": 1,
-          "categoryId": 37,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 74,
-          "dureeDeConservation": "36 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 101,
-          "ouvert": 1,
-          "categoryId": 39,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 78,
-          "dureeDeConservation": "12 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 102,
-          "ouvert": 1,
-          "categoryId": 39,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 78,
-          "dureeDeConservation": "12 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 103,
-          "ouvert": 1,
-          "categoryId": 39,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 76,
-          "dureeDeConservation": "24 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 104,
-          "ouvert": 1,
-          "categoryId": 39,
-          "temperature": "до +20°С",
-          "subCategoryId": 76,
-          "dureeDeConservation": "4 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 105,
-          "ouvert": 1,
-          "categoryId": 39,
-          "temperature": "до +20°С",
-          "subCategoryId": 77,
-          "dureeDeConservation": "48 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 106,
-          "ouvert": 1,
-          "categoryId": 39,
-          "temperature": "до +20°С",
-          "subCategoryId": 78,
-          "dureeDeConservation": "3 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 107,
-          "ouvert": 1,
-          "categoryId": 39,
-          "temperature": "до +20°С",
-          "subCategoryId": 79,
-          "dureeDeConservation": "4 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 108,
-          "ouvert": 1,
-          "categoryId": 60,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 80,
-          "dureeDeConservation": "24 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 110,
-          "ouvert": 1,
-          "categoryId": 29,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 240,
-          "dureeDeConservation": "32 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 111,
-          "ouvert": 1,
-          "categoryId": 29,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 241,
-          "dureeDeConservation": "12 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 112,
-          "ouvert": 1,
-          "categoryId": 41,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 83,
-          "dureeDeConservation": "72 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 113,
-          "ouvert": 1,
-          "categoryId": 41,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 86,
-          "dureeDeConservation": "72 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 114,
-          "ouvert": 1,
-          "categoryId": 41,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 84,
-          "dureeDeConservation": "120 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 115,
-          "ouvert": 1,
-          "categoryId": 41,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 85,
-          "dureeDeConservation": "120 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 116,
-          "ouvert": 1,
-          "categoryId": 42,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 90,
-          "dureeDeConservation": "168 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 117,
-          "ouvert": 1,
-          "categoryId": 42,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 87,
-          "dureeDeConservation": "72 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 118,
-          "ouvert": 1,
-          "categoryId": 42,
+          "categoryId": 20,
           "temperature": "от +2 до +6°С",
           "subCategoryId": 89,
           "dureeDeConservation": "72 heures",
           "indicateur": 0
         },
         {
-          "id": 119,
+          "id": 97,
           "ouvert": 1,
-          "categoryId": 42,
+          "categoryId": 20,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 88,
+          "subCategoryId": 90,
+          "dureeDeConservation": "48 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 98,
+          "ouvert": 1,
+          "categoryId": 20,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 91,
           "dureeDeConservation": "72 heures",
           "indicateur": 0
         },
         {
-          "id": 120,
+          "id": 99,
           "ouvert": 1,
-          "categoryId": 43,
+          "categoryId": 21,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 92,
+          "dureeDeConservation": "168 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 100,
+          "ouvert": 1,
+          "categoryId": 21,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 93,
+          "dureeDeConservation": "120 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 101,
+          "ouvert": 1,
+          "categoryId": 21,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 94,
+          "dureeDeConservation": "72 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 102,
+          "ouvert": 1,
+          "categoryId": 22,
           "temperature": "от +2 до +6°С",
           "subCategoryId": 95,
           "dureeDeConservation": "72 heures",
           "indicateur": 0
         },
         {
-          "id": 121,
+          "id": 103,
           "ouvert": 1,
-          "categoryId": 43,
+          "categoryId": 22,
           "temperature": "от +2 до +6°С",
           "subCategoryId": 96,
           "dureeDeConservation": "72 heures",
           "indicateur": 0
         },
         {
-          "id": 122,
+          "id": 104,
           "ouvert": 1,
-          "categoryId": 43,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 94,
-          "dureeDeConservation": "36 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 123,
-          "ouvert": 1,
-          "categoryId": 43,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 93,
-          "dureeDeConservation": "32 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 124,
-          "ouvert": 1,
-          "categoryId": 43,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 92,
-          "dureeDeConservation": "12 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 125,
-          "ouvert": 1,
-          "categoryId": 43,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 91,
-          "dureeDeConservation": "24 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 126,
-          "ouvert": 1,
-          "categoryId": 44,
+          "categoryId": 22,
           "temperature": "от +2 до +6°С",
           "subCategoryId": 97,
-          "dureeDeConservation": "30 jours",
+          "dureeDeConservation": "48 heures",
           "indicateur": 0
         },
         {
-          "id": 127,
+          "id": 105,
           "ouvert": 1,
-          "categoryId": 44,
+          "categoryId": 22,
           "temperature": "от +2 до +6°С",
           "subCategoryId": 98,
-          "dureeDeConservation": "30 jours",
-          "indicateur": 0
-        },{
-          "id": 128,
-          "ouvert": 1,
-          "categoryId": 44,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 100,
-          "dureeDeConservation": "30 jours",
-          "indicateur": 0
-        },{
-          "id": 129,
-          "ouvert": 1,
-          "categoryId": 44,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 102,
-          "dureeDeConservation": "30 jours",
-          "indicateur": 0
-        },{
-          "id": 130,
-          "ouvert": 1,
-          "categoryId": 44,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 102,
-          "dureeDeConservation": "30 jours",
-          "indicateur": 0
-        },{
-          "id": 131,
-          "ouvert": 1,
-          "categoryId": 44,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 104,
-          "dureeDeConservation": "30 jours",
-          "indicateur": 0
-        },{
-          "id": 132,
-          "ouvert": 1,
-          "categoryId": 44,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId":  105,
-          "dureeDeConservation": "30 jours",
+          "dureeDeConservation": "72 heures",
           "indicateur": 0
         },
         {
-          "id": 133,
+          "id": 106,
           "ouvert": 1,
-          "categoryId": 44,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId":  107,
-          "dureeDeConservation": "30 jours",
-          "indicateur": 0
-        },
-
-
-
-
-        {
-          "id": 134,
-          "ouvert": 1,
-          "categoryId": 44,
+          "categoryId": 22,
           "temperature": "от +2 до +6°С",
           "subCategoryId": 99,
           "dureeDeConservation": "72 heures",
           "indicateur": 0
         },
         {
-          "id": 135,
+          "id": 107,
           "ouvert": 1,
-          "categoryId": 44,
+          "categoryId": 22,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 109,
+          "subCategoryId": 100,
+          "dureeDeConservation": "180 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 108,
+          "ouvert": 1,
+          "categoryId": 22,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 100,
           "dureeDeConservation": "72 heures",
           "indicateur": 0
         },
         {
-          "id":136,
+          "id": 109,
           "ouvert": 1,
-          "categoryId": 44,
+          "categoryId": 23,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 101, 
-          "dureeDeConservation": "6 mois",
+          "subCategoryId": 101,
+          "dureeDeConservation": "18 heures",
           "indicateur": 0
         },
         {
-          "id":137,
+          "id": 110,
           "ouvert": 1,
-          "categoryId": 44,
+          "categoryId": 23,
           "temperature": "от +2 до +6°С",
-          "subCategoryId":  131,
-          "dureeDeConservation": "6 mois",
+          "subCategoryId": 102,
+          "dureeDeConservation": "18 heures",
           "indicateur": 0
         },
-
-
         {
-          "id":138,
+          "id": 111,
           "ouvert": 1,
-          "categoryId": 44,
+          "categoryId": 23,
           "temperature": "от +2 до +6°С",
           "subCategoryId": 103,
-          "dureeDeConservation": "180 heures",
+          "dureeDeConservation": "18 heures",
           "indicateur": 0
         },
         {
-          "id":139,
+          "id": 112,
           "ouvert": 1,
-          "categoryId": 44,
+          "categoryId": 23,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 110,
-          "dureeDeConservation": "180 heures",
+          "subCategoryId": 104,
+          "dureeDeConservation": "18 heures",
           "indicateur": 0
         },
-
         {
-          "id":140,
+          "id": 113,
           "ouvert": 1,
-          "categoryId": 44,
+          "categoryId": 23,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 105,
+          "dureeDeConservation": "24 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 114,
+          "ouvert": 1,
+          "categoryId": 23,
           "temperature": "от +2 до +6°С",
           "subCategoryId": 106,
-          "dureeDeConservation": "15 jours",
+          "dureeDeConservation": "18 heures",
           "indicateur": 0
         },
         {
-          "id":141,
+          "id": 115,
           "ouvert": 1,
-          "categoryId": 44,
+          "categoryId": 24,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 107,
+          "dureeDeConservation": "36 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 116,
+          "ouvert": 1,
+          "categoryId": 25,
           "temperature": "от +2 до +6°С",
           "subCategoryId": 108,
-          "dureeDeConservation": "12 mois",
-          "indicateur": 0
-        },
-        { "id":142,
-          "ouvert": 1,
-          "categoryId": 44,
-          "temperature": "до +20°С",
-          "subCategoryId": 110,
-          "dureeDeConservation": "72 heures",
+          "dureeDeConservation": "24 heures ",
           "indicateur": 0
         },
         {
-          "id":143,
+          "id": 117,
           "ouvert": 1,
-          "categoryId": 44,
+          "categoryId": 26,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 109,
+          "dureeDeConservation": "24 heures ",
+          "indicateur": 0
+        },
+        {
+          "id": 118,
+          "ouvert": 1,
+          "categoryId": 27,
           "temperature": "до +20°С",
-          "subCategoryId": 106,
+          "subCategoryId": 109,
+          "dureeDeConservation": "4 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 119,
+          "ouvert": 1,
+          "categoryId": 27,
+          "temperature": "до +20°С",
+          "subCategoryId": 110,
           "dureeDeConservation": "48 heures",
           "indicateur": 0
         },
         {
-          "id":144,
+          "id": 120,
           "ouvert": 1,
-          "categoryId": 45,
+          "categoryId": 27,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 111,
+          "dureeDeConservation": "12 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 121,
+          "ouvert": 1,
+          "categoryId": 27,
           "temperature": "до +20°С",
           "subCategoryId": 111,
-          "dureeDeConservation": "18 mois",
+          "dureeDeConservation": "3 heures",
           "indicateur": 0
         },
         {
-          "id":145,
+          "id": 122,
           "ouvert": 1,
-          "categoryId": 45,
-          "temperature": "до +20°С",
+          "categoryId": 27,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 112,
+          "dureeDeConservation": "4 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 123,
+          "ouvert": 1,
+          "categoryId": 28,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 113,
+          "dureeDeConservation": "72 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 124,
+          "ouvert": 1,
+          "categoryId": 28,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 114,
+          "dureeDeConservation": "120 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 125,
+          "ouvert": 1,
+          "categoryId": 28,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 115,
+          "dureeDeConservation": "120 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 126,
+          "ouvert": 1,
+          "categoryId": 28,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 116,
+          "dureeDeConservation": "72 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 127,
+          "ouvert": 1,
+          "categoryId": 29,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 117,
+          "dureeDeConservation": "72 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 128,
+          "ouvert": 1,
+          "categoryId": 29,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 118,
+          "dureeDeConservation": "168 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 129,
+          "ouvert": 1,
+          "categoryId": 29,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 119,
+          "dureeDeConservation": "72 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 130,
+          "ouvert": 1,
+          "categoryId": 29,
+          "temperature": "от +2 до +6°С",
           "subCategoryId": 120,
+          "dureeDeConservation": "72 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 131,
+          "ouvert": 1,
+          "categoryId": 30,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 121,
+          "dureeDeConservation": "48 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 132,
+          "ouvert": 1,
+          "categoryId": 30,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 122,
+          "dureeDeConservation": "48 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 133,
+          "ouvert": 1,
+          "categoryId": 30,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 123,
+          "dureeDeConservation": "120 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 134,
+          "ouvert": 1,
+          "categoryId": 30,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 124,
+          "dureeDeConservation": "120 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 135,
+          "ouvert": 1,
+          "categoryId": 30,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 125,
+          "dureeDeConservation": "72 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 136,
+          "ouvert": 1,
+          "categoryId": 30,
+          "temperature": "до +20°С",
+          "subCategoryId": 125,
           "dureeDeConservation": "18 mois",
           "indicateur": 0
         },
         {
-          "id":146,
+          "id": 137,
           "ouvert": 1,
-          "categoryId": 45,
+          "categoryId": 30,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 126,
+          "dureeDeConservation": "72 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 138,
+          "ouvert": 1,
+          "categoryId": 30,
           "temperature": "до +20°С",
           "subCategoryId": 126,
           "dureeDeConservation": "18 mois",
           "indicateur": 0
         },
-
-
         {
-          "id":147,
+          "id": 139,
           "ouvert": 1,
-          "categoryId": 45,
-          "temperature": "до +20°С",
-          "subCategoryId": 113,
-          "dureeDeConservation": "24 mois",
-          "indicateur": 0
-        },
-        {
-          "id":148,
-          "ouvert": 1,
-          "categoryId": 45,
-          "temperature": "до +20°С",
-          "subCategoryId": 122,
-          "dureeDeConservation": "24 mois",
-          "indicateur": 0
-        },
-        {
-          "id":149,
-          "ouvert": 1,
-          "categoryId": 45,
-          "temperature": "до +20°С",
-          "subCategoryId": 125,
-          "dureeDeConservation": "24 mois",
-          "indicateur": 0
-        },
-        {
-          "id":150,
-          "ouvert": 1,
-          "categoryId": 45,
-          "temperature": "до +20°С",
-          "subCategoryId": 117,
-          "dureeDeConservation": "24 mois",
-          "indicateur": 0
-        },
-        {
-          "id":151,
-          "ouvert": 1,
-          "categoryId": 45,
-          "temperature": "до +20°С",
+          "categoryId": 31,
+          "temperature": "от +2 до +6°С",
           "subCategoryId": 127,
-          "dureeDeConservation": "24 mois",
-          "indicateur": 0
-        },
-        {
-          "id":152,
-          "ouvert": 1,
-          "categoryId": 45,
-          "temperature": "до +20°С",
-          "subCategoryId": 133,
-          "dureeDeConservation": "24 mois",
-          "indicateur": 0
-        },
-
-        {
-          "id":153,
-          "ouvert": 0,
-          "categoryId": 45,
-          "temperature": "до +20°С",
-          "subCategoryId": 114,
-          "dureeDeConservation": "12 mois",
-          "indicateur": 1
-        },
-        {
-          "id":154,
-          "ouvert": 0,
-          "categoryId": 45,
-          "temperature": "до +20°С",
-          "subCategoryId": 116,
-          "dureeDeConservation": "12 mois",
-          "indicateur": 1
-        },{
-          "id":155,
-          "ouvert": 0,
-          "categoryId": 45,
-          "temperature": "до +20°С",
-          "subCategoryId":  121, 
-          "dureeDeConservation": "12 mois",
-          "indicateur": 1
-        },{
-          "id":156,
-          "ouvert": 0,
-          "categoryId": 45,
-          "temperature": "до +20°С",
-          "subCategoryId": 128,
-          "dureeDeConservation": "12 mois",
-          "indicateur": 1
-        },{
-          "id":157,
-          "ouvert": 0,
-          "categoryId": 45,
-          "temperature": "до +20°С",
-          "subCategoryId":  129, 
-          "dureeDeConservation": "12 mois",
-          "indicateur": 1
-        },{
-          "id":158,
-          "ouvert": 0,
-          "categoryId": 45,
-          "temperature": "до +20°С",
-          "subCategoryId": 130,
-          "dureeDeConservation": "12 mois",
-          "indicateur": 1
-        },
-
-
-        {
-          "id":159,
-          "ouvert": 1,
-          "categoryId": 45,
-          "temperature": "до +20°С",
-          "subCategoryId": 123,
-          "dureeDeConservation": "6 mois",
-          "indicateur": 0
-        },
-        {
-          "id":160,
-          "ouvert": 1,
-          "categoryId": 45,
-          "temperature": "до +20°С",
-          "subCategoryId": 131,
-          "dureeDeConservation": "6 mois",
-          "indicateur": 0
-        },
-
-        {
-          "id":161,
-          "ouvert": 1,
-          "categoryId": 45,
-          "temperature": "до +20°С",
-          "subCategoryId": 134,
-          "dureeDeConservation": "14 mois",
-          "indicateur": 0
-        },
-
-        {
-          "id":162,
-          "ouvert": 1,
-          "categoryId": 45,
-          "temperature": "до +20°С",
-          "subCategoryId": 118,
-          "dureeDeConservation": "4 ans",
-          "indicateur": 0
-        },
-        {
-          "id":163,
-          "ouvert": 1,
-          "categoryId": 45,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 112,
-          "dureeDeConservation": "12 mois",
-          "indicateur": 0
-        },
-        {
-          "id":164,
-          "ouvert": 1,
-          "categoryId": 45,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 115,
-          "dureeDeConservation": "365 jours",
-          "indicateur": 0
-        },
-        {
-          "id":165,
-          "ouvert": 1,
-          "categoryId": 45,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 124,
-          "dureeDeConservation": "14 jours",
-          "indicateur": 0
-        },
-        {
-          "id":166,
-          "ouvert": 1,
-          "categoryId": 45,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 131,
-          "dureeDeConservation": "24 mois",
-          "indicateur": 0
-        },
-        {
-          "id":167,
-          "ouvert": 1,
-          "categoryId": 46,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 135,
-          "dureeDeConservation": "48 heures",
-          "indicateur": 0
-        },
-        {
-          "id":168,
-          "ouvert": 1,
-          "categoryId": 46,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 136,
-          "dureeDeConservation": "168 heures",
-          "indicateur": 0
-        },
-        {
-          "id":169,
-          "ouvert": 1,
-          "categoryId": 46,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 137,
-          "dureeDeConservation": "168 heures",
-          "indicateur": 0
-        },
-
-        {
-          "id":170,
-          "ouvert": 1,
-          "categoryId": 46,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 138,
-          "dureeDeConservation": "72 heures",
-          "indicateur": 0
-        },
-        {
-          "id":171,
-          "ouvert": 1,
-          "categoryId": 47,
-          "temperature": "до +20°С",
-          "subCategoryId": 139,
-          "dureeDeConservation": "36 mois",
-          "indicateur": 0
-        },
-        {
-          "id":172,
-          "ouvert": 1,
-          "categoryId": 47,
-          "temperature": "до +20°С",
-          "subCategoryId": 140,
-          "dureeDeConservation": "24 mois",
-          "indicateur": 0
-        },
-        {
-          "id":173,
-          "ouvert": 1,
-          "categoryId": 48,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 141, 
-          "dureeDeConservation": "48 heures",
-          "indicateur": 0
-        },
-        {
-          "id":174,
-          "ouvert": 1,
-          "categoryId": 48,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 142,
-          "dureeDeConservation": "48 heures",
-          "indicateur": 0
-        },
-        {
-          "id":175,
-          "ouvert": 1,
-          "categoryId": 48,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 143,
-          "dureeDeConservation": "48 heures",
-          "indicateur": 0
-        },
-        {
-          "id":176,
-          "ouvert": 1,
-          "categoryId": 49,
-          "temperature": "-18°С",
-          "subCategoryId": 144,
-          "dureeDeConservation": "24 mois",
-          "indicateur": 0
-        },
-        {
-          "id":177,
-          "ouvert": 1,
-          "categoryId": 50,
-          "temperature": "-18°С",
-          "subCategoryId": 145,
-          "dureeDeConservation": "7 jours",
-          "indicateur": 0
-        },
-        {
-          "id":178,
-          "ouvert": 1,
-          "categoryId": 50,
-          "temperature": "до +20°С",
-          "subCategoryId": 145,
-          "dureeDeConservation": "30 minutes",
-          "indicateur": 0
-        },
-        {
-          "id":179,
-          "ouvert": 1,
-          "categoryId": 51,
-          "temperature": "до +20°С",
-          "subCategoryId": 1450,
-          "dureeDeConservation": "21 jours",
-          "indicateur": 0
-        },
-        {
-          "id":180,
-          "ouvert": 1,
-          "categoryId": 51,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 146,
-          "dureeDeConservation": "10 jours",
-          "indicateur": 0
-        },
-        {
-          "id":181,
-          "ouvert": 0,
-          "categoryId": 50,
-          "temperature": "-18°С",
-          "subCategoryId": 1445,
-          "dureeDeConservation": "180 jours",
-          "indicateur": 1
-        },
-        {
-          "id":182,
-          "ouvert": 1,
-          "categoryId": 52,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 147,
-          "dureeDeConservation": "72 heures",
-          "indicateur": 0
-        },
-        {
-          "id":183,
-          "ouvert": 1,
-          "categoryId": 52,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 594, 
-          "dureeDeConservation": "72 heures",
-          "indicateur": 0
-        },
-        {
-          "id":184,
-          "ouvert": 1,
-          "categoryId": 52,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 148,
-          "dureeDeConservation": "72 heures",
-          "indicateur": 0
-        },
-        {
-          "id":185,
-          "ouvert": 1,
-          "categoryId": 52,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 154, 
-          "dureeDeConservation": "72 heures",
-          "indicateur": 0
-        },
-        {
-          "id":186,
-          "ouvert": 1,
-          "categoryId": 52,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 156,
-          "dureeDeConservation": "72 heures",
-          "indicateur": 0
-        },
-        {
-          "id":187,
-          "ouvert": 1,
-          "categoryId": 52,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 150,
-          "dureeDeConservation": "10 jours",
-          "indicateur": 0
-        },
-        {
-          "id":188,
-          "ouvert": 1,
-          "categoryId": 52,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 149,
-          "dureeDeConservation": "48 heures",
-          "indicateur": 0
-        },
-        {
-          "id":189,
-          "ouvert": 1,
-          "categoryId": 52,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 153,
-          "dureeDeConservation": "48 heures",
-          "indicateur": 0
-        },
-
-        {
-          "id":190,
-          "ouvert": 1,
-          "categoryId": 52,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 155,
           "dureeDeConservation": "30 jours",
           "indicateur": 0
         },
         {
-          "id":191,
+          "id": 140,
           "ouvert": 1,
-          "categoryId": 52,
+          "categoryId": 31,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 157,
-          "dureeDeConservation": "120 heures",
+          "subCategoryId": 128,
+          "dureeDeConservation": "30 jours",
           "indicateur": 0
         },
         {
-          "id":192,
+          "id": 141,
           "ouvert": 1,
-          "categoryId": 52,
-          "temperature": "до +20°С",
-          "subCategoryId": 158,
+          "categoryId": 31,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 129,
+          "dureeDeConservation": "30 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 142,
+          "ouvert": 1,
+          "categoryId": 31,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 130,
           "dureeDeConservation": "72 heures",
           "indicateur": 0
         },
         {
-          "id":193,
+          "id": 143,
           "ouvert": 1,
-          "categoryId": 52,
+          "categoryId": 31,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 158,
+          "subCategoryId": 131,
+          "dureeDeConservation": "6 mois",
+          "indicateur": 0
+        },
+        {
+          "id": 144,
+          "ouvert": 1,
+          "categoryId": 31,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 132,
+          "dureeDeConservation": "30 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 145,
+          "ouvert": 1,
+          "categoryId": 31,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 133,
           "dureeDeConservation": "180 jours",
           "indicateur": 0
         },
         {
-          "id":194,
+          "id": 146,
           "ouvert": 1,
-          "categoryId": 53,
-          "temperature":"от +2 до +6°С",
-          "subCategoryId":159,
-          "dureeDeConservation": "24 heures",
+          "categoryId": 31,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 134,
+          "dureeDeConservation": "30 jours",
           "indicateur": 0
         },
         {
-          "id":195,
+          "id": 147,
           "ouvert": 1,
-          "categoryId": 54,
+          "categoryId": 31,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 
-            160,
-          "dureeDeConservation": "18 heures",
+          "subCategoryId": 135,
+          "dureeDeConservation": "30 jours",
           "indicateur": 0
         },
         {
-          "id":196,
+          "id": 148,
           "ouvert": 1,
-          "categoryId": 54,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 
-            161
-          ,
-          "dureeDeConservation": "18 heures",
+          "categoryId": 31,
+          "temperature": "до +20°С",
+          "subCategoryId": 136,
+          "dureeDeConservation": "48 heures",
           "indicateur": 0
         },
         {
-          "id":197,
+          "id": 149,
           "ouvert": 1,
-          "categoryId": 54,
+          "categoryId": 31,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 
-            165
-          ,
-          "dureeDeConservation": "18 heures",
-          "indicateur": 0
-        },{
-          "id":198,
-          "ouvert": 1,
-          "categoryId": 54,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 
-            166
-          ,
-          "dureeDeConservation": "18 heures",
-          "indicateur": 0
-        },{
-          "id":199,
-          "ouvert": 1,
-          "categoryId": 54,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 
-            167,
-          "dureeDeConservation": "18 heures",
-          "indicateur": 0
-        },{
-          "id":200,
-          "ouvert": 1,
-          "categoryId": 54,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 
-            168,
-          "dureeDeConservation": "18 heures",
-          "indicateur": 0
-        },{
-          "id":201,
-          "ouvert": 1,
-          "categoryId": 54,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 
-            169,
-          "dureeDeConservation": "18 heures",
-          "indicateur": 0
-        },{
-          "id":202,
-          "ouvert": 1,
-          "categoryId": 54,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 
-            170,
-          "dureeDeConservation": "18 heures",
-          "indicateur": 0
-        },{
-          "id":203,
-          "ouvert": 1,
-          "categoryId": 54,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 
-            172,
-          "dureeDeConservation": "18 heures",
-          "indicateur": 0
-        },{
-          "id":204,
-          "ouvert": 1,
-          "categoryId": 54,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 
-            174,
-          "dureeDeConservation": "18 heures",
-          "indicateur": 0
-        },{
-          "id":205,
-          "ouvert": 1,
-          "categoryId": 54,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 
-            175,
-          "dureeDeConservation": "18 heures",
-          "indicateur": 0
-        },{
-          "id":206,
-          "ouvert": 1,
-          "categoryId": 54,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 
-            1680,
-          "dureeDeConservation": "18 heures",
+          "subCategoryId": 136,
+          "dureeDeConservation": "15 jours",
           "indicateur": 0
         },
         {
-          "id":207,
+          "id": 150,
           "ouvert": 1,
-          "categoryId": 54,
+          "categoryId": 31,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 162, 
-          "dureeDeConservation": "24 heures",
+          "subCategoryId": 137,
+          "dureeDeConservation": "30 jours",
           "indicateur": 0
         },
         {
-          "id":208,
+          "id": 151,
           "ouvert": 1,
-          "categoryId": 54,
+          "categoryId": 31,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 163, 
-          "dureeDeConservation": "24 heures",
+          "subCategoryId": 138,
+          "dureeDeConservation": "12 mois",
           "indicateur": 0
         },
         {
-          "id":209,
+          "id": 152,
           "ouvert": 1,
-          "categoryId": 54,
+          "categoryId": 31,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 139,
+          "dureeDeConservation": "72 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 153,
+          "ouvert": 1,
+          "categoryId": 31,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 140,
+          "dureeDeConservation": "180 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 154,
+          "ouvert": 1,
+          "categoryId": 31,
+          "temperature": "до +20°С",
+          "subCategoryId": 140,
+          "dureeDeConservation": "72 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 155,
+          "ouvert": 1,
+          "categoryId": 32,
+          "temperature": "до +20°С",
+          "subCategoryId": 141,
+          "dureeDeConservation": "18 mois",
+          "indicateur": 0
+        },
+        {
+          "id": 156,
+          "ouvert": 1,
+          "categoryId": 32,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 142,
+          "dureeDeConservation": "12 mois",
+          "indicateur": 0
+        },
+        {
+          "id": 157,
+          "ouvert": 1,
+          "categoryId": 32,
+          "temperature": "до +20°С",
+          "subCategoryId": 143,
+          "dureeDeConservation": "24 mois",
+          "indicateur": 0
+        },
+        {
+          "id": 158,
+          "ouvert": 1,
+          "categoryId": 32,
+          "temperature": "до +20°С",
+          "subCategoryId": 144,
+          "dureeDeConservation": "12 mois",
+          "indicateur": 0
+        },
+        {
+          "id": 159,
+          "ouvert": 1,
+          "categoryId": 32,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 145,
+          "dureeDeConservation": "365 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 160,
+          "ouvert": 1,
+          "categoryId": 32,
+          "temperature": "до +20°С",
+          "subCategoryId": 146,
+          "dureeDeConservation": "12 mois",
+          "indicateur": 0
+        },
+        {
+          "id": 161,
+          "ouvert": 1,
+          "categoryId": 32,
+          "temperature": "до +20°С",
+          "subCategoryId": 147,
+          "dureeDeConservation": "24 mois",
+          "indicateur": 0
+        },
+        {
+          "id": 162,
+          "ouvert": 1,
+          "categoryId": 32,
+          "temperature": "до +20°С",
+          "subCategoryId": 148,
+          "dureeDeConservation": "4 annees",
+          "indicateur": 0
+        },
+        {
+          "id": 163,
+          "ouvert": 1,
+          "categoryId": 32,
+          "temperature": "до +20°С",
+          "subCategoryId": 149,
+          "dureeDeConservation": "",
+          "indicateur": 0
+        },
+        {
+          "id": 164,
+          "ouvert": 1,
+          "categoryId": 32,
+          "temperature": "до +20°С",
+          "subCategoryId": 150,
+          "dureeDeConservation": "18 mois",
+          "indicateur": 0
+        },
+        {
+          "id": 165,
+          "ouvert": 1,
+          "categoryId": 32,
+          "temperature": "до +20°С",
+          "subCategoryId": 151,
+          "dureeDeConservation": "12 mois",
+          "indicateur": 0
+        },
+        {
+          "id": 166,
+          "ouvert": 1,
+          "categoryId": 32,
+          "temperature": "до +20°С",
+          "subCategoryId": 152,
+          "dureeDeConservation": "24 mois",
+          "indicateur": 0
+        },
+        {
+          "id": 167,
+          "ouvert": 1,
+          "categoryId": 32,
+          "temperature": "до +20°С",
+          "subCategoryId": 153,
+          "dureeDeConservation": "6 mois",
+          "indicateur": 0
+        },
+        {
+          "id": 168,
+          "ouvert": 1,
+          "categoryId": 32,
+          "temperature": "до +20°С",
+          "subCategoryId": 154,
+          "dureeDeConservation": "24 mois",
+          "indicateur": 0
+        },
+        {
+          "id": 169,
+          "ouvert": 1,
+          "categoryId": 33,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 155,
+          "dureeDeConservation": "48 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 170,
+          "ouvert": 1,
+          "categoryId": 33,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 156,
+          "dureeDeConservation": "168 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 171,
+          "ouvert": 1,
+          "categoryId": 33,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 157,
+          "dureeDeConservation": "168 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 172,
+          "ouvert": 1,
+          "categoryId": 33,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 158,
+          "dureeDeConservation": "72 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 173,
+          "ouvert": 1,
+          "categoryId": 34,
+          "temperature": "до +20°С",
+          "subCategoryId": 159,
+          "dureeDeConservation": "36 mois",
+          "indicateur": 0
+        },
+        {
+          "id": 174,
+          "ouvert": 1,
+          "categoryId": 34,
+          "temperature": "до +20°С",
+          "subCategoryId": 160,
+          "dureeDeConservation": "24 mois",
+          "indicateur": 0
+        },
+        {
+          "id": 175,
+          "ouvert": 1,
+          "categoryId": 35,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 161,
+          "dureeDeConservation": "48 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 176,
+          "ouvert": 1,
+          "categoryId": 35,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 162,
+          "dureeDeConservation": "48 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 177,
+          "ouvert": 1,
+          "categoryId": 35,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 163,
+          "dureeDeConservation": "48 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 178,
+          "ouvert": 0,
+          "categoryId": 36,
+          "temperature": "-18°С",
+          "subCategoryId": 164,
+          "dureeDeConservation": "24 mois",
+          "indicateur": 1
+        },
+        {
+          "id": 179,
+          "ouvert": 0,
+          "categoryId": 37,
+          "temperature": "-18°С",
+          "subCategoryId": 165,
+          "dureeDeConservation": "180 jours",
+          "indicateur": 1
+        },
+        {
+          "id": 180,
+          "ouvert": 1,
+          "categoryId": 37,
+          "temperature": "до +20°С",
+          "subCategoryId": 165,
+          "dureeDeConservation": "30 минут",
+          "indicateur": 0
+        },
+        {
+          "id": 181,
+          "ouvert": 1,
+          "categoryId": 38,
+          "temperature": "до +20°С",
+          "subCategoryId": 166,
+          "dureeDeConservation": "21 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 182,
+          "ouvert": 1,
+          "categoryId": 38,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 167,
+          "dureeDeConservation": "10 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 183,
+          "ouvert": 0,
+          "categoryId": 38,
+          "temperature": "-18°С",
+          "subCategoryId": 168,
+          "dureeDeConservation": "180 jours",
+          "indicateur": 1
+        },
+        {
+          "id": 184,
+          "ouvert": 1,
+          "categoryId": 39,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 169,
+          "dureeDeConservation": "72 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 185,
+          "ouvert": 1,
+          "categoryId": 39,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 170,
+          "dureeDeConservation": "72 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 186,
+          "ouvert": 1,
+          "categoryId": 39,
           "temperature": "от +2 до +6°С",
           "subCategoryId": 171,
-          "dureeDeConservation": "24 heures",
+          "dureeDeConservation": "48 heures",
           "indicateur": 0
         },
-
-
         {
-          "id":210,
+          "id": 187,
           "ouvert": 1,
-          "categoryId": 53,
+          "categoryId": 39,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 164,
+          "subCategoryId": 172,
+          "dureeDeConservation": "10 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 188,
+          "ouvert": 1,
+          "categoryId": 39,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 173,
+          "dureeDeConservation": "72 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 189,
+          "ouvert": 1,
+          "categoryId": 39,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 174,
+          "dureeDeConservation": "72 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 190,
+          "ouvert": 1,
+          "categoryId": 39,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 175,
+          "dureeDeConservation": "72 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 191,
+          "ouvert": 1,
+          "categoryId": 39,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 176,
+          "dureeDeConservation": "48 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 192,
+          "ouvert": 1,
+          "categoryId": 39,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 177,
+          "dureeDeConservation": "72 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 193,
+          "ouvert": 1,
+          "categoryId": 39,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 178,
+          "dureeDeConservation": "30 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 194,
+          "ouvert": 1,
+          "categoryId": 39,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 179,
+          "dureeDeConservation": "72 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 195,
+          "ouvert": 1,
+          "categoryId": 39,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 180,
+          "dureeDeConservation": "120 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 196,
+          "ouvert": 1,
+          "categoryId": 39,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 181,
+          "dureeDeConservation": "180 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 197,
+          "ouvert": 1,
+          "categoryId": 39,
+          "temperature": "до +20°С",
+          "subCategoryId": 181,
+          "dureeDeConservation": "72 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 198,
+          "ouvert": 1,
+          "categoryId": 40,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 182,
+          "dureeDeConservation": "18 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 199,
+          "ouvert": 1,
+          "categoryId": 41,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 183,
+          "dureeDeConservation": "18 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 200,
+          "ouvert": 1,
+          "categoryId": 41,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 184,
+          "dureeDeConservation": "24 heures ",
+          "indicateur": 0
+        },
+        {
+          "id": 201,
+          "ouvert": 1,
+          "categoryId": 41,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 185,
+          "dureeDeConservation": "24 heures ",
+          "indicateur": 0
+        },
+        {
+          "id": 202,
+          "ouvert": 1,
+          "categoryId": 41,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 186,
+          "dureeDeConservation": "24 heures ",
+          "indicateur": 0
+        },
+        {
+          "id": 203,
+          "ouvert": 1,
+          "categoryId": 41,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 187,
           "dureeDeConservation": "36 heures",
           "indicateur": 0
         },
         {
-          "id":211,
+          "id": 204,
           "ouvert": 1,
-          "categoryId": 54,
+          "categoryId": 41,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 173,
+          "subCategoryId": 188,
+          "dureeDeConservation": "18 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 205,
+          "ouvert": 1,
+          "categoryId": 41,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 189,
+          "dureeDeConservation": "18 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 206,
+          "ouvert": 1,
+          "categoryId": 41,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 190,
+          "dureeDeConservation": "18 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 207,
+          "ouvert": 1,
+          "categoryId": 41,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 191,
+          "dureeDeConservation": "18 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 208,
+          "ouvert": 1,
+          "categoryId": 41,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 192,
+          "dureeDeConservation": "18 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 209,
+          "ouvert": 1,
+          "categoryId": 41,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 193,
+          "dureeDeConservation": "18 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 210,
+          "ouvert": 1,
+          "categoryId": 27,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 194,
+          "dureeDeConservation": "24 heures ",
+          "indicateur": 0
+        },
+        {
+          "id": 211,
+          "ouvert": 1,
+          "categoryId": 41,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 195,
+          "dureeDeConservation": "18 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 212,
+          "ouvert": 1,
+          "categoryId": 41,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 196,
           "dureeDeConservation": "120 heures",
           "indicateur": 0
         },
         {
-          "id":212,
+          "id": 213,
           "ouvert": 1,
-          "categoryId": 54,
+          "categoryId": 41,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 176, 
+          "subCategoryId": 197,
+          "dureeDeConservation": "18 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 214,
+          "ouvert": 1,
+          "categoryId": 41,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 198,
+          "dureeDeConservation": "18 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 215,
+          "ouvert": 1,
+          "categoryId": 41,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 199,
           "dureeDeConservation": "120 heures",
           "indicateur": 0
         },
         {
-          "id":213,
+          "id": 216,
           "ouvert": 1,
-          "categoryId": 54,
+          "categoryId": 41,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 177,
+          "subCategoryId": 200,
           "dureeDeConservation": "120 heures",
           "indicateur": 0
         },
-        
         {
-          "id":214,
+          "id": 217,
           "ouvert": 1,
-          "categoryId": 55,
+          "categoryId": 28,
+          "temperature": "до +20°С",
+          "subCategoryId": 202,
+          "dureeDeConservation": "36 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 218,
+          "ouvert": 1,
+          "categoryId": 42,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 1780,
+          "subCategoryId": 203,
+          "dureeDeConservation": "12 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 219,
+          "ouvert": 1,
+          "categoryId": 42,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 204,
           "dureeDeConservation": "12 jours",
           "indicateur": 0
         },
         {
-          "id":215,
+          "id": 220,
           "ouvert": 1,
-          "categoryId": 55,
+          "categoryId": 42,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 178,
-          "dureeDeConservation": "36 heures",
+          "subCategoryId": 205,
+          "dureeDeConservation": "24 heures ",
           "indicateur": 0
         },
         {
-          "id":216,
+          "id": 221,
           "ouvert": 1,
-          "categoryId": 55,
+          "categoryId": 43,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 1708,
-          "dureeDeConservation": "12 heures",
+          "subCategoryId": 206,
+          "dureeDeConservation": "24 heures ",
           "indicateur": 0
         },
         {
-          "id":217,
+          "id": 222,
           "ouvert": 1,
-          "categoryId": 55,
+          "categoryId": 43,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 179,
-          "dureeDeConservation": "24 heures",
+          "subCategoryId": 207,
+          "dureeDeConservation": "18 heures ",
           "indicateur": 0
         },
         {
-          "id":218,
+          "id": 223,
           "ouvert": 1,
-          "categoryId": 56,
+          "categoryId": 43,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 180,
-          "dureeDeConservation": "24 heures",
-          "indicateur": 0
-        },
-        {
-          "id":219,
-          "ouvert": 1,
-          "categoryId": 56,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 181,
-          "dureeDeConservation": "18 heures",
-          "indicateur": 0
-        },
-        {
-          "id":220,
-          "ouvert": 1,
-          "categoryId": 56,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 182,
+          "subCategoryId": 208,
           "dureeDeConservation": "72 heures",
           "indicateur": 0
         },
         {
-          "id":221,
+          "id": 224,
           "ouvert": 1,
-          "categoryId": 56,
+          "categoryId": 43,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 183,
+          "subCategoryId": 209,
           "dureeDeConservation": "36 heures",
           "indicateur": 0
         },
         {
-          "id":222,
+          "id": 225,
           "ouvert": 1,
-          "categoryId": 56,
+          "categoryId": 43,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 184,
+          "subCategoryId": 210,
           "dureeDeConservation": "32 heures",
           "indicateur": 0
         },
         {
-          "id":223,
+          "id": 226,
           "ouvert": 1,
-          "categoryId": 57,
+          "categoryId": 44,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 185,
+          "subCategoryId": 211,
           "dureeDeConservation": "48 heures",
           "indicateur": 0
         },
         {
-          "id":224,
+          "id": 227,
           "ouvert": 1,
-          "categoryId": 58,
-          "temperature":"от +2 до +6°С",
-          "subCategoryId":186, 
-          "dureeDeConservation": "48 heures",
-          "indicateur": 0
-        },
-        {
-          "id":225,
-          "ouvert": 1,
-          "categoryId": 58,
-          "temperature":"от +2 до +6°С",
-          "subCategoryId":187,
-          "dureeDeConservation": "48 heures",
-          "indicateur": 0
-        },
-        {
-          "id":226,
-          "ouvert": 1,
-          "categoryId": 58,
-          "temperature":"от +2 до +6°С",
-          "subCategoryId": 188,
-          "dureeDeConservation": "48 heures",
-          "indicateur": 0
-        },
-        {
-          "id":227,
-          "ouvert": 1,
-          "categoryId": 58,
-          "temperature":"от +2 до +6°С",
-          "subCategoryId": 189,
-          "dureeDeConservation": "48 heures",
-          "indicateur": 0
-        },
-        {
-          "id":228,
-          "ouvert": 1,
-          "categoryId": 58,
-          "temperature":"от +2 до +6°С",
-          "subCategoryId":190, 
-          "dureeDeConservation": "48 heures",
-          "indicateur": 0
-        },
-        {
-          "id":229,
-          "ouvert": 1,
-          "categoryId": 58,
-          "temperature":"от +2 до +6°С",
-          "subCategoryId":196,
-          "dureeDeConservation": "48 heures",
-          "indicateur": 0
-        },
-        {
-          "id":230,
-          "ouvert": 1,
-          "categoryId": 58,
-          "temperature":"от +2 до +6°С",
-          "subCategoryId":197,
-          "dureeDeConservation": "48 heures",
-          "indicateur": 0
-        },
-
-
-        {
-          "id":231,
-          "ouvert": 1,
-          "categoryId": 58,
+          "categoryId": 45,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 191, 
+          "subCategoryId": 212,
+          "dureeDeConservation": "48 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 228,
+          "ouvert": 1,
+          "categoryId": 45,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 213,
+          "dureeDeConservation": "48 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 229,
+          "ouvert": 1,
+          "categoryId": 45,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 214,
+          "dureeDeConservation": "48 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 230,
+          "ouvert": 1,
+          "categoryId": 45,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 215,
+          "dureeDeConservation": "48 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 231,
+          "ouvert": 1,
+          "categoryId": 45,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 216,
+          "dureeDeConservation": "48 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 232,
+          "ouvert": 1,
+          "categoryId": 45,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 217,
           "dureeDeConservation": "36 heures",
           "indicateur": 0
         },
         {
-          "id":232,
+          "id": 233,
           "ouvert": 1,
-          "categoryId": 58,
+          "categoryId": 45,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 192, 
+          "subCategoryId": 218,
           "dureeDeConservation": "36 heures",
           "indicateur": 0
         },
         {
-          "id":233,
+          "id": 234,
           "ouvert": 1,
-          "categoryId": 58,
+          "categoryId": 45,
           "temperature": "от +2 до +6°С",
-          "subCategoryId":  193,
+          "subCategoryId": 219,
           "dureeDeConservation": "36 heures",
           "indicateur": 0
         },
         {
-          "id":234,
+          "id": 235,
           "ouvert": 1,
-          "categoryId": 58,
+          "categoryId": 45,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 198,
-          "dureeDeConservation": "36 heures",
-          "indicateur": 0
-        },
-
-        {
-          "id":235,
-          "ouvert": 1,
-          "categoryId": 58,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 194,
-          "dureeDeConservation": "24 heures",
+          "subCategoryId": 220,
+          "dureeDeConservation": "24 heures ",
           "indicateur": 0
         },
         {
-          "id":236,
+          "id": 236,
           "ouvert": 1,
-          "categoryId": 56,
+          "categoryId": 45,
+          "temperature": "до +20°С",
+          "subCategoryId": 221,
+          "dureeDeConservation": "4 heures ",
+          "indicateur": 0
+        },
+        {
+          "id": 237,
+          "ouvert": 1,
+          "categoryId": 45,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 195,
+          "subCategoryId": 222,
           "dureeDeConservation": "12 heures",
           "indicateur": 0
         },
         {
-          "id":237,
+          "id": 238,
           "ouvert": 1,
-          "categoryId": 56,
+          "categoryId": 45,
           "temperature": "от +2 до +6°С",
-          "subCategoryId": 199,
+          "subCategoryId": 223,
+          "dureeDeConservation": "48 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 239,
+          "ouvert": 1,
+          "categoryId": 45,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 224,
+          "dureeDeConservation": "48 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 240,
+          "ouvert": 1,
+          "categoryId": 45,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 225,
+          "dureeDeConservation": "36 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 241,
+          "ouvert": 1,
+          "categoryId": 45,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 226,
           "dureeDeConservation": "72 heures",
           "indicateur": 0
         },
         {
-          "id":238,
+          "id": 242,
           "ouvert": 1,
-          "categoryId": 58,
+          "categoryId": 45,
           "temperature": "до +20°С",
-          "subCategoryId": 194,
+          "subCategoryId": 227,
           "dureeDeConservation": "4 heures",
           "indicateur": 0
         },
         {
-          "id":239,
+          "id": 243,
           "ouvert": 1,
-          "categoryId": 58,
-          "temperature": "до +20°С",
-          "subCategoryId": 200,
-          "dureeDeConservation": "4 heures",
+          "categoryId": 46,
+          "temperature": "+2+10°С",
+          "subCategoryId": 228,
+          "dureeDeConservation": "20 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 244,
+          "ouvert": 1,
+          "categoryId": 46,
+          "temperature": "+2+10°С",
+          "subCategoryId": 234,
+          "dureeDeConservation": "60 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 245,
+          "ouvert": 1,
+          "categoryId": 46,
+          "temperature": "+2+10°С",
+          "subCategoryId": 235,
+          "dureeDeConservation": "60 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 246,
+          "ouvert": 1,
+          "categoryId": 46,
+          "temperature": "0+10°С",
+          "subCategoryId": 229,
+          "dureeDeConservation": "10 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 247,
+          "ouvert": 1,
+          "categoryId": 46,
+          "temperature": "0+10°С",
+          "subCategoryId": 243,
+          "dureeDeConservation": "10 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 248,
+          "ouvert": 1,
+          "categoryId": 46,
+          "temperature": "+2+6°С",
+          "subCategoryId": 230,
+          "dureeDeConservation": "20 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 249,
+          "ouvert": 1,
+          "categoryId": 46,
+          "temperature": "+2+6°С",
+          "subCategoryId": 232,
+          "dureeDeConservation": "60 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 250,
+          "ouvert": 1,
+          "categoryId": 46,
+          "temperature": "+2+6°С",
+          "subCategoryId": 236,
+          "dureeDeConservation": "7 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 251,
+          "ouvert": 1,
+          "categoryId": 46,
+          "temperature": "+2+6°С",
+          "subCategoryId": 237,
+          "dureeDeConservation": "90 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 252,
+          "ouvert": 1,
+          "categoryId": 46,
+          "temperature": "+2+6°С",
+          "subCategoryId": 238,
+          "dureeDeConservation": "60 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 253,
+          "ouvert": 1,
+          "categoryId": 46,
+          "temperature": "+2+6°С",
+          "subCategoryId": 240,
+          "dureeDeConservation": "15 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 254,
+          "ouvert": 1,
+          "categoryId": 46,
+          "temperature": "+2+6°С",
+          "subCategoryId": 241,
+          "dureeDeConservation": "50 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 255,
+          "ouvert": 1,
+          "categoryId": 46,
+          "temperature": "+2+6°С",
+          "subCategoryId": 242,
+          "dureeDeConservation": "90 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 256,
+          "ouvert": 1,
+          "categoryId": 46,
+          "temperature": "+2+6°С",
+          "subCategoryId": 246,
+          "dureeDeConservation": "14 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 257,
+          "ouvert": 1,
+          "categoryId": 46,
+          "temperature": "+2+6°С",
+          "subCategoryId": 247,
+          "dureeDeConservation": "21 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 258,
+          "ouvert": 1,
+          "categoryId": 46,
+          "temperature": "+0+25°С",
+          "subCategoryId": 231,
+          "dureeDeConservation": "20 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 259,
+          "ouvert": 1,
+          "categoryId": 46,
+          "temperature": "+2+14°С",
+          "subCategoryId": 233,
+          "dureeDeConservation": "14 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 260,
+          "ouvert": 1,
+          "categoryId": 46,
+          "temperature": "+0+6°С",
+          "subCategoryId": 244,
+          "dureeDeConservation": "20 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 261,
+          "ouvert": 1,
+          "categoryId": 46,
+          "temperature": "+0+6°С",
+          "subCategoryId": 245,
+          "dureeDeConservation": "180 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 262,
+          "ouvert": 1,
+          "categoryId": 46,
+          "temperature": "+2+6°С",
+          "subCategoryId": 246,
+          "dureeDeConservation": "14 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 263,
+          "ouvert": 1,
+          "categoryId": 46,
+          "temperature": "+2+6°С",
+          "subCategoryId": 247,
+          "dureeDeConservation": "21 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 267,
+          "ouvert": 1,
+          "categoryId": 47,
+          "température": "",
+          "subCategoryId": 251,
+          "dureeDeConservation": "18 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 268,
+          "ouvert": 1,
+          "categoryId": 47,
+          "température": " ",
+          "subCategoryId": 252,
+          "dureeDeConservation": "18 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 269,
+          "ouvert": 1,
+          "categoryId": 47,
+          "température": " ",
+          "subCategoryId": 253,
+          "dureeDeConservation": "24 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 270,
+          "ouvert": 1,
+          "categoryld": 47,
+          "température": " ",
+          "subCategoryId": 254,
+          "dureeDeConservation": "24 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 271,
+          "ouvert": 1,
+          "categoryld": 47,
+          "température": " ",
+          "subCategoryId": 255,
+          "dureeDeConservation": "18 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 272,
+          "ouvert": 1,
+          "categoryld": 47,
+          "température": " ",
+          "subCategoryId": 256,
+          "dureeDeConservation": "12 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 273,
+          "ouvert": 1,
+          "categoryld": 47,
+          "température": " ",
+          "subCategoryId": 257,
+          "dureeDeConservation": "18 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 274,
+          "ouvert": 1,
+          "categoryld": 47,
+          "température": " ",
+          "subCategoryId": 258,
+          "dureeDeConservation": "72 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 275,
+          "ouvert": 1,
+          "categoryld": 47,
+          "température": " ",
+          "subCategoryId": 259,
+          "dureeDeConservation": "36 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 276,
+          "ouvert": 1,
+          "categoryId": 47,
+          "température": " ",
+          "subCategoryId": 260,
+          "dureeDeConservation": "36 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 277,
+          "ouvert": 1,
+          "categoryld": 47,
+          "température": " ",
+          "subCategoryId": 261,
+          "dureeDeConservation": "18 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 278,
+          "ouvert": 1,
+          "categoryld": 47,
+          "température": " ",
+          "subCategoryId": 262,
+          "dureeDeConservation": "18 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 279,
+          "ouvert": 1,
+          "categoryld": 47,
+          "température": " ",
+          "subCategoryId": 263,
+          "dureeDeConservation": "72 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 5001,
+          "ouvert": 1,
+          "categoryId": 47,
+          "température": " ",
+          "subCategoryId": 264,
+          "dureeDeConservation": "24 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 280,
+          "ouvert": 1,
+          "categoryld": 47,
+          "température": " ",
+          "subCategoryId": 265,
+          "dureeDeConservation": "30 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 281,
+          "ouvert": 1,
+          "categoryld": 47,
+          "température": " ",
+          "subCategoryId": 266,
+          "dureeDeConservation": "72 heures",
+          "indicateur": 0
+        },
+        {
+          "id": 282,
+          "ouvert": 1,
+          "categoryld": 47,
+          "température": " ",
+          "subCategoryId": 267,
+          "dureeDeConservation": "7 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 283,
+          "ouvert": 1,
+          "categoryld": 47,
+          "température": " ",
+          "subCategoryId": 268,
+          "dureeDeConservation": "7 jours",
           "indicateur": 0
         }
       ];
@@ -2951,7 +3309,8 @@ class DatabaseHelper {
           try {
             // Ajout d'une impression pour examiner la valeur de "ouvert"
             if (kDebugMode) {
-              print('Value of "ouvert" from the database: ${maps[i]['ouvert']}');
+              print(
+                  'Value of "ouvert" from the database: ${maps[i]['ouvert']}');
             }
 
             return Temperature.fromJson(maps[i]);
@@ -2985,7 +3344,8 @@ class DatabaseHelper {
     }
   }
 
-  static Future<List<Temperature>> getTemperaturesByCategoryId(int categoryId) async {
+  static Future<List<Temperature>> getTemperaturesByCategoryId(
+      int categoryId) async {
     try {
       Database db = await _instance.database;
 
@@ -3004,40 +3364,44 @@ class DatabaseHelper {
       return temperatures;
     } catch (e) {
       if (kDebugMode) {
-        print('Erreur lors de la récupération des températures par catégorie : $e');
+        print(
+            'Erreur lors de la récupération des températures par catégorie : $e');
       }
       rethrow;
     }
   }
-  
-  static Future<List<SubCategory>> getSubCategoriesByFilteredCategories(List<Categorie> filteredCategories) async {
-      try {
-        Database db = await _instance.database;
 
-        // Récupérer les IDs des catégories filtrées
-        List<int> categoryIds = filteredCategories.map((categorie) => categorie.id).toList();
+  static Future<List<SubCategory>> getSubCategoriesByFilteredCategories(
+      List<Categorie> filteredCategories) async {
+    try {
+      Database db = await _instance.database;
 
-        // Requête pour récupérer les sous-catégories en fonction des IDs des catégories filtrées
-        List<Map<String, dynamic>> maps = await db.query(
-          'SubCategories',
-          where: 'categoryId IN (${categoryIds.join(",")})',
-        );
+      // Récupérer les IDs des catégories filtrées
+      List<int> categoryIds =
+          filteredCategories.map((categorie) => categorie.id).toList();
 
-        // Convertir les résultats en objets SubCategorie
-        List<SubCategory> subCategories = List.generate(maps.length, (i) {
-          return SubCategory.fromJson(maps[i]);
-        });
+      // Requête pour récupérer les sous-catégories en fonction des IDs des catégories filtrées
+      List<Map<String, dynamic>> maps = await db.query(
+        'SubCategories',
+        where: 'categoryId IN (${categoryIds.join(",")})',
+      );
 
-        return subCategories;
-      } catch (e) {
-        if (kDebugMode) {
-          print('Erreur lors de la récupération des sous-catégories : $e');
-        }
-        rethrow;
+      // Convertir les résultats en objets SubCategorie
+      List<SubCategory> subCategories = List.generate(maps.length, (i) {
+        return SubCategory.fromJson(maps[i]);
+      });
+
+      return subCategories;
+    } catch (e) {
+      if (kDebugMode) {
+        print('Erreur lors de la récupération des sous-catégories : $e');
       }
+      rethrow;
     }
+  }
 
-  static Future<List<Categorie>> getCategorieByIdCuisine(Cuisine cuisine) async {
+  static Future<List<Categorie>> getCategorieByIdCuisine(
+      Cuisine cuisine) async {
     try {
       Database db = await _instance.database;
 
@@ -3047,8 +3411,8 @@ class DatabaseHelper {
       }
 
       // Récupérer les catégories pour une cuisine spécifique
-      List<Map<String, dynamic>> maps = await db.query('Categories',
-          where: 'cuisineId = ?', whereArgs: [cuisine.id]);
+      List<Map<String, dynamic>> maps = await db
+          .query('Categories', where: 'cuisineId = ?', whereArgs: [cuisine.id]);
 
       // Convertir les résultats en objets Categorie
       List<Categorie> categories = List.generate(maps.length, (i) {
@@ -3062,14 +3426,15 @@ class DatabaseHelper {
       }
       rethrow;
     }
-  } 
+  }
 
   static Future<List<Categorie>> getCategoryFilter(
-    List<Temperature> temperatureList, List<Categorie> allCategories) async {
+      List<Temperature> temperatureList, List<Categorie> allCategories) async {
     try {
       // Ajout de l'impression de débogage
       if (kDebugMode) {
-        print('getCategoryFilter - TemperatureList: $temperatureList, AllCategories: $allCategories');
+        print(
+            'getCategoryFilter - TemperatureList: $temperatureList, AllCategories: $allCategories');
       }
 
       // Filtrer les catégories en fonction des categoryIds des objets Temperature fournis
@@ -3095,13 +3460,4 @@ class DatabaseHelper {
       rethrow;
     }
   }
-
-
-
-
-
-
-
-
-
 }
