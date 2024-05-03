@@ -2,9 +2,9 @@ import 'package:dart_date/dart_date.dart';
 
 
 class Calculator {
-  List<DateTime> calculateDate(String time, int indicator) {
-    List<DateTime> dates = [];
-    List<dynamic>? resultat = this.normalisationTemps(time);
+  static List<String> calculateDate(String time, int indicator) {
+    List<String> dates = [];
+    List<dynamic>? resultat = normalisationTemps(time);
 
     if (indicator == 0) {
       dates = ajouteDeuxDates(resultat);
@@ -15,7 +15,7 @@ class Calculator {
     return dates;
   }
 
-  List<DateTime> ajouteDeuxDates(List<dynamic>? time) {
+  static List<String> ajouteDeuxDates(List<dynamic>? time) {
     DateTime now = DateTime.now();
     DateTime firstDate = now;
     DateTime? secondDate = now;
@@ -34,11 +34,11 @@ class Calculator {
       secondDate = secondDate.addYears(nombre);
     }
 
-    return [firstDate, secondDate];
+    return [firstDate.format('dd MM y, h:mm:ss'), secondDate.format('dd MM y, h:mm:ss')];
   }
 
   
-List<DateTime> ajouteTroisDates(List<dynamic>? time) {
+static List<String> ajouteTroisDates(List<dynamic>? time) {
   DateTime now = DateTime.now();
   DateTime firstDate = now;
   DateTime secondDate = now.addHours(24); // Ajouter 24 heures à la date actuelle pour obtenir la deuxième date
@@ -56,10 +56,10 @@ List<DateTime> ajouteTroisDates(List<dynamic>? time) {
     thirdDate = now.addYears(nombre);
   }
 
-  return [firstDate, secondDate,thirdDate];
+  return [firstDate.format('dd MM y, h:mm:ss'), secondDate.format('dd MM y, h:mm:ss'),thirdDate.format('dd MM y, h:mm:ss')];
 }
 
-  List<dynamic>? normalisationTemps(String time) {
+  static List<dynamic>? normalisationTemps(String time) {
     List<dynamic>? resultat = [];
     // Expression régulière pour récupérer un nombre ou un chiffre suivi d'un mot
     RegExp regex = RegExp(r'(\d+)\s*(\w+)');

@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_null_comparison, duplicate_ignore
+// ignore_for_file: unnecessary_null_comparison, duplicate_ignore, unrelated_type_equality_checks
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:grinlintsa/models/cook.dart';
@@ -239,7 +239,6 @@ class DatabaseHelper {
         {"id": 2, "name": "МЯСО", "cuisineId": 1},
         {"id": 3, "name": "ГАСТРОНОМИЯ", "cuisineId": 1},
         {"id": 4, "name": "БАКАЛЕЯ", "cuisineId": 1},
-    
         {"id": 5, "name": "ЗАМОРОЗКА", "cuisineId": 1},
         {"id": 6, "name": "СОУСЫ И ЗАМЕСЫ", "cuisineId": 1},
         {"id": 7, "name": "МЯСНАЯ ГАСТРОНОМИЯ", "cuisineId": 1},
@@ -346,13 +345,6 @@ class DatabaseHelper {
         {"id": 20, "name": "Лаваш", "categoryId": 4},
         {"id": 21, "name": "Лепешка для грильяса", "categoryId": 4},
         {"id": 22, "name": "Яичный порошок", "categoryId": 4},
-        {"id": 23, "name": "Маринованные огурцы", "categoryId": 4.1},
-        {"id": 24, "name": "Ананасы", "categoryId": 4.1},
-        {
-          "id": 25,
-          "name": "Халапеньо, в неметаллическом контейнере",
-          "categoryId": 4.1
-        },
         {"id": 26, "name": "Картофель фри", "categoryId": 5},
         {"id": 27, "name": "Чесночный", "categoryId": 6},
         {"id": 28, "name": "Горчица", "categoryId": 6},
@@ -916,33 +908,6 @@ class DatabaseHelper {
           "temperature": "от +2 до +6°С",
           "subCategoryId": 22,
           "dureeDeConservation": "15 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 28,
-          "ouvert": 1,
-          "categoryId": 4.1,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 23,
-          "dureeDeConservation": "72 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 29,
-          "ouvert": 1,
-          "categoryId": 4.1,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 24,
-          "dureeDeConservation": "48 heures",
-          "indicateur": 0
-        },
-        {
-          "id": 30,
-          "ouvert": 1,
-          "categoryId": 4.1,
-          "temperature": "от +2 до +6°С",
-          "subCategoryId": 25,
-          "dureeDeConservation": "21 jours",
           "indicateur": 0
         },
         {
@@ -3423,6 +3388,69 @@ class DatabaseHelper {
     } catch (e) {
       if (kDebugMode) {
         print('Erreur lors de la récupération des catégories : $e');
+      }
+      rethrow;
+    }
+  }
+
+  // methode pour recuperer la duree de concervation et l'indicateur d'une sous-categorie d'une categorie
+  // en fonction de la liste des temperatures
+
+  static Future<List<dynamic>> getDurreeConcervationAndIdicator(
+      List<Temperature> temperatureList) async {
+    List<dynamic> resultat = [];
+    try {
+      // recuperation de la durree de concervation
+      resultat.add(temperatureList.first.dureeDeConservation);
+      // recuperation de l'indicateur
+      resultat.add(temperatureList.first.indicateur);
+
+      // Ajout d'une impression pour vérifier les résultats
+      if (kDebugMode) {
+        print(
+            'les valeurs attentudes - Résultats- durree concervation ${resultat.first} --- indicateur ${resultat.last} ---');
+      }
+
+      return resultat;
+    } catch (e) {
+      if (kDebugMode) {
+        print(
+            'Erreur lors de la récupération des informations durree de concervation et indicateur : $e');
+      }
+      rethrow;
+    }
+  }
+
+  //recuperer temperature par categoryId , subcategoryId , isOpen
+  static Future<List<Temperature>>
+      getTemperaturesByCategoryIdSubCategoryIdIsOpen(
+          int subcategoryId, int isOpen) async {
+    try {
+      Database db = await _instance.database;
+      if (kDebugMode) {
+        print(
+            'les donnees entre pour le filtrage dans la fonction filtre : subcategory  ${subcategoryId}  --isOpen ${isOpen}');
+      }
+      // Requête pour récupérer les températures en fonction de la catégorie, du sous-catégorie et de l'ouverture
+      List<Map<String, dynamic>> maps = await db.query(
+        'Temperatures',
+        where: 'subcategoryId = ? AND ouvert = ?',
+        whereArgs: [subcategoryId, isOpen],
+      );
+
+      // Convertir les résultats en objets Temperature
+      List<Temperature> temperatures = List.generate(maps.length, (i) {
+        return Temperature.fromJson(maps[i]);
+      });
+      if (kDebugMode) {
+        print(
+            'les donnees de la liste dans son ensemble  : ${temperatures.toString()}');
+      }
+      return temperatures;
+    } catch (e) {
+      if (kDebugMode) {
+        print(
+            'Erreur lors de la récupération des températures par catégorie, sous-catégorie et ouverture : $e');
       }
       rethrow;
     }
