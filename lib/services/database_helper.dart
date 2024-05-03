@@ -3429,7 +3429,7 @@ class DatabaseHelper {
       Database db = await _instance.database;
       if (kDebugMode) {
         print(
-            'les donnees entre pour le filtrage dans la fonction filtre : subcategory  ${subcategoryId}  --isOpen ${isOpen}');
+            'les donnees entre pour le filtrage dans la fonction filtre : subcategory  $subcategoryId  --isOpen $isOpen');
       }
       // Requête pour récupérer les températures en fonction de la catégorie, du sous-catégorie et de l'ouverture
       List<Map<String, dynamic>> maps = await db.query(

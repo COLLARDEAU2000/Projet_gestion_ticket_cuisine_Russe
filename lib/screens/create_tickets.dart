@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously, non_constant_identifier_names, unnecessary_brace_in_string_interps
+// ignore_for_file: use_build_context_synchronously, non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_new
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +9,7 @@ import 'package:grinlintsa/models/temperature.dart';
 import 'package:grinlintsa/models/sub_category.dart';
 import 'package:grinlintsa/services/calculator_date.dart';
 import 'package:grinlintsa/services/database_helper.dart';
-import 'package:grinlintsa/services/PrintManager.dart';
-import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart'; // Import de la classe PrinterManager
+import 'package:grinlintsa/services/printerManager.dart';
 
 class CreateTicketScreen extends StatefulWidget {
   final Cuisine cuisine;
@@ -38,56 +37,13 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
   String dateOne = ""; // Déclaration de la date 1
   String dateTwo = ""; // Déclaration de la date 2
   String dateThree = ""; // Déclaration de la date 3
+  // instance ticket manager
+  final TicketManager _ticketManager = new TicketManager();
+
   @override
   void initState() {
     super.initState();
     _updateCategories();
-  }
-
-  
-
-  Future<void> _handlePrint(List<dynamic> infosTickets) async {
-    // Vérifier si le Bluetooth est activé
-    bool isBluetoothEnabled = await PrinterManager.checkBluetooth();
-    if (!isBluetoothEnabled) {
-      // Afficher une boîte de dialogue demandant à l'utilisateur d'activer le Bluetooth
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text('Bluetooth désactivé'),
-            content: const Text('Veuillez activer le Bluetooth pour imprimer.'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(); // Fermer la boîte de dialogue
-                },
-                child: const Text('OK'),
-              ),
-            ],
-          );
-        },
-      );
-      return; // Sortir de la fonction si le Bluetooth n'est pas activé
-    }
-
-    // Si le Bluetooth est activé, récupérer les informations de l'imprimante
-    List<BluetoothInfo> printerInfo =
-        await PrinterManager.checkConnectionPrinter();
-
-    // Lancer l'impression
-    bool isPrinted = await PrinterManager.impression(printerInfo, infosTickets);
-    if (isPrinted) {
-      // Afficher un message de confirmation après impression réussie si nécessaire
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Impression réussie')),
-      );
-    } else {
-      // Gérer le cas où l'impression a échoué, si nécessaire
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Erreur lors de l\'impression')),
-      );
-    }
   }
 
   Future<void> _updateCategories() async {
@@ -351,10 +307,63 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
                                         // Lancer l'impression
                                         Navigator.pop(
                                             context); // Ferme la boîte de dialogue
-                                        // Appeler la fonction _handlePrint lors du clic sur le bouton
-                                        await _handlePrint(listeTicket);
-                                        Navigator.pop(
-                                            context); // Fermer la boîte de dialogue
+                                        // Vérifier si le Bluetooth est activé
+                                        bool? isBluetoothActive =
+                                            await _ticketManager
+                                                .isBluetoothActive();
+                                        if (kDebugMode) {
+                                          print(
+                                              'VOICI LA VALEUR RECHERCHER : ${isBluetoothActive}');
+                                        }
+                                        if (isBluetoothActive!) {
+                                          try {
+                                            // Imprimer le ticket en utilisant la méthode printTicket du TicketManager
+                                            await _ticketManager
+                                                .printTicket(listeTicket);
+                                          } catch (e) {
+                                            // Afficher une boîte de dialogue en cas d'erreur lors de l'impression
+                                            showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return AlertDialog(
+                                                  title: const Text(
+                                                      'Erreur d\'impression'),
+                                                  content: Text(
+                                                      'Une erreur s\'est produite lors de l\'impression du ticket : $e'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () {
+                                                        Navigator.pop(context);
+                                                      },
+                                                      child: const Text('OK'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                          }
+                                        } else {
+                                          // Afficher un dialogue indiquant que le Bluetooth est désactivé
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                title: const Text(
+                                                    'Bluetooth désactivé'),
+                                                content: const Text(
+                                                    'Veuillez activer le Bluetooth pour imprimer.'),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: const Text('OK'),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                        }
                                       },
                                       child: const Text('Imprimer'),
                                     ),
