@@ -246,7 +246,7 @@
     {
       "id":28,
       "ouvert": 1,
-      "categoryId":4.1,
+      "categoryId":900,
       "temperature": "от +2 до +6°С",
       "subCategoryId": 23,
       "dureeDeConservation": "72 часa",
@@ -255,7 +255,7 @@
     {
       "id":29,
       "ouvert": 1,
-      "categoryId":4.1,
+      "categoryId":900,
       "temperature": "от +2 до +6°С",
       "subCategoryId": 24,
       "dureeDeConservation": "48 часов",
@@ -264,7 +264,7 @@
     {
       "id":30,
       "ouvert": 1,
-      "categoryId":4.1,
+      "categoryId":900,
       "temperature": "от +2 до +6°С",
       "subCategoryId": 25,
       "dureeDeConservation": "21 cyтки",

@@ -66,7 +66,7 @@ class HomePage extends StatelessWidget {
 
     switch (cuisine.name) {
       case 'ШАУРМА':
-        iconData = Icons.fastfood;
+        iconData = Icons.fastfood_sharp;
         break;
       case 'ПИЦЦА':
         iconData = Icons.local_restaurant;

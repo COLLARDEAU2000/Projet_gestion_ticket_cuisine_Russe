@@ -29,7 +29,7 @@ class DatabaseHelper {
   Future<Database> initDatabase() async {
     try {
       Directory documentsDirectory = await getApplicationDocumentsDirectory();
-      String path = join(documentsDirectory.path, 'poex.db');
+      String path = join(documentsDirectory.path, 'last_bdd2.db');
 
       Database database = await openDatabase(
         path,
@@ -296,7 +296,8 @@ class DatabaseHelper {
           "cuisineId": 3
         },
         {"id": 46, "name": "Овощи и Фрукты", "cuisineId": 4},
-        {"id": 47, "name": "Продукты", "cuisineId": 4}
+        {"id": 47, "name": "Продукты", "cuisineId": 4},
+        {"id": 900, "name": "КОНСЕРВАЦИЯ", "cuisineId": 1},
       ];
 
       await db.transaction((txn) async {
@@ -597,7 +598,14 @@ class DatabaseHelper {
         {"id": 266, "name": "Аройд", "categoryId": 47},
         {"id": 267, "name": "Красный соус", "categoryId": 47},
         {"id": 268, "name": "Соус обычный", "categoryId": 47},
-        {"id": 269, "name": "Соус чесночный", "categoryId": 47}
+        {"id": 269, "name": "Соус чесночный", "categoryId": 47},
+        {"id": 23, "name": "Маринованные огурцы", "categoryId": 900},
+        {"id": 24, "name": "Ананасы", "categoryId": 900},
+        {
+          "id": 25,
+          "name": "Халапеньо, в неметаллическом контейнере",
+          "categoryId": 900
+        },
       ];
 
       await db.transaction((txn) async {
@@ -3062,6 +3070,33 @@ class DatabaseHelper {
           "indicateur": 0
         },
         {
+          "id": 264,
+          "ouvert": 1,
+          "categoryId": 47,
+          "temperature": "",
+          "subCategoryId": 248,
+          "dureeDeConservation": "18 часов",
+          "indicateur": 0
+        },
+        {
+          "id": 265,
+          "ouvert": 1,
+          "categoryId": 47,
+          "temperature": "",
+          "subCategoryId": 249,
+          "dureeDeConservation": "18 часов",
+          "indicateur": 0
+        },
+        {
+          "id": 266,
+          "ouvert": 1,
+          "categoryId": 47,
+          "temperature": "",
+          "subCategoryId": 250,
+          "dureeDeConservation": "18 часов",
+          "indicateur": 0
+        },
+        {
           "id": 267,
           "ouvert": 1,
           "categoryId": 47,
@@ -3222,7 +3257,34 @@ class DatabaseHelper {
           "subCategoryId": 268,
           "dureeDeConservation": "7 jours",
           "indicateur": 0
-        }
+        },
+        {
+          "id": 28,
+          "ouvert": 1,
+          "categoryId": 900,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 23,
+          "dureeDeConservation": "72 часa",
+          "indicateur": 0
+        },
+        {
+          "id": 29,
+          "ouvert": 1,
+          "categoryId": 900,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 24,
+          "dureeDeConservation": "48 часов",
+          "indicateur": 0
+        },
+        {
+          "id": 30,
+          "ouvert": 1,
+          "categoryId": 900,
+          "temperature": "от +2 до +6°С",
+          "subCategoryId": 25,
+          "dureeDeConservation": "21 cyтки",
+          "indicateur": 0
+        },
       ];
       await db.transaction((txn) async {
         Batch batch = txn.batch();

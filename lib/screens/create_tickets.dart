@@ -158,7 +158,7 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
                     itemBuilder: (context, index) {
                       return Card(
                         margin: const EdgeInsets.all(8.0),
-                        color: Colors.orange,
+                        color: const Color.fromARGB(255, 205, 40, 2),
                         child: ListTile(
                           title: Text(subCategories[index].name),
                           onTap: () {

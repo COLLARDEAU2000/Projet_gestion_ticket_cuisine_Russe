@@ -1,6 +1,5 @@
 import 'package:dart_date/dart_date.dart';
 
-
 class Calculator {
   static List<String> calculateDate(String time, int indicator) {
     List<String> dates = [];
@@ -23,41 +22,50 @@ class Calculator {
     int nombre = time[0];
     if (mot == 'jours') {
       secondDate = secondDate.addDays(nombre);
-    }
-    else if (mot == 'heures') {
+    } else if (mot == 'heures') {
       secondDate = secondDate.addHours(nombre);
-    }
-    else if (mot == 'mois') {
+    } else if (mot == 'mois') {
       secondDate = secondDate.addMonths(nombre);
-    }
-    else if (mot == 'annees') {
+    } else if (mot == 'annees') {
       secondDate = secondDate.addYears(nombre);
     }
 
-    return [firstDate.format('dd MM y, h:mm:ss'), secondDate.format('dd MM y, h:mm:ss')];
+    return [
+      firstDate.format('dd MM y, h:mm:ss'),
+      secondDate.format('dd MM y, h:mm:ss')
+    ];
   }
 
-  
-static List<String> ajouteTroisDates(List<dynamic>? time) {
-  DateTime now = DateTime.now();
-  DateTime firstDate = now;
-  DateTime secondDate = now.addHours(24); // Ajouter 24 heures à la date actuelle pour obtenir la deuxième date
-  String mot = time![1];
-  int nombre = time[0];
-  // Calculer la troisième date en fonction de l'unité de temps spécifiée
-  DateTime thirdDate = now;
-  if (mot == 'jours') {
-    thirdDate = now.addDays(nombre);
-  } else if (mot == 'heures') {
-    thirdDate = now.addHours(nombre);
-  } else if (mot == 'mois') {
-    thirdDate = now.addMonths(nombre);
-  } else if (mot == 'annees') {
-    thirdDate = now.addYears(nombre);
-  }
+  static List<String> ajouteTroisDates(List<dynamic>? time) {
+    DateTime now = DateTime.now();
+    DateTime firstDate = now;
+    DateTime secondDate = now.addHours(
+        24); 
+    // Ajouter 24 heures à la date actuelle pour obtenir la deuxième date
+    //on a produit dans cuisine qui ajoute 3 h pour la deuxieme date
+    //ce meme produit ajoute 1 journe a sa 3 eme date qui la premiere date + 1 jour
+    // ce produit est dans la cuisine pizza
 
-  return [firstDate.format('dd MM y, h:mm:ss'), secondDate.format('dd MM y, h:mm:ss'),thirdDate.format('dd MM y, h:mm:ss')];
-}
+    String mot = time![1];
+    int nombre = time[0];
+    // Calculer la troisième date en fonction de l'unité de temps spécifiée
+    DateTime thirdDate = now;
+    if (mot == 'jours') {
+      thirdDate = now.addDays(nombre);
+    } else if (mot == 'heures') {
+      thirdDate = now.addHours(nombre);
+    } else if (mot == 'mois') {
+      thirdDate = now.addMonths(nombre);
+    } else if (mot == 'annees') {
+      thirdDate = now.addYears(nombre);
+    }
+
+    return [
+      firstDate.format('dd MM y, h:mm:ss'),
+      secondDate.format('dd MM y, h:mm:ss'),
+      thirdDate.format('dd MM y, h:mm:ss')
+    ];
+  }
 
   static List<dynamic>? normalisationTemps(String time) {
     List<dynamic>? resultat = [];
