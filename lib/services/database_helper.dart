@@ -606,6 +606,7 @@ class DatabaseHelper {
           "name": "Халапеньо, в неметаллическом контейнере",
           "categoryId": 900
         },
+        {"id": 444, "name": "Тесто", "categoryId": 25}
       ];
 
       await db.transaction((txn) async {
@@ -933,7 +934,7 @@ class DatabaseHelper {
           "categoryId": 5,
           "temperature": "до +20°С",
           "subCategoryId": 26,
-          "dureeDeConservation": "30 минут",
+          "dureeDeConservation": "30 minutes",
           "indicateur": 0
         },
         {
@@ -2319,7 +2320,7 @@ class DatabaseHelper {
           "categoryId": 37,
           "temperature": "до +20°С",
           "subCategoryId": 165,
-          "dureeDeConservation": "30 минут",
+          "dureeDeConservation": "30 minutes",
           "indicateur": 0
         },
         {
@@ -3075,7 +3076,7 @@ class DatabaseHelper {
           "categoryId": 47,
           "temperature": "",
           "subCategoryId": 248,
-          "dureeDeConservation": "18 часов",
+          "dureeDeConservation": "18 heures",
           "indicateur": 0
         },
         {
@@ -3084,7 +3085,7 @@ class DatabaseHelper {
           "categoryId": 47,
           "temperature": "",
           "subCategoryId": 249,
-          "dureeDeConservation": "18 часов",
+          "dureeDeConservation": "18 heures",
           "indicateur": 0
         },
         {
@@ -3093,7 +3094,7 @@ class DatabaseHelper {
           "categoryId": 47,
           "temperature": "",
           "subCategoryId": 250,
-          "dureeDeConservation": "18 часов",
+          "dureeDeConservation": "18 heures",
           "indicateur": 0
         },
         {
@@ -3264,7 +3265,7 @@ class DatabaseHelper {
           "categoryId": 900,
           "temperature": "от +2 до +6°С",
           "subCategoryId": 23,
-          "dureeDeConservation": "72 часa",
+          "dureeDeConservation": "72 heures",
           "indicateur": 0
         },
         {
@@ -3273,7 +3274,7 @@ class DatabaseHelper {
           "categoryId": 900,
           "temperature": "от +2 до +6°С",
           "subCategoryId": 24,
-          "dureeDeConservation": "48 часов",
+          "dureeDeConservation": "48 heures",
           "indicateur": 0
         },
         {
@@ -3282,7 +3283,16 @@ class DatabaseHelper {
           "categoryId": 900,
           "temperature": "от +2 до +6°С",
           "subCategoryId": 25,
-          "dureeDeConservation": "21 cyтки",
+          "dureeDeConservation": "21 jours",
+          "indicateur": 0
+        },
+        {
+          "id": 445,
+          "ouvert": 1,
+          "categoryId": 25,
+          "temperature": "",
+          "subCategoryId": 444,
+          "dureeDeConservation": "1 jours",
           "indicateur": 0
         },
       ];
