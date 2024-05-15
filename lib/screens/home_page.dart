@@ -12,12 +12,45 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Liste des Cuisines'),
+        title: const Text(
+          'кухонные списки',
+          style: TextStyle(fontSize: 38, fontWeight: FontWeight.bold), // Taille de la police
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        leading: Image.asset(
+          'assets/logorussie.png',
+          width: 40,
+          height: 40,
+        ),
       ),
-      body: OrientationBuilder(
-        builder: (context, orientation) {
-          return _buildGrid(orientation, context);
-        },
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/background.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: OrientationBuilder(
+          builder: (context, orientation) {
+            return _buildGrid(orientation, context);
+          },
+        ),
+      ),
+      bottomNavigationBar: const BottomAppBar(
+        color: Colors.white, // Couleur de fond du BottomNavigationBar
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                'Приложение разработано ittechnologie.ru',
+                style: TextStyle(fontSize: 18, color: Colors.black),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -33,12 +66,14 @@ class HomePage extends StatelessWidget {
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
           return const Text('Aucune cuisine trouvée.');
         } else {
-          return GridView.builder(
-            gridDelegate: _buildGridDelegate(orientation),
-            itemCount: snapshot.data!.length,
-            itemBuilder: (context, index) {
-              return _buildCuisineCard(snapshot.data![index], context);
-            },
+          return Center(
+            child: GridView.builder(
+              gridDelegate: _buildGridDelegate(orientation),
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                return _buildCuisineCard(snapshot.data![index], context);
+              },
+            ),
           );
         }
       },
@@ -62,49 +97,55 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildCuisineCard(Cuisine cuisine, BuildContext context) {
-    IconData iconData;
+    String imagePath;
 
     switch (cuisine.name) {
       case 'ШАУРМА':
-        iconData = Icons.fastfood_sharp;
+        imagePath = 'assets/icon-shawarma.png'; // Remplacez 'assets/shawarma_icon.png' par le chemin de votre image pour la shawarma
         break;
       case 'ПИЦЦА':
-        iconData = Icons.local_restaurant;
+        imagePath = 'assets/icon-pizza.png'; // Remplacez 'assets/pizza_icon.png' par le chemin de votre image pour la pizza
         break;
       case 'ЯПОНИЯ':
-        iconData = Icons.local_florist;
+        imagePath = 'assets/icon-sushi.png'; // Remplacez 'assets/sushi_icon.png' par le chemin de votre image pour le sushi
         break;
       case 'ОВОЩНОЙ ЦЕХ':
-        iconData = Icons.local_pizza;
+        imagePath = 'assets/icon-legumes.png'; // Remplacez 'assets/vegetable_icon.png' par le chemin de votre image pour le département de légumes
         break;
       default:
-        iconData = Icons.fastfood;
+        imagePath = 'assets/default_icon.png'; // Remplacez 'assets/default_icon.png' par le chemin de votre image par défaut
     }
 
     return Card(
-      child: InkWell(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => Dashboard(cuisine: cuisine),
-            ),
-          );
-        },
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              iconData,
-              color: Colors.orange,
-              size: 40.0,
-            ),
-            const SizedBox(height: 8.0),
-            Text(
-              cuisine.name,
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 0, 0, 0)),
-            ),
-          ],
+      color: const Color(0xFFEA3423),
+      child: Center(
+        child: InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Dashboard(cuisine: cuisine),
+              ),
+            );
+          },
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                imagePath,
+                width: 60, // Largeur de l'image
+                height: 60, // Hauteur de l'image
+              ),
+              const SizedBox(height: 8.0),
+              Text(
+                cuisine.name,
+                style: const TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              ),
+            ],
+          ),
         ),
       ),
     );

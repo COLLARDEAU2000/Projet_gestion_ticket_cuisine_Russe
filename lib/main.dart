@@ -27,7 +27,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.orange,
         hintColor: Colors.orangeAccent,
       ),
-      initialRoute: '/',
+      // Désactiver le logo de débogage
+        debugShowCheckedModeBanner: false,
       routes: {
         '/': (context) => FutureBuilder<List<Cuisine>>(
               future: DatabaseHelper().getCuisines(),
