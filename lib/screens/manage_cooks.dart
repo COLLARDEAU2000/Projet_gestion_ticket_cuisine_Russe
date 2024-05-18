@@ -70,8 +70,7 @@ class _ManageCooksState extends State<ManageCooks> {
                 children: [
                   const Text(
                     'список поваров',
-                    style:
-                        TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 16.0),
                   Expanded(
@@ -90,8 +89,7 @@ class _ManageCooksState extends State<ManageCooks> {
                           return ListView.builder(
                             itemCount: cooksList.length,
                             itemBuilder: (context, index) {
-                              return _buildCookCard(
-                                  context, cooksList[index]);
+                              return _buildCookCard(context, cooksList[index]);
                             },
                           );
                         }
@@ -166,8 +164,7 @@ class _ManageCooksState extends State<ManageCooks> {
             children: [
               TextField(
                 controller: _newCookNameController,
-                decoration:
-                    const InputDecoration(labelText: 'имя повара'),
+                decoration: const InputDecoration(labelText: 'имя повара'),
                 onChanged: (value) {
                   newCookName = value;
                 },

@@ -29,7 +29,7 @@ class DatabaseHelper {
   Future<Database> initDatabase() async {
     try {
       Directory documentsDirectory = await getApplicationDocumentsDirectory();
-      String path = join(documentsDirectory.path, 'last_bdd2.db');
+      String path = join(documentsDirectory.path, 'last_bdd3.db');
 
       Database database = await openDatabase(
         path,
@@ -3293,7 +3293,7 @@ class DatabaseHelper {
           "temperature": "",
           "subCategoryId": 444,
           "dureeDeConservation": "1 jours",
-          "indicateur": 0
+          "indicateur": 1
         },
       ];
       await db.transaction((txn) async {
@@ -3382,15 +3382,15 @@ class DatabaseHelper {
   }
 
   static Future<List<Temperature>> getTemperaturesByCategoryId(
-      int categoryId) async {
+      int isOpen, int categoryId) async {
     try {
       Database db = await _instance.database;
 
       // Requête pour récupérer les températures en fonction de la catégorie
       List<Map<String, dynamic>> maps = await db.query(
         'Temperatures',
-        where: 'categoryId = ?',
-        whereArgs: [categoryId],
+        where: 'categoryId = ? AND ouvert = ?',
+        whereArgs: [categoryId, isOpen],
       );
 
       // Convertir les résultats en objets Temperature
@@ -3516,7 +3516,7 @@ class DatabaseHelper {
       });
       if (kDebugMode) {
         print(
-            'les donnees de la liste dans son ensemble  : ${temperatures.toString()}');
+            'les donnees de la liste temperature dans son ensemble  : ${temperatures.toString()}');
       }
       return temperatures;
     } catch (e) {

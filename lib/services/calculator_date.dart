@@ -1,14 +1,19 @@
 import 'package:dart_date/dart_date.dart';
 
 class Calculator {
-  static List<String> calculateDate(String time, int indicator) {
-    List<String> dates = [];
+  static List<String> calculateDate(
+      String subCategory, String time, int indicator) {
+    List<String> dates = ['', ''];
     List<dynamic>? resultat = normalisationTemps(time);
 
-    if (indicator == 0) {
-      dates = ajouteDeuxDates(resultat);
-    } else if (indicator == 1) {
-      dates = ajouteTroisDates(resultat);
+    if (time == "") {
+      return dates;
+    } else {
+      if (indicator == 0) {
+        dates = ajouteDeuxDates(resultat);
+      } else if (indicator == 1) {
+        dates = ajouteTroisDates(subCategory, resultat);
+      }
     }
 
     return dates;
@@ -32,38 +37,42 @@ class Calculator {
 
     return [
       firstDate.format('dd MM y, h:mm:ss'),
-      secondDate.format('dd MM y, h:mm:ss')
+      secondDate.format('dd MM y, h:mm:ss'),
     ];
   }
 
-  static List<String> ajouteTroisDates(List<dynamic>? time) {
+  static List<String> ajouteTroisDates(subCategory, List<dynamic>? time) {
     DateTime now = DateTime.now();
-    DateTime firstDate = now;
-    DateTime secondDate = now.addHours(
-        24); 
-    // Ajouter 24 heures à la date actuelle pour obtenir la deuxième date
-    //on a produit dans cuisine qui ajoute 3 h pour la deuxieme date
-    //ce meme produit ajoute 1 journe a sa 3 eme date qui la premiere date + 1 jour
-    // ce produit est dans la cuisine pizza
-
+    DateTime firstDate =
+        now; // Ajouter 24 heures à la date actuelle pour obtenir la deuxième date
     String mot = time![1];
     int nombre = time[0];
     // Calculer la troisième date en fonction de l'unité de temps spécifiée
+    DateTime secondDate = now;
     DateTime thirdDate = now;
-    if (mot == 'jours') {
-      thirdDate = now.addDays(nombre);
-    } else if (mot == 'heures') {
-      thirdDate = now.addHours(nombre);
-    } else if (mot == 'mois') {
-      thirdDate = now.addMonths(nombre);
-    } else if (mot == 'annees') {
-      thirdDate = now.addYears(nombre);
-    }
 
+    if (subCategory == "Тесто") {
+      secondDate = secondDate.addHours(3);
+      thirdDate = thirdDate.addDays(nombre);
+    } else {
+      secondDate = secondDate.addHours(
+          24); // Ajouter 24 heures à la date actuelle pour obtenir la deuxième date
+      if (mot == 'jours') {
+        thirdDate = now.addDays(nombre);
+      } else if (mot == 'heures') {
+        thirdDate = now.addHours(nombre);
+      } else if (mot == 'mois') {
+        thirdDate = now.addMonths(nombre);
+      } else if (mot == 'annees') {
+        thirdDate = now.addYears(nombre);
+      } else if (mot == 'minutes') {
+        thirdDate = now.addMinutes(nombre);
+      }
+    }
     return [
       firstDate.format('dd MM y, h:mm:ss'),
       secondDate.format('dd MM y, h:mm:ss'),
-      thirdDate.format('dd MM y, h:mm:ss')
+      thirdDate.format('dd MM y, h:mm:ss'),
     ];
   }
 
@@ -89,4 +98,19 @@ class Calculator {
     }
     return resultat;
   }
+}
+
+void main(List<String> args) {
+  // Demander à l'utilisateur de saisir une durée (par exemple, '2 jours')
+  final time = '7 jours';
+
+  // Demander à l'utilisateur de saisir un indicateur (0 ou 1)
+  final indicator = 1;
+
+  // Calculer les dates en fonction de la durée et de l'indicateur fournis par l'utilisateur
+  final dates = Calculator.calculateDate("xxx", time, indicator);
+  print("${dates}");
+  /* Afficher les dates calculées
+  console.write('Dates calculées: ');
+  console.write(dates.join(', '));*/
 }

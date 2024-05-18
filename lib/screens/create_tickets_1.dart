@@ -24,20 +24,19 @@ class CreateTicketScreen1 extends StatefulWidget {
 }
 
 class _CreateTicketScreen1State extends State<CreateTicketScreen1> {
-  bool isOpening = true;
+  bool isOpening = false;
   List<Categorie> categories = [];
   List<SubCategory> subCategories = [];
-  List<dynamic> listeTicket = []; // Initialisation de la liste dynamique ici
-  List<dynamic> listeInfosDureeConcervationEtIndicateur =
-      []; // Initialisation de la liste
-  List<Temperature> ListTemperaturesTicketCreation =
-      []; // Initialisation de la liste
-  int quantity = 1; // Déclaration de la variable quantity
-  String dateOne = ""; // Déclaration de la date 1
-  String dateTwo = ""; // Déclaration de la date 2
-  String dateThree = ""; // Déclaration de la date 3
-  // instance ticket manager
-  final TicketManager _ticketManager = new TicketManager();
+  List<dynamic> listeTicket = [];
+  List<dynamic> listeInfosDureeConcervationEtIndicateur = [];
+  List<Temperature> ListTemperaturesTicketCreation = [];
+  int quantity = 1;
+  String dateOne = "";
+  String dateTwo = "";
+  String dateThree = "";
+
+  // Instance du TicketManager
+  final TicketManager _ticketManager = TicketManager();
 
   @override
   void initState() {
@@ -45,44 +44,33 @@ class _CreateTicketScreen1State extends State<CreateTicketScreen1> {
     _updateCategories();
   }
 
+  // Met à jour la liste des catégories en fonction de l'état d'ouverture
   Future<void> _updateCategories() async {
     try {
-      if (kDebugMode) {
-        print('_updateCategories - IsOpening: $isOpening');
-      }
+      if (kDebugMode) print('_updateCategories - IsOpening: $isOpening');
 
       List<Temperature> temperatures =
           await DatabaseHelper.getTemperaturesByOpen(isOpening ? 1 : 1);
-      /*if (kDebugMode) {
-        print('Temperature List: $temperatures');
-      }*/
-
       List<Categorie> allCategories =
           await DatabaseHelper.getCategorieByIdCuisine(widget.cuisine);
-      /*if (kDebugMode) {
-        print('All Categories: $allCategories');
-      }*/
-
       List<Categorie> filteredCategories =
           await DatabaseHelper.getCategoryFilter(temperatures, allCategories);
-      /*if (kDebugMode) {
-        print('Filtered Categories: $filteredCategories');
-      }*/
 
       setState(() {
         categories = filteredCategories;
       });
     } catch (e) {
-      /*if (kDebugMode) {
+      if (kDebugMode)
         print('Erreur lors de la mise à jour des catégories : $e');
-      }*/
     }
   }
 
-  Future<void> _updateSubCategories(int categoryId) async {
+  // Met à jour la liste des sous-catégories en fonction de l'état d'ouverture et de l'ID de la catégorie
+  Future<void> _updateSubCategories(int isOpening, int categoryId) async {
     try {
       List<Temperature> temperatures =
-          await DatabaseHelper.getTemperaturesByCategoryId(categoryId);
+          await DatabaseHelper.getTemperaturesByCategoryId(
+              isOpening, categoryId);
       List<int> subCategoryIds =
           temperatures.map((temp) => temp.subCategoryId).toList();
       List<SubCategory> filteredSubCategories =
@@ -92,293 +80,288 @@ class _CreateTicketScreen1State extends State<CreateTicketScreen1> {
         subCategories = filteredSubCategories;
       });
     } catch (e) {
-      if (kDebugMode) {
+      if (kDebugMode)
         print('Erreur lors de la mise à jour des sous-catégories : $e');
-      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-  return GestureDetector(
-    // Gérer le geste de glissement horizontal pour revenir en arrière
-    onHorizontalDragEnd: (details) {
-      if (details.primaryVelocity! > 0) {
-        Navigator.of(context).pop();
-      }
-    },
-    child: Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false, // Supprimer automatiquement le bouton de retour en arrière
-        backgroundColor: Colors.white,
-        leading: Image.asset(
-          'assets/logorussie.png',
-          width: 40,
-          height: 40,
-        ),
-        title: const Text(
-          'Создайте маркировку',
-          style: TextStyle(
-              fontSize: 28, color: Colors.black, fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true, // Centrer le texte dans la AppBar
-      ),
-      bottomNavigationBar: const BottomAppBar(
-        color: Colors.white, // Couleur de fond du BottomNavigationBar
-        child: Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text(
-                'Приложение разработано ittechnologie.ru',
-                style: TextStyle(fontSize: 18, color: Colors.black),
-              ),
-            ],
+    return GestureDetector(
+      onHorizontalDragEnd: (details) {
+        if (details.primaryVelocity! > 0) {
+          Navigator.of(context).pop();
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.white,
+          leading: Image.asset(
+            'assets/logorussie.png',
+            width: 40,
+            height: 40,
           ),
+          title: const Text(
+            'Создайте маркировку',
+            style: TextStyle(
+                fontSize: 28, color: Colors.black, fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
         ),
-      ),
-      body: Column(
-        children: [
-          Expanded(
+        bottomNavigationBar: const BottomAppBar(
+          color: Colors.white,
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: categories.length,
-                    itemBuilder: (context, index) {
-                      return Card(
-                        margin: const EdgeInsets.all(8.0),
-                        child: ListTile(
-                          title: Text(
-                            categories[index].name,
-                            style: const TextStyle(
-                                fontSize: 22,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          onTap: () {
-                            _updateSubCategories(categories[index].id);
-                          },
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: GridView.builder(
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 4,
-                      mainAxisSpacing: 8.0,
-                      crossAxisSpacing: 8.0,
-                    ),
-                    itemCount: subCategories.length,
-                    itemBuilder: (context, index) {
-                      try {
-                        return Card(
-                          margin: const EdgeInsets.all(8.0),
-                          color: const Color(0xFFEA3423),
-                          child: ListTile(
-                            title: Text(
-                              subCategories[index].name,
-                              style: const TextStyle(
-                                  fontSize: 25,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            onTap: () {
-                              // Ajoutez ici l'action que vous souhaitez effectuer lorsqu'une sous-catégorie est sélectionnée.
-                              listeTicket.add(widget.cook.name); // Ajoute le nom du cuisinier à la liste
-                              listeTicket.add(subCategories[index].name); // Ajoute le nom de la sous-catégorie sélectionnée à la liste
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: const Text('Информация о маркировке'),
-                                    content: StatefulBuilder(
-                                      builder: (BuildContext context, StateSetter setState) {
-                                        return Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Text('Название продукта: ${subCategories[index].name}'),
-                                            Text('Категория: ${categories[index].name}'),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              children: [
-                                                IconButton(
-                                                  icon: const Icon(Icons.remove),
-                                                  onPressed: () {
-                                                    setState(() {
-                                                      if (quantity > 1) {
-                                                        quantity--;
-                                                      }
-                                                    });
-                                                  },
-                                                ),
-                                                SizedBox(
-                                                  width: 100,
-                                                  child: TextField(
-                                                    textAlign: TextAlign.center,
-                                                    decoration: const InputDecoration(
-                                                      border: OutlineInputBorder(),
-                                                    ),
-                                                    keyboardType: TextInputType.number,
-                                                    controller: TextEditingController(text: quantity.toString()),
-                                                    onChanged: (value) {
-                                                      setState(() {
-                                                        quantity = int.tryParse(value) ?? 1;
-                                                      });
-                                                    },
-                                                  ),
-                                                ),
-                                                IconButton(
-                                                  icon: const Icon(Icons.add),
-                                                  onPressed: () {
-                                                    setState(() {
-                                                      quantity++;
-                                                    });
-                                                  },
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    ),
-                                    actions: [
-                                      ElevatedButton(
-                                        onPressed: () async {
-                                          // Ajoutez ici la logique pour l'impression du ticket
-                                          listeTicket.add(quantity); // Ajoute le ticket à la liste
-                                          // Recuperer indicateur et la durree de concervation
-                                          if (kDebugMode) {
-                                            print(
-                                                'Affichage des informations pour la fonction : subcategorie ${subCategories[index].id}-- categori: ${categories[index].id} -- open: ${isOpening}');
-                                          }
-                                          if (kDebugMode) {
-                                            print(
-                                                'Affichage index :  ${index}');
-                                          }
-                                          ListTemperaturesTicketCreation =
-                                              await DatabaseHelper.getTemperaturesByCategoryIdSubCategoryIdIsOpen(
-                                                  subCategories[index].id, isOpening ? 1 : 1);
-                                          listeInfosDureeConcervationEtIndicateur =
-                                              await DatabaseHelper.getDurreeConcervationAndIdicator(
-                                                  ListTemperaturesTicketCreation);
-                                          // Utiliser calculator pour recuperer les dates
-                                          listeInfosDureeConcervationEtIndicateur =
-                                              Calculator.calculateDate(
-                                                  listeInfosDureeConcervationEtIndicateur.first,
-                                                  listeInfosDureeConcervationEtIndicateur.last);
-
-                                          // verification de la taille de la list
-                                          if (listeInfosDureeConcervationEtIndicateur.length == 2) {
-                                            // recuperation de la premiere date
-                                            dateOne = listeInfosDureeConcervationEtIndicateur.first;
-                                            // recuperation de la deuxieme date
-                                            dateTwo = listeInfosDureeConcervationEtIndicateur[1];
-
-                                            // Ajouter les dates dans liste Tickets
-                                            listeTicket.add(dateOne);
-                                            listeTicket.add(dateTwo);
-                                          } else {
-                                            // recuperation de la premiere date
-                                            dateOne = listeInfosDureeConcervationEtIndicateur.first;
-                                            // recuperation de la deuxieme date
-                                            dateTwo = listeInfosDureeConcervationEtIndicateur[1];
-                                            // recuperation de la troisieme date
-                                            dateThree = listeInfosDureeConcervationEtIndicateur[2];
-
-                                            // Ajouter les dates dans liste Tickets
-                                            listeTicket.add(dateOne);
-                                            listeTicket.add(dateTwo);
-                                            listeTicket.add(dateThree);
-                                          }
-
-                                          // affiche du resultat en console
-                                          if (kDebugMode) {
-                                            print('Affichage des informations de la liste : ${listeTicket}');
-                                          }
-                                          //verifier la connextion a l'imprimente
-                                          // Lancer l'impression
-                                          Navigator.pop(context); // Ferme la boîte de dialogue
-                                          // Vérifier si le Bluetooth est activé
-                                          bool? isBluetoothActive = await _ticketManager.isBluetoothActive();
-                                          if (kDebugMode) {
-                                            print('VOICI LA VALEUR RECHERCHER : ${isBluetoothActive}');
-                                          }
-                                          if (isBluetoothActive!) {
-                                            try {
-                                              // Imprimer le ticket en utilisant la méthode printTicket du TicketManager
-                                              await _ticketManager.printTicket(listeTicket);
-                                            } catch (e) {
-                                              // Afficher une boîte de dialogue en cas d'erreur lors de l'impression
-                                              showDialog(
-                                                context: context,
-                                                builder: (BuildContext context) {
-                                                  return AlertDialog(
-                                                    title: const Text('Erreur d\'impression'),
-                                                    content: Text('Une erreur s\'est produite lors de l\'impression du ticket : $e'),
-                                                    actions: [
-                                                      TextButton(
-                                                        onPressed: () {
-                                                          Navigator.pop(context);
-                                                        },
-                                                        child: const Text('OK'),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                              );
-                                            }
-                                          } else {
-                                            // Afficher un dialogue indiquant que le Bluetooth est désactivé
-                                            showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return AlertDialog(
-                                                  title: const Text('Bluetooth désactivé'),
-                                                  content: const Text('Veuillez activer le Bluetooth pour imprimer.'),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () {
-                                                        Navigator.pop(context);
-                                                      },
-                                                      child: const Text('OK'),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            );
-                                          }
-                                        },
-                                        child: const Text('Печать'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            },
-                          ),
-                        );
-                      } catch (e) {
-                        // Gérer les erreurs lors de l'accès à la liste subCategories
-                        if (kDebugMode) {
-                          print("Erreur lors de l'accès à la liste subCategories : $e");
-                        }
-                        return Container(); // Ou tout autre widget de remplacement
-                      }
-                    },
-                  ),
+                Text(
+                  'Приложение разработано ittechnologie.ru',
+                  style: TextStyle(fontSize: 18, color: Colors.black),
                 ),
               ],
             ),
           ),
-        ],
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              child: Row(
+                children: [
+                  // Liste des catégories
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: categories.length,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          margin: const EdgeInsets.all(8.0),
+                          child: ListTile(
+                            title: Text(
+                              categories[index].name,
+                              style: const TextStyle(
+                                  fontSize: 22,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            onTap: () {
+                              _updateSubCategories(
+                                  isOpening ? 1 : 1, categories[index].id);
+                            },
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  // Grille des sous-catégories
+                  // Grille des sous-catégories
+                  Expanded(
+                    flex: 2,
+                    child: GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 4,
+                        mainAxisSpacing: 8.0,
+                        crossAxisSpacing: 8.0,
+                      ),
+                      itemCount: subCategories.length,
+                      itemBuilder: (context, index) {
+                        try {
+                          return Card(
+                            margin: const EdgeInsets.all(8.0),
+                            color: const Color(0xFFEA3423),
+                            child: ListTile(
+                              title: Text(
+                                subCategories[index].name,
+                                style: const TextStyle(
+                                    fontSize: 25,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  listeTicket
+                                      .clear(); // Réinitialise la listeTicket ici
+                                  if (kDebugMode)
+                                    print(
+                                        "etat de la liste apres renitialisation : $listeTicket");
+                                  listeTicket.add(widget.cook.name);
+                                  listeTicket.add(subCategories[index].name);
+                                });
+                                // Continue avec les autres opérations
+                                _showTicketDialog(context, index);
+                              },
+                            ),
+                          );
+                        } catch (e) {
+                          if (kDebugMode)
+                            print(
+                                "Erreur lors de l'accès à la liste subCategories : $e");
+                          return Container();
+                        }
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 
+  // Affiche le dialogue pour la création du ticket
+  // Affiche le dialogue pour la création du ticket
+  void _showTicketDialog(BuildContext context, int index) {
+    // Réinitialise la listeTicket et garde uniquement le nom du cuisinier
+    setState(() {
+      listeTicket.clear();
+      listeTicket.add(widget.cook.name);
+    });
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Информация о маркировке'),
+          content: StatefulBuilder(
+            builder: (BuildContext context, StateSetter setState) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('Название продукта: ${subCategories[index].name}'),
+                  Text('Категория: ${categories[index].name}'),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.remove),
+                        onPressed: () {
+                          setState(() {
+                            if (quantity > 1) quantity--;
+                          });
+                        },
+                      ),
+                      SizedBox(
+                        width: 100,
+                        child: TextField(
+                          textAlign: TextAlign.center,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                          ),
+                          keyboardType: TextInputType.number,
+                          controller:
+                              TextEditingController(text: quantity.toString()),
+                          onChanged: (value) {
+                            setState(() {
+                              quantity = int.tryParse(value) ?? 1;
+                            });
+                          },
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.add),
+                        onPressed: () {
+                          setState(() {
+                            quantity++;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              );
+            },
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: () async {
+                await _handleTicketPrinting(index);
+
+                Navigator.pop(context);
+              },
+              child: const Text('Печать'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  // Gère l'impression du ticket
+  // Gère l'impression du ticket
+  Future<void> _handleTicketPrinting(int index) async {
+    listeTicket.add(quantity);
+
+    // Récupère les informations de durée de conservation et d'indicateur
+    ListTemperaturesTicketCreation =
+        await DatabaseHelper.getTemperaturesByCategoryIdSubCategoryIdIsOpen(
+      subCategories[index].id,
+      isOpening ? 1 : 1,
+    );
+    listeInfosDureeConcervationEtIndicateur =
+        await DatabaseHelper.getDurreeConcervationAndIdicator(
+      ListTemperaturesTicketCreation,
+    );
+    listeInfosDureeConcervationEtIndicateur = Calculator.calculateDate(
+      subCategories[index].name,
+      listeInfosDureeConcervationEtIndicateur.first,
+      listeInfosDureeConcervationEtIndicateur.last,
+    );
+
+    // Mise à jour des dates
+    if (listeInfosDureeConcervationEtIndicateur.length == 2) {
+      dateOne = listeInfosDureeConcervationEtIndicateur.first;
+      dateTwo = listeInfosDureeConcervationEtIndicateur[1];
+      listeTicket.add(dateOne);
+      listeTicket.add(dateTwo);
+    } else {
+      dateOne = listeInfosDureeConcervationEtIndicateur.first;
+      dateTwo = listeInfosDureeConcervationEtIndicateur[1];
+      dateThree = listeInfosDureeConcervationEtIndicateur[2];
+      listeTicket.add(dateOne);
+      listeTicket.add(dateTwo);
+      listeTicket.add(dateThree);
+    }
+
+    // Affiche les informations de la listeTicket dans le terminal
+    print('listeTicket mise à jour: $listeTicket');
+
+    // Vérifie la connexion Bluetooth
+    bool? isBluetoothActive = await _ticketManager.isBluetoothActive();
+    if (isBluetoothActive!) {
+      try {
+        // Imprime le ticket
+        await _ticketManager.printTicket(listeTicket);
+      } catch (e) {
+        _showErrorDialog(context, 'Erreur d\'impression',
+            'Une erreur s\'est produite lors de l\'impression du ticket : $e');
+      }
+    } else {
+      _showErrorDialog(context, 'Bluetooth désactivé',
+          'Veuillez activer le Bluetooth pour imprimer.');
+    }
+  }
+
+  // Affiche une boîte de dialogue d'erreur
+  void _showErrorDialog(BuildContext context, String title, String content) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(content),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
