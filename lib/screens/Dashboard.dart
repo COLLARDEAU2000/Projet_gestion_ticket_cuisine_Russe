@@ -15,19 +15,19 @@ class Dashboard extends StatelessWidget {
     switch (cuisine.name) {
       case 'ШАУРМА':
         imagePath =
-            'assets/fond-shawarma.jpg'; // Remplacez 'assets/shawarma_icon.png' par le chemin de votre image pour la shawarma
+            'assets/bg-shawarma.jpg'; // Remplacez 'assets/shawarma_icon.png' par le chemin de votre image pour la shawarma
         break;
       case 'ПИЦЦА':
         imagePath =
-            'assets/font-pizza.jpg'; // Remplacez 'assets/pizza_icon.png' par le chemin de votre image pour la pizza
+            'assets/bg-pizza.jpg'; // Remplacez 'assets/pizza_icon.png' par le chemin de votre image pour la pizza
         break;
       case 'ЯПОНИЯ':
         imagePath =
-            'assets/font-sushi.jpg'; // Remplacez 'assets/sushi_icon.png' par le chemin de votre image pour le sushi
+            'assets/bg-sushi.jpg'; // Remplacez 'assets/sushi_icon.png' par le chemin de votre image pour le sushi
         break;
       case 'ОВОЩНОЙ ЦЕХ':
         imagePath =
-            'assets/font-legumes.jpg'; // Remplacez 'assets/vegetable_icon.png' par le chemin de votre image pour le département de légumes
+            'assets/bg-legumes.jpg'; // Remplacez 'assets/vegetable_icon.png' par le chemin de votre image pour le département de légumes
         break;
       default:
         imagePath =
@@ -92,7 +92,7 @@ class Dashboard extends StatelessWidget {
                       style: const TextStyle(
                           fontSize: 44,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                          color: Colors.black),
                     ),
                     const SizedBox(height: 20),
                     Row(
@@ -108,6 +108,10 @@ class Dashboard extends StatelessWidget {
                               ),
                             );
                           },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color(0xFFEA3423), // Couleur de fond du bouton
+                          ),
                           child: const Row(
                             children: [
                               Icon(Icons.print,
@@ -116,9 +120,10 @@ class Dashboard extends StatelessWidget {
                               Text(
                                 'Управление маркировкой',
                                 style: TextStyle(
-                                    fontSize: 26,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black),
+                                  fontSize: 26,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
                               ),
                             ],
                           ),
@@ -133,18 +138,25 @@ class Dashboard extends StatelessWidget {
                               ),
                             );
                           },
-                          // ... Autres styles de bouton
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFFEA3423), // Couleur de fond du bouton
+                          ),
                           child: const Row(
                             children: [
-                              Icon(Icons.person,
-                                  color: Color(0xFFFBE14F),
-                                  size: 70), // Ajoutez l'icône bonhomme ici
+                              Icon(
+                                Icons.person,
+                                color: Color(0xFFFBE14F), // Couleur de l'icône
+                                size: 70,
+                              ),
                               SizedBox(width: 10),
-                              Text('Управление кухней',
-                                  style: TextStyle(
-                                      fontSize: 26,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black)),
+                              Text(
+                                'Управление кухней',
+                                style: TextStyle(
+                                  fontSize: 26,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white, // Couleur du texte
+                                ),
+                              ),
                             ],
                           ),
                         ),

@@ -66,10 +66,10 @@ flutter:
     - assets/icon-pizza.png
     - assets/icon-shawarma.png
     - assets/icon-sushi.png
-    - assets/font-legumes.jpg
-    - assets/font-pizza.jpg
-    - assets/fond-shawarma.jpg
-    - assets/font-sushi.jpg
+    - assets/bg-legumes.jpg
+    - assets/bg-pizza.jpg
+    - assets/bg-shawarma.jpg
+    - assets/bg-sushi.jpg
 
 
   # The following line ensures that the Material Icons font is

@@ -326,7 +326,7 @@ class _CreateTicketScreen1State extends State<CreateTicketScreen1> {
     }
 
     // Affiche les informations de la listeTicket dans le terminal
-    print('listeTicket mise à jour: $listeTicket');
+    print('Обновленный список эстетики: $listeTicket');
 
     // Vérifie la connexion Bluetooth
     bool? isBluetoothActive = await _ticketManager.isBluetoothActive();
@@ -335,12 +335,12 @@ class _CreateTicketScreen1State extends State<CreateTicketScreen1> {
         // Imprime le ticket
         await _ticketManager.printTicket(listeTicket);
       } catch (e) {
-        _showErrorDialog(context, 'Erreur d\'impression',
-            'Une erreur s\'est produite lors de l\'impression du ticket : $e');
+        _showErrorDialog(context, 'ошибка печати',
+            'При печати этикетки произошла ошибка : $e');
       }
     } else {
-      _showErrorDialog(context, 'Bluetooth désactivé',
-          'Veuillez activer le Bluetooth pour imprimer.');
+      _showErrorDialog(context, 'Bluetooth отключен',
+          'Активируйте Bluetooth для печати');
     }
   }
 
@@ -357,7 +357,7 @@ class _CreateTicketScreen1State extends State<CreateTicketScreen1> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text('OK'),
+              child: const Text('Хорошо'),
             ),
           ],
         );
