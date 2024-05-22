@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously, non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_new
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:grinlintsa/models/category_cuisine.dart';
@@ -34,6 +32,8 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
   String dateOne = "";
   String dateTwo = "";
   String dateThree = "";
+  String selectedCategoryName =
+      ""; // Variable pour stocker le nom de la catégorie sélectionnée
 
   // Instance du TicketManager
   final TicketManager _ticketManager = TicketManager();
@@ -66,7 +66,8 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
   }
 
   // Met à jour la liste des sous-catégories en fonction de l'état d'ouverture et de l'ID de la catégorie
-  Future<void> _updateSubCategories(int isOpening, int categoryId) async {
+  Future<void> _updateSubCategories(
+      int isOpening, int categoryId, String categoryName) async {
     try {
       List<Temperature> temperatures =
           await DatabaseHelper.getTemperaturesByCategoryId(
@@ -78,6 +79,8 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
 
       setState(() {
         subCategories = filteredSubCategories;
+        selectedCategoryName =
+            categoryName; // Met à jour le nom de la catégorie sélectionnée
       });
     } catch (e) {
       if (kDebugMode)
@@ -172,15 +175,14 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
                                   fontWeight: FontWeight.bold),
                             ),
                             onTap: () {
-                              _updateSubCategories(
-                                  isOpening ? 1 : 0, categories[index].id);
+                              _updateSubCategories(isOpening ? 1 : 0,
+                                  categories[index].id, categories[index].name);
                             },
                           ),
                         );
                       },
                     ),
                   ),
-                  // Grille des sous-catégories
                   // Grille des sous-catégories
                   Expanded(
                     flex: 2,
@@ -239,7 +241,6 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
   }
 
   // Affiche le dialogue pour la création du ticket
-  // Affiche le dialogue pour la création du ticket
   void _showTicketDialog(BuildContext context, int index) {
     // Réinitialise la listeTicket et garde uniquement le nom du cuisinier
     setState(() {
@@ -257,6 +258,8 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  Text(
+                      'Категория: $selectedCategoryName'), // Affiche le nom de la catégorie
                   Text('Название продукта: ${subCategories[index].name}'),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -315,7 +318,6 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
     );
   }
 
-  // Gère l'impression du ticket
   // Gère l'impression du ticket
   Future<void> _handleTicketPrinting(int index) async {
     listeTicket.add(quantity);
