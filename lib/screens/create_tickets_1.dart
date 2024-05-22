@@ -238,7 +238,6 @@ class _CreateTicketScreen1State extends State<CreateTicketScreen1> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Название продукта: $subCategoryName'),
-                  Text('Категория: $categoryName'),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

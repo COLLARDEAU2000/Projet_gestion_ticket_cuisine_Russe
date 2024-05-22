@@ -258,7 +258,6 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Название продукта: ${subCategories[index].name}'),
-                  Text('Категория: ${categories[index].name}'),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -366,8 +365,8 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
             'При печати этикетки произошла ошибка : $e');
       }
     } else {
-      _showErrorDialog(context, 'Bluetooth отключен',
-          'Активируйте Bluetooth для печати');
+      _showErrorDialog(
+          context, 'Bluetooth отключен', 'Активируйте Bluetooth для печати');
     }
   }
 
