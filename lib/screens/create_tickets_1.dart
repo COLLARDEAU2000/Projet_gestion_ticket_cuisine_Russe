@@ -32,7 +32,8 @@ class _CreateTicketScreen1State extends State<CreateTicketScreen1> {
   String dateOne = "";
   String dateTwo = "";
   String dateThree = "";
-  String selectedCategoryName = ""; // Variable pour stocker le nom de la catégorie sélectionnée
+  String selectedCategoryName =
+      ""; // Variable pour stocker le nom de la catégorie sélectionnée
 
   // Instance du TicketManager
   final TicketManager _ticketManager = TicketManager();
@@ -65,7 +66,8 @@ class _CreateTicketScreen1State extends State<CreateTicketScreen1> {
   }
 
   // Met à jour la liste des sous-catégories en fonction de l'état d'ouverture et de l'ID de la catégorie
-  Future<void> _updateSubCategories(int isOpening, int categoryId, String categoryName) async {
+  Future<void> _updateSubCategories(
+      int isOpening, int categoryId, String categoryName) async {
     try {
       List<Temperature> temperatures =
           await DatabaseHelper.getTemperaturesByCategoryId(
@@ -77,7 +79,8 @@ class _CreateTicketScreen1State extends State<CreateTicketScreen1> {
 
       setState(() {
         subCategories = filteredSubCategories;
-        selectedCategoryName = categoryName; // Met à jour le nom de la catégorie sélectionnée
+        selectedCategoryName =
+            categoryName; // Met à jour le nom de la catégorie sélectionnée
       });
     } catch (e) {
       if (kDebugMode)
@@ -145,8 +148,8 @@ class _CreateTicketScreen1State extends State<CreateTicketScreen1> {
                                   fontWeight: FontWeight.bold),
                             ),
                             onTap: () {
-                              _updateSubCategories(
-                                  isOpening ? 1 : 1, categories[index].id, categories[index].name);
+                              _updateSubCategories(isOpening ? 1 : 1,
+                                  categories[index].id, categories[index].name);
                             },
                           ),
                         );
@@ -216,13 +219,6 @@ class _CreateTicketScreen1State extends State<CreateTicketScreen1> {
   // Affiche le dialogue pour la création du ticket
   void _showTicketDialog(BuildContext context, String categoryName,
       String subCategoryName, int index) {
-    // Réinitialise la listeTicket et garde uniquement le nom du cuisinier
-    setState(() {
-      listeTicket.clear();
-      listeTicket.add(widget.cook.name);
-      listeTicket.add(subCategoryName);
-    });
-
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -233,7 +229,8 @@ class _CreateTicketScreen1State extends State<CreateTicketScreen1> {
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('Категория: $categoryName'), // Affiche le nom de la catégorie
+                  Text(
+                      'Категория: $categoryName'), // Affiche le nom de la catégorie
                   Text('Название продукта: $subCategoryName'),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -280,7 +277,7 @@ class _CreateTicketScreen1State extends State<CreateTicketScreen1> {
           actions: [
             ElevatedButton(
               onPressed: () async {
-                await _handleTicketPrinting(index);
+                await _handleTicketPrinting(index, subCategoryName);
 
                 Navigator.pop(context);
               },
@@ -293,7 +290,14 @@ class _CreateTicketScreen1State extends State<CreateTicketScreen1> {
   }
 
   // Gère l'impression du ticket
-  Future<void> _handleTicketPrinting(int index) async {
+  Future<void> _handleTicketPrinting(int index, String subCategory) async {
+    // Réinitialise la listeTicket et garde uniquement le nom du cuisinier
+    setState(() {
+      listeTicket.clear();
+      listeTicket.add(widget.cook.name);
+      listeTicket.add(subCategory);
+    });
+
     listeTicket.add(quantity);
 
     // Récupère les informations de durée de conservation et d'indicateur
