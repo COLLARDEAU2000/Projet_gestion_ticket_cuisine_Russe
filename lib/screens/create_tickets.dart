@@ -306,7 +306,7 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
           actions: [
             ElevatedButton(
               onPressed: () async {
-                await _handleTicketPrinting(index);
+                await _handleTicketPrinting(index, subCategories[index].name);
 
                 Navigator.pop(context);
               },
@@ -319,7 +319,14 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
   }
 
   // Gère l'impression du ticket
-  Future<void> _handleTicketPrinting(int index) async {
+  Future<void> _handleTicketPrinting(int index, String subCategory) async {
+    // Réinitialise la listeTicket et garde uniquement le nom du cuisinier
+    setState(() {
+      listeTicket.clear();
+      listeTicket.add(widget.cook.name);
+      listeTicket.add(subCategory);
+    });
+
     listeTicket.add(quantity);
 
     // Récupère les informations de durée de conservation et d'indicateur
@@ -373,23 +380,51 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
   }
 
   // Affiche une boîte de dialogue d'erreur
+  // Affiche une boîte de dialogue d'erreur en cas d'échec d'impression
   void _showErrorDialog(BuildContext context, String title, String content) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(title),
-          content: Text(content),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('Хорошо'),
-            ),
-          ],
+    // Vérifie si le Bluetooth est activé
+    _ticketManager.isBluetoothActive().then((isBluetoothActive) {
+      if (isBluetoothActive!) {
+        // Affiche une boîte de dialogue en cas d'erreur lors de l'impression
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text(title),
+              content: Text(content),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Хорошо'), // Texte en russe pour "OK"
+                ),
+              ],
+            );
+          },
         );
-      },
-    );
+      } else {
+        // Affiche une boîte de dialogue indiquant que le Bluetooth est désactivé
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text(
+                  'Bluetooth отключен'), // Texte en russe pour "Bluetooth désactivé"
+              content: const Text(
+                  'Активируйте Bluetooth для печати.'), // Texte en russe pour "Veuillez activer le Bluetooth pour imprimer."
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Хорошо'), // Texte en russe pour "OK"
+                ),
+              ],
+            );
+          },
+        );
+      }
+    });
   }
 }
