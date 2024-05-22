@@ -29,7 +29,7 @@ class DatabaseHelper {
   Future<Database> initDatabase() async {
     try {
       Directory documentsDirectory = await getApplicationDocumentsDirectory();
-      String path = join(documentsDirectory.path, 'last_bdd3.db');
+      String path = join(documentsDirectory.path, 'last_x.db');
 
       Database database = await openDatabase(
         path,
@@ -3074,7 +3074,7 @@ class DatabaseHelper {
           "id": 264,
           "ouvert": 1,
           "categoryId": 47,
-          "temperature": "",
+          "temperature": "x",
           "subCategoryId": 248,
           "dureeDeConservation": "18 heures",
           "indicateur": 0
@@ -3083,7 +3083,7 @@ class DatabaseHelper {
           "id": 265,
           "ouvert": 1,
           "categoryId": 47,
-          "temperature": "",
+          "temperature": "x",
           "subCategoryId": 249,
           "dureeDeConservation": "18 heures",
           "indicateur": 0
@@ -3092,7 +3092,7 @@ class DatabaseHelper {
           "id": 266,
           "ouvert": 1,
           "categoryId": 47,
-          "temperature": "",
+          "temperature": "x",
           "subCategoryId": 250,
           "dureeDeConservation": "18 heures",
           "indicateur": 0
@@ -3101,7 +3101,7 @@ class DatabaseHelper {
           "id": 267,
           "ouvert": 1,
           "categoryId": 47,
-          "température": "",
+          "température": "x",
           "subCategoryId": 251,
           "dureeDeConservation": "18 heures",
           "indicateur": 0
@@ -3110,7 +3110,7 @@ class DatabaseHelper {
           "id": 268,
           "ouvert": 1,
           "categoryId": 47,
-          "température": " ",
+          "température": "x",
           "subCategoryId": 252,
           "dureeDeConservation": "18 heures",
           "indicateur": 0
@@ -3119,7 +3119,7 @@ class DatabaseHelper {
           "id": 269,
           "ouvert": 1,
           "categoryId": 47,
-          "température": " ",
+          "température": "x",
           "subCategoryId": 253,
           "dureeDeConservation": "24 heures",
           "indicateur": 0
@@ -3128,7 +3128,7 @@ class DatabaseHelper {
           "id": 270,
           "ouvert": 1,
           "categoryld": 47,
-          "température": " ",
+          "température": "x",
           "subCategoryId": 254,
           "dureeDeConservation": "24 heures",
           "indicateur": 0
@@ -3137,7 +3137,7 @@ class DatabaseHelper {
           "id": 271,
           "ouvert": 1,
           "categoryld": 47,
-          "température": " ",
+          "température": "x",
           "subCategoryId": 255,
           "dureeDeConservation": "18 heures",
           "indicateur": 0
@@ -3146,7 +3146,7 @@ class DatabaseHelper {
           "id": 272,
           "ouvert": 1,
           "categoryld": 47,
-          "température": " ",
+          "température": "x",
           "subCategoryId": 256,
           "dureeDeConservation": "12 heures",
           "indicateur": 0
@@ -3155,7 +3155,7 @@ class DatabaseHelper {
           "id": 273,
           "ouvert": 1,
           "categoryld": 47,
-          "température": " ",
+          "température": "x",
           "subCategoryId": 257,
           "dureeDeConservation": "18 heures",
           "indicateur": 0
@@ -3164,7 +3164,7 @@ class DatabaseHelper {
           "id": 274,
           "ouvert": 1,
           "categoryld": 47,
-          "température": " ",
+          "température": "x",
           "subCategoryId": 258,
           "dureeDeConservation": "72 heures",
           "indicateur": 0
@@ -3173,7 +3173,7 @@ class DatabaseHelper {
           "id": 275,
           "ouvert": 1,
           "categoryld": 47,
-          "température": " ",
+          "température": "x",
           "subCategoryId": 259,
           "dureeDeConservation": "36 heures",
           "indicateur": 0
@@ -3182,7 +3182,7 @@ class DatabaseHelper {
           "id": 276,
           "ouvert": 1,
           "categoryId": 47,
-          "température": " ",
+          "température": "x",
           "subCategoryId": 260,
           "dureeDeConservation": "36 heures",
           "indicateur": 0
@@ -3191,7 +3191,7 @@ class DatabaseHelper {
           "id": 277,
           "ouvert": 1,
           "categoryld": 47,
-          "température": " ",
+          "température": "x",
           "subCategoryId": 261,
           "dureeDeConservation": "18 heures",
           "indicateur": 0
@@ -3200,7 +3200,7 @@ class DatabaseHelper {
           "id": 278,
           "ouvert": 1,
           "categoryld": 47,
-          "température": " ",
+          "température": "x",
           "subCategoryId": 262,
           "dureeDeConservation": "18 heures",
           "indicateur": 0
@@ -3209,7 +3209,7 @@ class DatabaseHelper {
           "id": 279,
           "ouvert": 1,
           "categoryld": 47,
-          "température": " ",
+          "température": "x",
           "subCategoryId": 263,
           "dureeDeConservation": "72 heures",
           "indicateur": 0
@@ -3218,7 +3218,7 @@ class DatabaseHelper {
           "id": 5001,
           "ouvert": 1,
           "categoryId": 47,
-          "température": " ",
+          "température": "x",
           "subCategoryId": 264,
           "dureeDeConservation": "24 heures",
           "indicateur": 0
@@ -3227,7 +3227,7 @@ class DatabaseHelper {
           "id": 280,
           "ouvert": 1,
           "categoryld": 47,
-          "température": " ",
+          "température": "x",
           "subCategoryId": 265,
           "dureeDeConservation": "30 jours",
           "indicateur": 0
@@ -3236,7 +3236,7 @@ class DatabaseHelper {
           "id": 281,
           "ouvert": 1,
           "categoryld": 47,
-          "température": " ",
+          "température": "x",
           "subCategoryId": 266,
           "dureeDeConservation": "72 heures",
           "indicateur": 0
@@ -3245,7 +3245,7 @@ class DatabaseHelper {
           "id": 282,
           "ouvert": 1,
           "categoryld": 47,
-          "température": " ",
+          "température": "x",
           "subCategoryId": 267,
           "dureeDeConservation": "7 jours",
           "indicateur": 0
@@ -3254,7 +3254,7 @@ class DatabaseHelper {
           "id": 283,
           "ouvert": 1,
           "categoryld": 47,
-          "température": " ",
+          "température": "x",
           "subCategoryId": 268,
           "dureeDeConservation": "7 jours",
           "indicateur": 0
@@ -3290,7 +3290,7 @@ class DatabaseHelper {
           "id": 445,
           "ouvert": 1,
           "categoryId": 25,
-          "temperature": "",
+          "temperature": "x",
           "subCategoryId": 444,
           "dureeDeConservation": "1 jours",
           "indicateur": 1

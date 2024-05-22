@@ -100,17 +100,3 @@ class Calculator {
   }
 }
 
-void main(List<String> args) {
-  // Demander à l'utilisateur de saisir une durée (par exemple, '2 jours')
-  final time = '7 jours';
-
-  // Demander à l'utilisateur de saisir un indicateur (0 ou 1)
-  final indicator = 1;
-
-  // Calculer les dates en fonction de la durée et de l'indicateur fournis par l'utilisateur
-  final dates = Calculator.calculateDate("xxx", time, indicator);
-  print("${dates}");
-  /* Afficher les dates calculées
-  console.write('Dates calculées: ');
-  console.write(dates.join(', '));*/
-}

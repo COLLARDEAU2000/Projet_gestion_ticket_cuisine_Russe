@@ -34,6 +34,7 @@ class _CreateTicketScreen1State extends State<CreateTicketScreen1> {
   String dateOne = "";
   String dateTwo = "";
   String dateThree = "";
+  String CategoryName = "";
 
   // Instance du TicketManager
   final TicketManager _ticketManager = TicketManager();
@@ -139,6 +140,8 @@ class _CreateTicketScreen1State extends State<CreateTicketScreen1> {
                           child: ListTile(
                             title: Text(
                               categories[index].name,
+                              semanticsLabel: CategoryName =
+                                  categories[index].name,
                               style: const TextStyle(
                                   fontSize: 22,
                                   color: Colors.black,
@@ -187,9 +190,12 @@ class _CreateTicketScreen1State extends State<CreateTicketScreen1> {
                                         "etat de la liste apres renitialisation : $listeTicket");
                                   listeTicket.add(widget.cook.name);
                                   listeTicket.add(subCategories[index].name);
+                                  print(
+                                      "etat de la liste actuelle ajout elements  : $listeTicket");
                                 });
                                 // Continue avec les autres opérations
-                                _showTicketDialog(context, index);
+                                _showTicketDialog(context, CategoryName,
+                                    subCategories[index].name, index);
                               },
                             ),
                           );
@@ -212,12 +218,13 @@ class _CreateTicketScreen1State extends State<CreateTicketScreen1> {
   }
 
   // Affiche le dialogue pour la création du ticket
-  // Affiche le dialogue pour la création du ticket
-  void _showTicketDialog(BuildContext context, int index) {
+  void _showTicketDialog(BuildContext context, String categoryName,
+      String subCategoryName, int index) {
     // Réinitialise la listeTicket et garde uniquement le nom du cuisinier
     setState(() {
       listeTicket.clear();
       listeTicket.add(widget.cook.name);
+      listeTicket.add(subCategoryName);
     });
 
     showDialog(
@@ -230,8 +237,8 @@ class _CreateTicketScreen1State extends State<CreateTicketScreen1> {
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('Название продукта: ${subCategories[index].name}'),
-                  Text('Категория: ${categories[index].name}'),
+                  Text('Название продукта: $subCategoryName'),
+                  Text('Категория: $categoryName'),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -339,8 +346,8 @@ class _CreateTicketScreen1State extends State<CreateTicketScreen1> {
             'При печати этикетки произошла ошибка : $e');
       }
     } else {
-      _showErrorDialog(context, 'Bluetooth отключен',
-          'Активируйте Bluetooth для печати');
+      _showErrorDialog(
+          context, 'Bluetooth отключен', 'Активируйте Bluetooth для печати');
     }
   }
 
