@@ -1,16 +1,13 @@
-# grinlintsa
+# Gestion de ticket 
 
-A new Flutter project.
+Ce projet a pour but de creer des tickets pour la conservations d'aliement dans les cuisines,
+il gere egalement le CRUD des cuiniers ( creation des cuisinier , suppression).
+La vue est unique pour Tablette OS android.
 
-## Getting Started
+# Technos 
+SQLi 
+Dart
+Flutter 
+Json
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Voici des captures d'ecran du rendu 
