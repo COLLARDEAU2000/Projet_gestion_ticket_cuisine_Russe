@@ -3,7 +3,7 @@
 Ce projet a pour but de creer des tickets pour la conservations d'alimements dans les cuisines,
 il gere egalement le CRUD des cuiniers ( creation des cuisinier , suppression) et permet la connexion a une imprimante distante via bluethooth.
 La vue est unique pour Tablette OS android.
-Cette applicarion a ete creer pour un restaurant Russe supperbe imagination 😂.
+Cette applicarion a ete creer pour un restaurant Russe.
 
 ## Technos 
 SQLi , Dart , Flutter et Json
